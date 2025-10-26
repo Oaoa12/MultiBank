@@ -1,0 +1,60 @@
+.analyticsWrapper {
+  position: relative;
+  padding: 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.balanceCard {
+  position: relative;
+  min-width: 700px;
+  min-height: 320px;
+  background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.balanceHeader {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 12px 20px;
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.balanceLabel {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+  letter-spacing: 0.3px;
+}
+
+.balanceAmount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 10px;
+}
+
+.growth {
+  font-size: 0.875rem;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.chartHidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.chartVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}

@@ -66,7 +66,7 @@ export default function ProfilePage() {
     lastName: '',
     phone: '',
     birthDate: '',
-    gender: '' as 'MALE' | 'FEMALE' | 'OTHER' | '',
+    gender: '' as 'MALE' | 'FEMALE' | '',
   });
 
   const {
@@ -93,7 +93,7 @@ export default function ProfilePage() {
         lastName: profile.lastName || '',
         phone: user?.phone || '',
         birthDate: profile.birthDate ? profile.birthDate.split('T')[0] : '',
-        gender: profile.gender || '',
+        gender: (profile.gender === 'MALE' || profile.gender === 'FEMALE') ? profile.gender as 'MALE' | 'FEMALE' : '',
       });
     }
   }, [profile, user]);
@@ -534,11 +534,10 @@ export default function ProfilePage() {
             label="Пол"
             placeholder="Выберите пол"
             value={editFormData.gender}
-            onChange={(value) => setEditFormData(prev => ({ ...prev, gender: value as 'MALE' | 'FEMALE' | 'OTHER' | '' }))}
+            onChange={(value) => setEditFormData(prev => ({ ...prev, gender: value as 'MALE' | 'FEMALE' | '' }))}
             data={[
               { value: 'MALE', label: 'Мужской' },
               { value: 'FEMALE', label: 'Женский' },
-              { value: 'OTHER', label: 'Другой' },
             ]}
           />
 

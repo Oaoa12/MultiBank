@@ -34,6 +34,8 @@ export default function Registration() {
 
 
   return (
+
+
     <Center h={200}>
       <Container size="sm">
         <Stack w={400}>
