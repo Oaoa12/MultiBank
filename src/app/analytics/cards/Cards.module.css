@@ -1,0 +1,197 @@
+:root {
+  --card-width: 400px;      
+  --container-width: 640px; 
+  --carousel-height: 240px;
+}
+
+.cardsWrapper {
+  position: relative;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: -150px;
+}
+
+.cardContainer {
+  position: relative;
+  width: var(--container-width);
+  min-width: var(--container-width);
+  max-width: 100%;
+  min-height: 600px;
+  background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+  border-radius: 12px;
+  overflow: visible;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: 0.3px;
+}
+
+.cardContainer > .mantine-Stack-root,
+.cardContainer > .mantine-Group-root {
+  padding: 16px;
+}
+
+.bankCard {
+  width: var(--card-width);
+  border-radius: 16px;
+  padding: 24px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.35);
+  transition: transform 0.25s ease;
+  min-height: 200px;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+
+.bankCard::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -40%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cardTop {
+  margin-bottom: 18px;
+}
+
+.cardBank {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.cardType {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.cardMiddle {
+  margin-bottom: 20px;
+}
+
+.cardNumber {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-family: 'Courier New', monospace;
+}
+
+.cardBottom {
+  margin-top: auto;
+}
+
+.cardLabel {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cardValue {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  height: var(--carousel-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.carouselContainer .swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.carouselContainer .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  touch-action: pan-y;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: rgba(0, 0, 0, 0.75);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-button-prev {
+  left: calc(50% - (var(--card-width) / 2) - 12px);
+}
+
+.swiper-button-next {
+  right: calc(50% - (var(--card-width) / 2) - 12px);
+}
+
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 12px !important;
+  bottom: auto !important;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #2563eb;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --container-width: 100%;
+    --card-width: 340px;
+  }
+
+  .cardsWrapper {
+    margin-left: 0;
+    padding: 10px;
+    justify-content: center;
+  }
+
+  .swiper-button-prev {
+    left: 8px;
+  }
+
+  .swiper-button-next {
+    right: 8px;
+  }
+
+  .cardContainer {
+    min-height: 560px;
+  }
+}

@@ -1,0 +1,64 @@
+/* [project]/src/app/analytics/balanceAnalytics/page.module.css [app-client] (css) */
+.page-module__zSHqya__analyticsWrapper {
+  justify-content: flex-start;
+  padding: 40px;
+  display: flex;
+  position: relative;
+}
+
+.page-module__zSHqya__balanceCard {
+  background: linear-gradient(#f9fafb 0%, #fff 100%);
+  border: 1px solid #0000001a;
+  border-radius: 8px;
+  min-width: 700px;
+  min-height: 320px;
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 16px #0000000d;
+}
+
+.page-module__zSHqya__balanceHeader {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background-color: #ffffffb3;
+  align-items: center;
+  width: 100%;
+  height: 56px;
+  padding: 12px 20px;
+  display: flex;
+}
+
+.page-module__zSHqya__balanceLabel {
+  color: #111827;
+  letter-spacing: .3px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.page-module__zSHqya__balanceAmount {
+  color: #111827;
+  margin-top: 10px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.page-module__zSHqya__growth {
+  color: #2563eb;
+  font-size: .875rem;
+  font-weight: 500;
+}
+
+.page-module__zSHqya__chartHidden {
+  opacity: 0;
+  transition: opacity .6s, transform .6s;
+  transform: translateY(20px);
+}
+
+.page-module__zSHqya__chartVisible {
+  opacity: 1;
+  transition: opacity .6s, transform .6s;
+  transform: translateY(0);
+}
+
+/*# sourceMappingURL=src_app_analytics_balanceAnalytics_page_module_dea1bb2f.css.map*/

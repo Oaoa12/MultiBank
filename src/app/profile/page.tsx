@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Container,
   Grid,
@@ -51,6 +52,7 @@ import { authApi } from '@/lib/store/api/AuthApi';
 import { useDispatch } from 'react-redux';
 
 export default function ProfilePage() {
+  const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [notifications, setNotifications] = useState({
     email: true,
@@ -160,6 +162,16 @@ export default function ProfilePage() {
       console.error('Ошибка при выходе:', error);
     }
   };
+
+
+  const navigateToAnalytics = () => {
+    router.push('/analytics');
+  };
+
+  const navigateToDashboard = () => {
+    router.push('/dashboard');
+  };
+
 
   if (isLoading && !user && !profile) {
     return (
@@ -309,16 +321,35 @@ export default function ProfilePage() {
           <Card shadow="sm" padding="lg" radius="md" withBorder mt="md">
             <Title order={4} mb="md">Быстрые действия</Title>
             <Stack gap="sm">
-              <Button variant="subtle" leftSection={<IconHistory size={16} />} justify="start">
+              <Button 
+                variant="subtle" 
+                leftSection={<IconHistory size={16} />} 
+                justify="start"
+              >
                 История операций
               </Button>
-              <Button variant="subtle" leftSection={<IconChartBar size={16} />} justify="start">
-                Статистика
+              <Button 
+                variant="subtle" 
+                leftSection={<IconChartBar size={16} />} 
+                justify="start"
+                onClick={navigateToAnalytics}
+              >
+                Аналитика
               </Button>
-              <Button variant="subtle" leftSection={<IconBell size={16} />} justify="start">
+              <Button 
+                variant="subtle" 
+                leftSection={<IconBell size={16} />} 
+                justify="start"
+                onClick={() => router.push('/analytics')}
+              >
                 Уведомления
               </Button>
-              <Button variant="subtle" leftSection={<IconUser size={16} />} justify="start">
+              <Button 
+                variant="subtle" 
+                leftSection={<IconUser size={16} />} 
+                justify="start"
+                onClick={() => router.push('/support')}
+              >
                 Поддержка
               </Button>
             </Stack>
@@ -327,7 +358,11 @@ export default function ProfilePage() {
         <Grid.Col span={{ base: 12, md: 8 }}>
           
           <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} mb="xl">
-            <Paper p="md" withBorder>
+            <Paper 
+              p="md" 
+              withBorder 
+              style={{ cursor: 'pointer' }}
+            >
               <Group justify="space-between">
                 <div>
                   <Text size="xs" tt="uppercase" fw={700} c="dimmed">Общий баланс</Text>
@@ -338,7 +373,11 @@ export default function ProfilePage() {
                 </ThemeIcon>
               </Group>
             </Paper>
-            <Paper p="md" withBorder>
+            <Paper 
+              p="md" 
+              withBorder 
+              style={{ cursor: 'pointer' }}
+            >
               <Group justify="space-between">
                 <div>
                   <Text size="xs" tt="uppercase" fw={700} c="dimmed">Карты</Text>
@@ -349,7 +388,11 @@ export default function ProfilePage() {
                 </ThemeIcon>
               </Group>
             </Paper>
-            <Paper p="md" withBorder>
+            <Paper 
+              p="md" 
+              withBorder 
+              style={{ cursor: 'pointer' }}
+            >
               <Group justify="space-between">
                 <div>
                   <Text size="xs" tt="uppercase" fw={700} c="dimmed">Операции</Text>
@@ -360,10 +403,15 @@ export default function ProfilePage() {
                 </ThemeIcon>
               </Group>
             </Paper>
-            <Paper p="md" withBorder>
+            <Paper 
+              p="md" 
+              withBorder 
+              style={{ cursor: 'pointer' }}
+              onClick={navigateToAnalytics}
+            >
               <Group justify="space-between">
                 <div>
-                  <Text size="xs" tt="uppercase" fw={700} c="dimmed">Что то там </Text>
+                  <Text size="xs" tt="uppercase" fw={700} c="dimmed">Аналитика</Text>
                   <Text fw={700} size="xl">Скоро</Text>
                 </div>
                 <ThemeIcon color="yellow" variant="light" size="lg">
@@ -376,7 +424,12 @@ export default function ProfilePage() {
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Group justify="space-between" mb="md">
               <Title order={4}>Последние транзакции</Title>
-              <Button variant="subtle" size="sm">Все операции</Button>
+              <Button 
+                variant="subtle" 
+                size="sm"
+              >
+                Все операции
+              </Button>
             </Group>
 
             <Stack gap="sm">
