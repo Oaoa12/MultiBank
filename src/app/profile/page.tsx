@@ -88,6 +88,16 @@ export default function ProfilePage() {
 
   const [logout, { isLoading: logoutLoading }] = useLogoutMutation();
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    document.body.style.overflowX = 'hidden';
+    document.documentElement.style.overflowX = 'hidden';
+    return () => {
+      document.body.style.overflowX = '';
+      document.documentElement.style.overflowX = '';
+    };
+  }, []);
+
   useEffect(() => {
     if (profile) {
       setEditFormData({
@@ -168,9 +178,6 @@ export default function ProfilePage() {
     router.push('/analytics');
   };
 
-  const navigateToDashboard = () => {
-    router.push('/dashboard');
-  };
 
 
   if (isLoading && !user && !profile) {
@@ -196,11 +203,31 @@ export default function ProfilePage() {
   }
 
   return (
-    <Container size="xl" py="xl">
-      <Grid>
+    <div
+      style={{
+        background: 'linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%)',
+        minHeight: '100vh',
+        width: '100%',
+        margin: 0,
+        padding: 0,
+        overflowX: 'hidden',
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center'
+      }}
+    >
+      <Container size="xl" py="xl" style={{ maxWidth: '1900px', width: '100%', overflowX: 'hidden', paddingLeft: '7rem' }}>
+      <Grid gutter={{ base: 'md', sm: 'lg', md: 'xl' }}>
         <Grid.Col span={{ base: 12, md: 4 }}>
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <Group justify="space-between" mb="md">
+          <Card 
+            padding="xl" 
+            radius="md"
+            style={{
+              background: 'rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
+            <Group justify="space-between" mb={0}>
               <div></div>
               <Menu shadow="md" width={200}>
                 <Menu.Target>
@@ -223,7 +250,7 @@ export default function ProfilePage() {
                 </Menu.Dropdown>
               </Menu>
             </Group>
-            <Stack align="center" gap="md">
+            <Stack align="center" gap="xs">
               <div
                 style={{
                   position: 'relative',
@@ -242,103 +269,138 @@ export default function ProfilePage() {
                   fileInputRef.current?.click();
                 }}
               >
-                <Avatar 
-                  size={120} 
-                  radius="xl" 
-                  color="blue"
-                  src={hasAvatar() ? profile?.avatar : undefined}
-                >
-                  {hasAvatar() ? null : <IconUser size={60} />}
+                  <Avatar 
+                    size={150} 
+                    radius="50%" 
+                    color="blue"
+                    src={hasAvatar() ? profile?.avatar : undefined}
+                  >
+                  {hasAvatar() ? null : <IconUser size={80} />}
                 </Avatar>
-                <div
-                  className="avatar-overlay"
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    borderRadius: '27px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    opacity: 0,
-                    transition: 'opacity 0.2s ease',
-                    pointerEvents: 'none'
-                  }}
-                >
+                  <div
+                    className="avatar-overlay"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      opacity: 0,
+                      transition: 'opacity 0.2s ease',
+                      pointerEvents: 'none'
+                    }}
+                  >
                   <IconUpload size={30} color="white" />
                 </div>
               </div>
               
               <Stack align="center" gap="xs">
-                <Title order={3}>{getFullName()}</Title>
-                <Text size="sm" c="dimmed">{user?.email}</Text>
+                <Title order={2}>{getFullName()}</Title>
                 <Badge color={user?.isActive ? "green" : "red"} variant="light">
                   {user?.isActive ? "Активный" : "Неактивный"}
                 </Badge>
               </Stack>
+               <Button 
+                 style={{ 
+                   marginTop: 'var(--mantine-spacing-lg)',
+                   width: '63%',
+                   backgroundColor: '#1E90FF',
+                   border: 'none',
+                   borderRadius: '15px',
+                   fontWeight: 600
+                 }} 
+                 variant="filled" 
+                 color="blue"
+                 size="md"
+                 onClick={() => {
+                   setEditError(null);
+                   setIsEditModalOpen(true);
+                 }}
+               >
+                 Редактировать профиль
+               </Button>
 
-              <Divider w="100%" />
+              <Stack gap="md" w="100%" mt="lg">
+                <Paper 
+                  p="lg" 
+                  radius="xl"
+                  style={{
+                    backgroundColor: '#f5f6f7'
+                  }}
+                >
+                  <Stack gap="sm">
+                    <Text size="sm" fw={600} c="dimmed">Email</Text>
+                    <Text size="md" fw={500}>{user?.email}</Text>
+                  </Stack>
+                </Paper>
 
-              <Group justify="space-between" w="100%">
-                <Text size="sm" fw={500}>ID пользователя</Text>
-                <Text size="sm" c="dimmed">#{user?.id}</Text>
-              </Group>
+                <Paper 
+                  p="lg" 
+                  radius="xl"
+                  style={{
+                    backgroundColor: '#f5f6f7'
+                  }}
+                >
+                  <Stack gap="sm">
+                    <Text size="sm" fw={600} c="dimmed">Телефон</Text>
+                    <Text size="md" fw={500}>{user?.phone || 'Не указан'}</Text>
+                  </Stack>
+                </Paper>
 
-              <Group justify="space-between" w="100%">
-                <Text size="sm" fw={500}>Дата регистрации</Text>
-                <Text size="sm" c="dimmed">{formatDate(user?.createdAt)}</Text>
-              </Group>
-
-              <Group justify="space-between" w="100%">
-                <Text size="sm" fw={500}>Телефон</Text>
-                <Text size="sm" c="dimmed">{user?.phone || 'Не указан'}</Text>
-              </Group>
-
-              {profile?.birthDate && (
-                <Group justify="space-between" w="100%">
-                  <Text size="sm" fw={500}>Дата рождения</Text>
-                  <Text size="sm" c="dimmed">{formatBirthDate(profile.birthDate)}</Text>
-                </Group>
-              )}
-
-              <Button 
-                fullWidth 
-                variant="light" 
-                leftSection={<IconEdit size={16} />}
-                onClick={() => {
-                  setEditError(null);
-                  setIsEditModalOpen(true);
-                }}
-              >
-                Редактировать профиль
-              </Button>
+                {profile?.birthDate && (
+                  <Paper 
+                    p="lg" 
+                    radius="xl"
+                    style={{
+                      backgroundColor: '#f5f6f7'
+                    }}
+                  >
+                    <Stack gap="sm">
+                      <Text size="sm" fw={600} c="dimmed">Дата рождения</Text>
+                      <Text size="md" fw={500}>{formatBirthDate(profile.birthDate)}</Text>
+                    </Stack>
+                  </Paper>
+                )}
+              </Stack>
             </Stack>
           </Card>
 
-          <Card shadow="sm" padding="lg" radius="md" withBorder mt="md">
+          <Card 
+            padding="xl" 
+            radius="md" 
+            mt="md"
+            style={{
+              background: 'rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
             <Title order={4} mb="md">Быстрые действия</Title>
             <Stack gap="sm">
               <Button 
                 variant="subtle" 
-                leftSection={<IconHistory size={16} />} 
+                size="md"
+                leftSection={<IconHistory size={18} />} 
                 justify="start"
               >
                 История операций
               </Button>
               <Button 
                 variant="subtle" 
-                leftSection={<IconChartBar size={16} />} 
+                size="md"
+                leftSection={<IconChartBar size={18} />} 
                 justify="start"
-                onClick={navigateToAnalytics}
               >
                 Аналитика
               </Button>
               <Button 
                 variant="subtle" 
-                leftSection={<IconBell size={16} />} 
+                size="md"
+                leftSection={<IconBell size={18} />} 
                 justify="start"
                 onClick={() => router.push('/analytics')}
               >
@@ -346,22 +408,25 @@ export default function ProfilePage() {
               </Button>
               <Button 
                 variant="subtle" 
-                leftSection={<IconUser size={16} />} 
+                size="md"
+                leftSection={<IconUser size={18} />} 
                 justify="start"
-                onClick={() => router.push('/support')}
               >
                 Поддержка
               </Button>
             </Stack>
           </Card>
         </Grid.Col>
-        <Grid.Col span={{ base: 12, md: 8 }}>
+        <Grid.Col span={{ base: 12, md: 7.5 }}>
           
           <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} mb="xl">
             <Paper 
-              p="md" 
-              withBorder 
-              style={{ cursor: 'pointer' }}
+              p="lg" 
+              style={{ 
+                cursor: 'pointer',
+                background: 'rgba(255, 255, 255, 0.6)',
+                backdropFilter: 'blur(10px)'
+              }}
             >
               <Group justify="space-between">
                 <div>
@@ -374,9 +439,12 @@ export default function ProfilePage() {
               </Group>
             </Paper>
             <Paper 
-              p="md" 
-              withBorder 
-              style={{ cursor: 'pointer' }}
+              p="lg" 
+              style={{ 
+                cursor: 'pointer',
+                background: 'rgba(255, 255, 255, 0.6)',
+                backdropFilter: 'blur(10px)'
+              }}
             >
               <Group justify="space-between">
                 <div>
@@ -389,9 +457,12 @@ export default function ProfilePage() {
               </Group>
             </Paper>
             <Paper 
-              p="md" 
-              withBorder 
-              style={{ cursor: 'pointer' }}
+              p="lg" 
+              style={{ 
+                cursor: 'pointer',
+                background: 'rgba(255, 255, 255, 0.6)',
+                backdropFilter: 'blur(10px)'
+              }}
             >
               <Group justify="space-between">
                 <div>
@@ -405,8 +476,11 @@ export default function ProfilePage() {
             </Paper>
             <Paper 
               p="md" 
-              withBorder 
-              style={{ cursor: 'pointer' }}
+              style={{ 
+                cursor: 'pointer',
+                background: 'rgba(255, 255, 255, 0.6)',
+                backdropFilter: 'blur(10px)'
+              }}
               onClick={navigateToAnalytics}
             >
               <Group justify="space-between">
@@ -421,7 +495,14 @@ export default function ProfilePage() {
             </Paper>
           </SimpleGrid>
 
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card 
+            padding="xl" 
+            radius="md"
+            style={{
+              background: 'rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
             <Group justify="space-between" mb="md">
               <Title order={4}>Последние транзакции</Title>
               <Button 
@@ -474,7 +555,15 @@ export default function ProfilePage() {
             </Stack>
           </Card>
 
-          <Card shadow="sm" padding="lg" radius="md" withBorder mt="md">
+          <Card 
+            padding="xl" 
+            radius="md" 
+            mt="md"
+            style={{
+              background: 'rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
             <Title order={4} mb="md">Настройки уведомлений</Title>
 
             <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
@@ -611,7 +700,8 @@ export default function ProfilePage() {
         style={{ display: 'none' }}
         onChange={handleAvatarUpload}
       />
-    </Container>
+      </Container>
+    </div>
   );
 }
 
