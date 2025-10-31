@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
   useGetCurrentUserQuery, 
-  useGetProfileQuery, 
   useUpdateUserMutation, 
   useUpdateProfileMutation,
   useUploadAvatarMutation,
@@ -24,12 +23,11 @@ export const useProfile = () => {
     refetch: refetchUser 
   } = useGetCurrentUserQuery();
 
-  const { 
-    data: profile, 
-    isLoading: profileLoading, 
-    error: profileError,
-    refetch: refetchProfile 
-  } = useGetProfileQuery();
+  const profile = user?.profile;
+  
+  const refetchProfile = async () => {
+    return refetchUser();
+  };
 
   const [updateUser, { isLoading: updateUserLoading }] = useUpdateUserMutation();
   const [updateProfile, { isLoading: updateProfileLoading }] = useUpdateProfileMutation();
@@ -56,7 +54,7 @@ export const useProfile = () => {
       setIsLoading(true);
       setError(null);
       await updateProfile(profileData).unwrap();
-      await refetchProfile();
+      await refetchUser();
     } catch (err: any) {
       setError(err?.data?.message || 'Ошибка при обновлении профиля');
       throw err;
@@ -74,7 +72,7 @@ export const useProfile = () => {
       formData.append('avatar', file);
       
       const result = await uploadAvatar(formData).unwrap();
-      await refetchProfile();
+      await refetchUser(); 
       return result;
     } catch (err: any) {
       setError(err?.data?.message || 'Ошибка при загрузке аватара');
@@ -89,7 +87,7 @@ export const useProfile = () => {
       setIsLoading(true);
       setError(null);
       await deleteAvatar(fileId).unwrap();
-      await refetchProfile();
+      await refetchUser(); 
     } catch (err: any) {
       setError(err?.data?.message || 'Ошибка при удалении аватара');
       throw err;
@@ -103,7 +101,7 @@ export const useProfile = () => {
       setIsLoading(true);
       setError(null);
       const result = await refreshAvatarUrl({ fileId, expiry }).unwrap();
-      await refetchProfile();
+      await refetchUser(); 
       return result;
     } catch (err: any) {
       setError(err?.data?.message || 'Ошибка при обновлении URL аватара');
@@ -157,12 +155,12 @@ export const useProfile = () => {
     user,
     profile,
     
-    isLoading: isLoading || userLoading || profileLoading || 
+    isLoading: isLoading || userLoading || 
                updateUserLoading || updateProfileLoading || 
                uploadAvatarLoading || deleteAvatarLoading || 
                refreshAvatarUrlLoading,
     
-    error: error || userError || profileError,
+    error: error || userError,
     
     handleUpdateUser,
     handleUpdateProfile,

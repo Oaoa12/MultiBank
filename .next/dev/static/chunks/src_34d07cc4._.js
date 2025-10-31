@@ -16,7 +16,10 @@ const useProfile = ()=>{
     const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const { data: user, isLoading: userLoading, error: userError, refetch: refetchUser } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$api$2f$UserApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGetCurrentUserQuery"])();
-    const { data: profile, isLoading: profileLoading, error: profileError, refetch: refetchProfile } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$api$2f$UserApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGetProfileQuery"])();
+    const profile = user?.profile;
+    const refetchProfile = async ()=>{
+        return refetchUser();
+    };
     const [updateUser, { isLoading: updateUserLoading }] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$api$2f$UserApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUpdateUserMutation"])();
     const [updateProfile, { isLoading: updateProfileLoading }] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$api$2f$UserApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUpdateProfileMutation"])();
     const [uploadAvatar, { isLoading: uploadAvatarLoading }] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$api$2f$UserApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUploadAvatarMutation"])();
@@ -40,7 +43,7 @@ const useProfile = ()=>{
             setIsLoading(true);
             setError(null);
             await updateProfile(profileData).unwrap();
-            await refetchProfile();
+            await refetchUser();
         } catch (err) {
             setError(err?.data?.message || 'Ошибка при обновлении профиля');
             throw err;
@@ -55,7 +58,7 @@ const useProfile = ()=>{
             const formData = new FormData();
             formData.append('avatar', file);
             const result = await uploadAvatar(formData).unwrap();
-            await refetchProfile();
+            await refetchUser();
             return result;
         } catch (err) {
             setError(err?.data?.message || 'Ошибка при загрузке аватара');
@@ -69,7 +72,7 @@ const useProfile = ()=>{
             setIsLoading(true);
             setError(null);
             await deleteAvatar(fileId).unwrap();
-            await refetchProfile();
+            await refetchUser();
         } catch (err) {
             setError(err?.data?.message || 'Ошибка при удалении аватара');
             throw err;
@@ -85,7 +88,7 @@ const useProfile = ()=>{
                 fileId,
                 expiry
             }).unwrap();
-            await refetchProfile();
+            await refetchUser();
             return result;
         } catch (err) {
             setError(err?.data?.message || 'Ошибка при обновлении URL аватара');
@@ -129,8 +132,8 @@ const useProfile = ()=>{
     return {
         user,
         profile,
-        isLoading: isLoading || userLoading || profileLoading || updateUserLoading || updateProfileLoading || uploadAvatarLoading || deleteAvatarLoading || refreshAvatarUrlLoading,
-        error: error || userError || profileError,
+        isLoading: isLoading || userLoading || updateUserLoading || updateProfileLoading || uploadAvatarLoading || deleteAvatarLoading || refreshAvatarUrlLoading,
+        error: error || userError,
         handleUpdateUser,
         handleUpdateProfile,
         handleUploadAvatar,
@@ -145,10 +148,9 @@ const useProfile = ()=>{
         refetchProfile
     };
 };
-_s(useProfile, "qNf+jvPnS/s7olLJT41SLDswKko=", false, function() {
+_s(useProfile, "ilf43jqjG9lzooM/wcNjKDYDOxk=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$api$2f$UserApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGetCurrentUserQuery"],
-        __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$api$2f$UserApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGetProfileQuery"],
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$api$2f$UserApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUpdateUserMutation"],
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$api$2f$UserApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUpdateProfileMutation"],
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$api$2f$UserApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUploadAvatarMutation"],
