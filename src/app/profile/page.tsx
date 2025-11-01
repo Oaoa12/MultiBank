@@ -12,17 +12,14 @@ import {
   Stack,
   Badge,
   Button,
-  Divider,
   SimpleGrid,
   Paper,
   Title,
   ActionIcon,
   Menu,
-  rem,
   ThemeIcon,
   Modal,
   TextInput,
-  Textarea,
   Select,
   Alert,
   Loader,
@@ -36,20 +33,17 @@ import {
   IconChartBar,
   IconBell,
   IconDots,
-  IconEdit,
   IconLogout,
-  IconShield,
   IconHistory,
-  IconStar,
   IconUpload,
   IconAlertCircle,
-  IconCheck,
 } from '@tabler/icons-react';
 import { useProfile } from '@/lib/hooks/useProfile';
 import { useLogoutMutation } from '@/lib/store/api/AuthApi';
 import { userApi } from '@/lib/store/api/UserApi';
 import { authApi } from '@/lib/store/api/AuthApi';
 import { useDispatch } from 'react-redux';
+import AnalyticsSection from './AnalyticsSection';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -77,18 +71,15 @@ export default function ProfilePage() {
     isLoading,
     error,
     handleUpdateUser,
-    handleUpdateProfile,
     handleUploadAvatar,
     getFullName,
-    getInitials,
     hasAvatar,
-    formatDate,
     formatBirthDate,
   } = useProfile();
 
   const [logout, { isLoading: logoutLoading }] = useLogoutMutation();
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     document.body.style.overflowX = 'hidden';
     document.documentElement.style.overflowX = 'hidden';
@@ -121,13 +112,8 @@ export default function ProfilePage() {
     try {
       setEditError(null);
       
-      if (user) {
-        await handleUpdateUser({
-          phone: editFormData.phone,
-        });
-      }
-
-      await handleUpdateProfile({
+      await handleUpdateUser({
+        phone: editFormData.phone,
         firstName: editFormData.firstName,
         lastName: editFormData.lastName,
         birthDate: editFormData.birthDate ? new Date(editFormData.birthDate).toISOString() : undefined,
@@ -173,13 +159,6 @@ export default function ProfilePage() {
     }
   };
 
-
-  const navigateToAnalytics = () => {
-    router.push('/analytics');
-  };
-
-
-
   if (isLoading && !user && !profile) {
     return (
       <Container size="xl" py="xl">
@@ -221,7 +200,7 @@ export default function ProfilePage() {
         <Grid.Col span={{ base: 12, md: 4 }}>
           <Card 
             padding="xl" 
-            radius="md"
+            radius="lg"
             style={{
               background: 'rgba(255, 255, 255, 0.8)',
               backdropFilter: 'blur(10px)'
@@ -311,7 +290,7 @@ export default function ProfilePage() {
                    width: '63%',
                    backgroundColor: '#1E90FF',
                    border: 'none',
-                   borderRadius: '15px',
+                   borderRadius: '13px',
                    fontWeight: 600
                  }} 
                  variant="filled" 
@@ -330,7 +309,8 @@ export default function ProfilePage() {
                   p="lg" 
                   radius="xl"
                   style={{
-                    backgroundColor: '#f5f6f7'
+                    backgroundColor: '#f5f6f7',
+                    borderRadius: '20px'
                   }}
                 >
                   <Stack gap="sm">
@@ -343,7 +323,8 @@ export default function ProfilePage() {
                   p="lg" 
                   radius="xl"
                   style={{
-                    backgroundColor: '#f5f6f7'
+                    backgroundColor: '#f5f6f7',
+                    borderRadius: '20px'
                   }}
                 >
                   <Stack gap="sm">
@@ -357,7 +338,8 @@ export default function ProfilePage() {
                     p="lg" 
                     radius="xl"
                     style={{
-                      backgroundColor: '#f5f6f7'
+                      backgroundColor: '#f5f6f7',
+                      borderRadius: '20px'
                     }}
                   >
                     <Stack gap="sm">
@@ -372,7 +354,7 @@ export default function ProfilePage() {
 
           <Card 
             padding="xl" 
-            radius="md" 
+            radius="lg" 
             mt="md"
             style={{
               background: 'rgba(255, 255, 255, 0.8)',
@@ -418,86 +400,13 @@ export default function ProfilePage() {
           </Card>
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 7.5 }}>
-          
-          <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} mb="xl">
-            <Paper 
-              p="lg" 
-              style={{ 
-                cursor: 'pointer',
-                background: 'rgba(255, 255, 255, 0.6)',
-                backdropFilter: 'blur(10px)'
-              }}
-            >
-              <Group justify="space-between">
-                <div>
-                  <Text size="xs" tt="uppercase" fw={700} c="dimmed">Общий баланс</Text>
-                  <Text fw={700} size="xl">Скоро</Text>
-                </div>
-                <ThemeIcon color="blue" variant="light" size="lg">
-                  <IconWallet size={20} />
-                </ThemeIcon>
-              </Group>
-            </Paper>
-            <Paper 
-              p="lg" 
-              style={{ 
-                cursor: 'pointer',
-                background: 'rgba(255, 255, 255, 0.6)',
-                backdropFilter: 'blur(10px)'
-              }}
-            >
-              <Group justify="space-between">
-                <div>
-                  <Text size="xs" tt="uppercase" fw={700} c="dimmed">Карты</Text>
-                  <Text fw={700} size="xl">Скоро</Text>
-                </div>
-                <ThemeIcon color="green" variant="light" size="lg">
-                  <IconCreditCard size={20} />
-                </ThemeIcon>
-              </Group>
-            </Paper>
-            <Paper 
-              p="lg" 
-              style={{ 
-                cursor: 'pointer',
-                background: 'rgba(255, 255, 255, 0.6)',
-                backdropFilter: 'blur(10px)'
-              }}
-            >
-              <Group justify="space-between">
-                <div>
-                  <Text size="xs" tt="uppercase" fw={700} c="dimmed">Операции</Text>
-                  <Text fw={700} size="xl">Скоро</Text>
-                </div>
-                <ThemeIcon color="orange" variant="light" size="lg">
-                  <IconChartBar size={20} />
-                </ThemeIcon>
-              </Group>
-            </Paper>
-            <Paper 
-              p="md" 
-              style={{ 
-                cursor: 'pointer',
-                background: 'rgba(255, 255, 255, 0.6)',
-                backdropFilter: 'blur(10px)'
-              }}
-              onClick={navigateToAnalytics}
-            >
-              <Group justify="space-between">
-                <div>
-                  <Text size="xs" tt="uppercase" fw={700} c="dimmed">Аналитика</Text>
-                  <Text fw={700} size="xl">Скоро</Text>
-                </div>
-                <ThemeIcon color="yellow" variant="light" size="lg">
-                  <IconStar size={20} />
-                </ThemeIcon>
-              </Group>
-            </Paper>
-          </SimpleGrid>
+          <div style={{ marginBottom: 'var(--mantine-spacing-xl)' }}>
+            <AnalyticsSection />
+          </div>
 
           <Card 
             padding="xl" 
-            radius="md"
+            radius="lg"
             style={{
               background: 'rgba(255, 255, 255, 0.8)',
               backdropFilter: 'blur(10px)'
@@ -514,7 +423,7 @@ export default function ProfilePage() {
             </Group>
 
             <Stack gap="sm">
-              <Group justify="space-between" p="sm" style={{ backgroundColor: 'var(--mantine-color-gray-0)', borderRadius: 'var(--mantine-radius-sm)' }}>
+              <Group justify="space-between" p="sm" style={{ backgroundColor: 'var(--mantine-color-gray-0)', borderRadius: 'var(--mantine-radius-md)' }}>
                 <Group gap="sm">
                   <ThemeIcon color="green" variant="light" size="sm">
                     <IconWallet size={16} />
@@ -540,7 +449,7 @@ export default function ProfilePage() {
                 <Text fw={700} c="red">-₽ 1,250</Text>
               </Group>
 
-              <Group justify="space-between" p="sm" style={{ backgroundColor: 'var(--mantine-color-gray-0)', borderRadius: 'var(--mantine-radius-sm)' }}>
+              <Group justify="space-between" p="sm" style={{ backgroundColor: 'var(--mantine-color-gray-0)', borderRadius: 'var(--mantine-radius-md)' }}>
                 <Group gap="sm">
                   <ThemeIcon color="blue" variant="light" size="sm">
                     <IconWallet size={16} />
@@ -557,7 +466,7 @@ export default function ProfilePage() {
 
           <Card 
             padding="xl" 
-            radius="md" 
+            radius="lg" 
             mt="md"
             style={{
               background: 'rgba(255, 255, 255, 0.8)',

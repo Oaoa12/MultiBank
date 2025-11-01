@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+const BASE_URL = 'https://vtb-hack-ruby.vercel.app/';
+
 export interface User {
   id: number;
   username: string;
@@ -27,6 +29,10 @@ export interface UpdateUserData {
   username?: string;
   phone?: string;
   isActive?: boolean;
+  firstName?: string;
+  lastName?: string;
+  birthDate?: string;
+  gender?: 'MALE' | 'FEMALE' | 'OTHER';
 }
 
 export interface UpdateProfileData {
@@ -43,11 +49,6 @@ export interface AvatarUploadResponse {
   profile: Profile;
 }
 
-export interface ApiResponse<T> {
-  data: T;
-  message?: string;
-}
-
 const getTokenFromCookie = () => {
   if (typeof document !== 'undefined') {
     const cookies = document.cookie.split(';');
@@ -59,8 +60,8 @@ const getTokenFromCookie = () => {
 
 export const userApi = createApi({
   reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery({ 
-    baseUrl: 'https://vtb-hack-ruby.vercel.app/',
+  baseQuery: fetchBaseQuery({
+    baseUrl: BASE_URL,
     prepareHeaders: (headers) => {
       const token = getTokenFromCookie();
       if (token) {
@@ -82,7 +83,7 @@ export const userApi = createApi({
         method: 'PUT',
         body: userData,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ['User', 'Profile'],
     }),
     
     getProfile: builder.query<Profile, void>({
@@ -92,59 +93,59 @@ export const userApi = createApi({
     
     updateProfile: builder.mutation<Profile, UpdateProfileData>({
       query: (profileData) => ({
-        url: 'user/profile',
+        url: 'user/me',
         method: 'PUT',
         body: profileData,
       }),
-      invalidatesTags: ['Profile'],
+      invalidatesTags: ['User', 'Profile'],
     }),
-    
+
     deleteProfile: builder.mutation<{ message: string }, void>({
       query: () => ({
-        url: 'user/profile',
+        url: 'user',
         method: 'DELETE',
       }),
-      invalidatesTags: ['Profile'],
+      invalidatesTags: ['User', 'Profile'],
     }),
-    
+
     restoreProfile: builder.mutation<{ message: string }, void>({
       query: () => ({
-        url: 'user/profile/restore',
+        url: 'user/restore',
         method: 'POST',
       }),
-      invalidatesTags: ['Profile'],
+      invalidatesTags: ['User', 'Profile'],
     }),
     
     uploadAvatar: builder.mutation<AvatarUploadResponse, FormData>({
       query: (formData) => ({
-        url: 'user/profile/avatar',
+        url: 'user/avatar',
         method: 'POST',
         body: formData,
       }),
-      invalidatesTags: ['Profile'],
+      invalidatesTags: ['Profile', 'User'],
     }),
     
     getAvatar: builder.query<Blob, number>({
       query: (fileId) => ({
-        url: `user/profile/avatar/${fileId}`,
+        url: `user/avatar/${fileId}`,
         responseHandler: (response) => response.blob(),
       }),
     }),
     
     deleteAvatar: builder.mutation<{ message: string }, number>({
       query: (fileId) => ({
-        url: `user/profile/avatar/${fileId}`,
+        url: `user/avatar/${fileId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Profile'],
+      invalidatesTags: ['Profile', 'User'],
     }),
     
     refreshAvatarUrl: builder.mutation<AvatarUploadResponse, { fileId: number; expiry?: number }>({
       query: ({ fileId, expiry }) => ({
-        url: `user/profile/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
+        url: `user/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
         method: 'POST',
       }),
-      invalidatesTags: ['Profile'],
+      invalidatesTags: ['Profile', 'User'],
     }),
   }),
 });

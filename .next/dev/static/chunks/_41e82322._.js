@@ -380,6 +380,7 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$react$2f$rtk$2d$query$2d$react$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/@reduxjs/toolkit/dist/query/react/rtk-query-react.modern.mjs [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@reduxjs/toolkit/dist/query/rtk-query.modern.mjs [app-client] (ecmascript)");
 ;
+const BASE_URL = 'https://vtb-hack-ruby.vercel.app/';
 const getTokenFromCookie = ()=>{
     if (typeof document !== 'undefined') {
         const cookies = document.cookie.split(';');
@@ -391,7 +392,7 @@ const getTokenFromCookie = ()=>{
 const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$react$2f$rtk$2d$query$2d$react$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createApi"])({
     reducerPath: 'userApi',
     baseQuery: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["fetchBaseQuery"])({
-        baseUrl: 'https://vtb-hack-ruby.vercel.app/',
+        baseUrl: BASE_URL,
         prepareHeaders: (headers)=>{
             const token = getTokenFromCookie();
             if (token) {
@@ -418,7 +419,8 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
                         body: userData
                     }),
                 invalidatesTags: [
-                    'User'
+                    'User',
+                    'Profile'
                 ]
             }),
             getProfile: builder.query({
@@ -429,64 +431,70 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
             }),
             updateProfile: builder.mutation({
                 query: (profileData)=>({
-                        url: 'user/profile',
+                        url: 'user/me',
                         method: 'PUT',
                         body: profileData
                     }),
                 invalidatesTags: [
+                    'User',
                     'Profile'
                 ]
             }),
             deleteProfile: builder.mutation({
                 query: ()=>({
-                        url: 'user/profile',
+                        url: 'user',
                         method: 'DELETE'
                     }),
                 invalidatesTags: [
+                    'User',
                     'Profile'
                 ]
             }),
             restoreProfile: builder.mutation({
                 query: ()=>({
-                        url: 'user/profile/restore',
+                        url: 'user/restore',
                         method: 'POST'
                     }),
                 invalidatesTags: [
+                    'User',
                     'Profile'
                 ]
             }),
             uploadAvatar: builder.mutation({
                 query: (formData)=>({
-                        url: 'user/profile/avatar',
+                        url: 'user/avatar',
                         method: 'POST',
                         body: formData
                     }),
                 invalidatesTags: [
-                    'Profile'
+                    'Profile',
+                    'User'
                 ]
             }),
             getAvatar: builder.query({
                 query: (fileId)=>({
-                        url: `user/profile/avatar/${fileId}`,
+                        url: `user/avatar/${fileId}`,
                         responseHandler: (response)=>response.blob()
                     })
             }),
             deleteAvatar: builder.mutation({
                 query: (fileId)=>({
-                        url: `user/profile/avatar/${fileId}`,
+                        url: `user/avatar/${fileId}`,
                         method: 'DELETE'
                     }),
                 invalidatesTags: [
-                    'Profile'
+                    'Profile',
+                    'User'
                 ]
             }),
             refreshAvatarUrl: builder.mutation({
                 query: ({ fileId, expiry })=>({
-                        url: `user/profile/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
+                        url: `user/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
                         method: 'POST'
                     }),
                 invalidatesTags: [
-                    'Profile'
+                    'Profile',
+                    'User'
                 ]
             })
         })

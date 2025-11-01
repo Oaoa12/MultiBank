@@ -1,36 +1,32 @@
 import { useState } from 'react';
-import { 
-  useGetCurrentUserQuery, 
-  useUpdateUserMutation, 
-  useUpdateProfileMutation,
+import {
+  useGetCurrentUserQuery,
+  useUpdateUserMutation,
   useUploadAvatarMutation,
   useDeleteAvatarMutation,
   useRefreshAvatarUrlMutation,
-  User,
-  Profile,
   UpdateUserData,
-  UpdateProfileData
+  UpdateProfileData,
 } from '../store/api/UserApi';
 
 export const useProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { 
-    data: user, 
-    isLoading: userLoading, 
+  const {
+    data: user,
+    isLoading: userLoading,
     error: userError,
-    refetch: refetchUser 
+    refetch: refetchUser,
   } = useGetCurrentUserQuery();
 
   const profile = user?.profile;
-  
+
   const refetchProfile = async () => {
     return refetchUser();
   };
 
   const [updateUser, { isLoading: updateUserLoading }] = useUpdateUserMutation();
-  const [updateProfile, { isLoading: updateProfileLoading }] = useUpdateProfileMutation();
   const [uploadAvatar, { isLoading: uploadAvatarLoading }] = useUploadAvatarMutation();
   const [deleteAvatar, { isLoading: deleteAvatarLoading }] = useDeleteAvatarMutation();
   const [refreshAvatarUrl, { isLoading: refreshAvatarUrlLoading }] = useRefreshAvatarUrlMutation();
@@ -53,7 +49,7 @@ export const useProfile = () => {
     try {
       setIsLoading(true);
       setError(null);
-      await updateProfile(profileData).unwrap();
+      await updateUser(profileData).unwrap();
       await refetchUser();
     } catch (err: any) {
       setError(err?.data?.message || 'Ошибка при обновлении профиля');
@@ -67,12 +63,12 @@ export const useProfile = () => {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const formData = new FormData();
       formData.append('avatar', file);
-      
+
       const result = await uploadAvatar(formData).unwrap();
-      await refetchUser(); 
+      await refetchUser();
       return result;
     } catch (err: any) {
       setError(err?.data?.message || 'Ошибка при загрузке аватара');
@@ -113,10 +109,10 @@ export const useProfile = () => {
 
   const getFullName = () => {
     if (!profile) return user?.username || 'Пользователь';
-    
+
     const firstName = profile.firstName || '';
     const lastName = profile.lastName || '';
-    
+
     if (firstName && lastName) {
       return `${firstName} ${lastName}`;
     } else if (firstName) {
@@ -124,7 +120,7 @@ export const useProfile = () => {
     } else if (lastName) {
       return lastName;
     }
-    
+
     return user?.username || 'Пользователь';
   };
 
@@ -154,26 +150,24 @@ export const useProfile = () => {
   return {
     user,
     profile,
-    
-    isLoading: isLoading || userLoading || 
-               updateUserLoading || updateProfileLoading || 
-               uploadAvatarLoading || deleteAvatarLoading || 
-               refreshAvatarUrlLoading,
-    
+    isLoading:
+      isLoading ||
+      userLoading ||
+      updateUserLoading ||
+      uploadAvatarLoading ||
+      deleteAvatarLoading ||
+      refreshAvatarUrlLoading,
     error: error || userError,
-    
     handleUpdateUser,
     handleUpdateProfile,
     handleUploadAvatar,
     handleDeleteAvatar,
     handleRefreshAvatarUrl,
-    
     getFullName,
     getInitials,
     hasAvatar,
     formatDate,
     formatBirthDate,
-    
     refetchUser,
     refetchProfile,
   };
