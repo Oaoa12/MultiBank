@@ -9,10 +9,15 @@ interface AnalyticsCardData {
   heights: number[];
 }
 
-const ANALYTICS_DATA: AnalyticsCardData[] = [
+const GRID_CONFIG = {
+  cols: { base: 1, sm: 2, md: 3 },
+  spacing: 'lg' as const,
+} as const;
+
+const ANALYTICS_DATA: readonly AnalyticsCardData[] = [
   {
     value: 5,
-    label: 'Баланс',
+    label: 'Пополнения',
     percent: 33.67,
     color: '#E67E22',
     heights: [35, 28, 52, 45, 68],
@@ -35,16 +40,9 @@ const ANALYTICS_DATA: AnalyticsCardData[] = [
 
 export default function AnalyticsSection() {
   return (
-    <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg">
+    <SimpleGrid cols={GRID_CONFIG.cols} spacing={GRID_CONFIG.spacing}>
       {ANALYTICS_DATA.map((card) => (
-        <AnalyticsCard
-          key={card.label}
-          value={card.value}
-          label={card.label}
-          percent={card.percent}
-          color={card.color}
-          heights={card.heights}
-        />
+        <AnalyticsCard key={card.label} {...card} />
       ))}
     </SimpleGrid>
   );

@@ -17,7 +17,6 @@ import {
   Title,
   ActionIcon,
   Menu,
-  ThemeIcon,
   Modal,
   TextInput,
   Select,
@@ -28,8 +27,6 @@ import {
 import {
   IconUser,
   IconSettings,
-  IconCreditCard,
-  IconWallet,
   IconChartBar,
   IconBell,
   IconDots,
@@ -44,6 +41,44 @@ import { userApi } from '@/lib/store/api/UserApi';
 import { authApi } from '@/lib/store/api/AuthApi';
 import { useDispatch } from 'react-redux';
 import AnalyticsSection from './AnalyticsSection';
+
+const PAGE_STYLES = {
+  background: 'linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%)',
+  cardBackground: 'rgba(255, 255, 255, 0.8)',
+  paperBackground: '#f5f6f7',
+  buttonBlue: '#1E90FF',
+  successGreen: '#28a745',
+} as const;
+
+const TRANSACTION_STATUS_COLORS = {
+  Успешно: 'green',
+  'В обработке': 'orange',
+  Отменено: 'red',
+} as const;
+
+const TRANSACTIONS_DATA = [
+  { day: 15, month: 'янв', name: 'Пополнение счета', category: 'Переводы', status: 'Успешно', amount: '+₽ 5,000' },
+  { day: 12, month: 'янв', name: 'Магнит', category: 'Супермаркеты', status: 'Успешно', amount: '-₽ 1,250' },
+  { day: 10, month: 'янв', name: 'Перевод между счетами', category: 'Переводы', status: 'В обработке', amount: '₽ 3,000' },
+] as const;
+
+const GENDER_OPTIONS = [
+  { value: 'MALE', label: 'Мужской' },
+  { value: 'FEMALE', label: 'Женский' },
+] as const;
+
+interface Transaction {
+  day: number;
+  month: string;
+  name: string;
+  category: string;
+  status: keyof typeof TRANSACTION_STATUS_COLORS | string;
+  amount: string;
+}
+
+const getStatusColor = (status: string): string => {
+  return TRANSACTION_STATUS_COLORS[status as keyof typeof TRANSACTION_STATUS_COLORS] || 'gray';
+};
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -184,7 +219,7 @@ export default function ProfilePage() {
   return (
     <div
       style={{
-        background: 'linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%)',
+        background: PAGE_STYLES.background,
         minHeight: '100vh',
         width: '100%',
         margin: 0,
@@ -192,18 +227,18 @@ export default function ProfilePage() {
         overflowX: 'hidden',
         position: 'relative',
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
       }}
     >
       <Container size="xl" py="xl" style={{ maxWidth: '1900px', width: '100%', overflowX: 'hidden', paddingLeft: '7rem' }}>
       <Grid gutter={{ base: 'md', sm: 'lg', md: 'xl' }}>
         <Grid.Col span={{ base: 12, md: 4 }}>
-          <Card 
-            padding="xl" 
+          <Card
+            padding="xl"
             radius="lg"
             style={{
-              background: 'rgba(255, 255, 255, 0.8)',
-              backdropFilter: 'blur(10px)'
+              background: PAGE_STYLES.cardBackground,
+              backdropFilter: 'blur(10px)',
             }}
           >
             <Group justify="space-between" mb={0}>
@@ -285,13 +320,13 @@ export default function ProfilePage() {
                 </Badge>
               </Stack>
                <Button 
-                 style={{ 
+                 style={{
                    marginTop: 'var(--mantine-spacing-lg)',
                    width: '63%',
-                   backgroundColor: '#1E90FF',
+                   backgroundColor: PAGE_STYLES.buttonBlue,
                    border: 'none',
                    borderRadius: '13px',
-                   fontWeight: 600
+                   fontWeight: 600,
                  }} 
                  variant="filled" 
                  color="blue"
@@ -309,8 +344,8 @@ export default function ProfilePage() {
                   p="lg" 
                   radius="xl"
                   style={{
-                    backgroundColor: '#f5f6f7',
-                    borderRadius: '20px'
+                    backgroundColor: PAGE_STYLES.paperBackground,
+                    borderRadius: '20px',
                   }}
                 >
                   <Stack gap="sm">
@@ -323,8 +358,8 @@ export default function ProfilePage() {
                   p="lg" 
                   radius="xl"
                   style={{
-                    backgroundColor: '#f5f6f7',
-                    borderRadius: '20px'
+                    backgroundColor: PAGE_STYLES.paperBackground,
+                    borderRadius: '20px',
                   }}
                 >
                   <Stack gap="sm">
@@ -376,6 +411,7 @@ export default function ProfilePage() {
                 size="md"
                 leftSection={<IconChartBar size={18} />} 
                 justify="start"
+                onClick={() => router.push('/analytics')}
               >
                 Аналитика
               </Button>
@@ -384,7 +420,6 @@ export default function ProfilePage() {
                 size="md"
                 leftSection={<IconBell size={18} />} 
                 justify="start"
-                onClick={() => router.push('/analytics')}
               >
                 Уведомления
               </Button>
@@ -404,12 +439,12 @@ export default function ProfilePage() {
             <AnalyticsSection />
           </div>
 
-          <Card 
-            padding="xl" 
+          <Card
+            padding="xl"
             radius="lg"
             style={{
-              background: 'rgba(255, 255, 255, 0.8)',
-              backdropFilter: 'blur(10px)'
+              background: PAGE_STYLES.cardBackground,
+              backdropFilter: 'blur(10px)',
             }}
           >
             <Group justify="space-between" mb="md">
@@ -423,44 +458,62 @@ export default function ProfilePage() {
             </Group>
 
             <Stack gap="sm">
-              <Group justify="space-between" p="sm" style={{ backgroundColor: 'var(--mantine-color-gray-0)', borderRadius: 'var(--mantine-radius-md)' }}>
-                <Group gap="sm">
-                  <ThemeIcon color="green" variant="light" size="sm">
-                    <IconWallet size={16} />
-                  </ThemeIcon>
-                  <div>
-                    <Text size="sm" fw={500}>Пополнение счета</Text>
-                    <Text size="xs" c="dimmed">Переводы</Text>
+              {TRANSACTIONS_DATA.map((transaction, index) => (
+                <Group 
+                  key={index}
+                  justify="space-between" 
+                  p="md" 
+                  style={{ 
+                    backgroundColor: index % 2 === 0 ? 'var(--mantine-color-gray-0)' : 'transparent', 
+                    borderRadius: 'var(--mantine-radius-md)' 
+                  }}
+                  wrap="nowrap"
+                >
+                  <div style={{ minWidth: '50px', textAlign: 'center' }}>
+                    <Text fw={700} size="xl" style={{ lineHeight: 1.2, color: '#000' }}>
+                      {transaction.day}
+                    </Text>
+                    <Text size="xs" c="dimmed" style={{ lineHeight: 1, textTransform: 'lowercase' }}>
+                      {transaction.month}
+                    </Text>
                   </div>
-                </Group>
-                <Text fw={700} c="green">+₽ 5,000</Text>
-              </Group>
 
-              <Group justify="space-between" p="sm">
-                <Group gap="sm">
-                  <ThemeIcon color="red" variant="light" size="sm">
-                    <IconCreditCard size={16} />
-                  </ThemeIcon>
-                  <div>
-                    <Text size="sm" fw={500}>Магнит</Text>
-                    <Text size="xs" c="dimmed">Супермаркеты</Text>
+                  <div style={{ flex: 1, marginLeft: '16px' }}>
+                    <Text size="sm" fw={500} style={{ color: '#000' }}>
+                      {transaction.name}
+                    </Text>
+                    <Text size="xs" c="dimmed" style={{ marginTop: '2px' }}>
+                      {transaction.category}
+                    </Text>
                   </div>
-                </Group>
-                <Text fw={700} c="red">-₽ 1,250</Text>
-              </Group>
 
-              <Group justify="space-between" p="sm" style={{ backgroundColor: 'var(--mantine-color-gray-0)', borderRadius: 'var(--mantine-radius-md)' }}>
-                <Group gap="sm">
-                  <ThemeIcon color="blue" variant="light" size="sm">
-                    <IconWallet size={16} />
-                  </ThemeIcon>
-                  <div>
-                    <Text size="sm" fw={500}>Перевод между счетами</Text>
-                    <Text size="xs" c="dimmed">Переводы</Text>
-                  </div>
+                  <Badge
+                    variant="light"
+                    color={getStatusColor(transaction.status)}
+                    size="sm"
+                    style={{ marginRight: '16px' }}
+                    leftSection={
+                      transaction.status === 'Успешно' ? (
+                        <div
+                          style={{
+                            width: '6px',
+                            height: '6px',
+                            borderRadius: '50%',
+                            backgroundColor: PAGE_STYLES.successGreen,
+                            marginRight: '4px',
+                          }}
+                        />
+                      ) : null
+                    }
+                  >
+                    {transaction.status}
+                  </Badge>
+
+                  <Text fw={700} style={{ color: '#000', minWidth: '100px', textAlign: 'right' }}>
+                    {transaction.amount}
+                  </Text>
                 </Group>
-                <Text fw={700} c="blue">₽ 3,000</Text>
-              </Group>
+              ))}
             </Stack>
           </Card>
 
@@ -586,10 +639,7 @@ export default function ProfilePage() {
             placeholder="Выберите пол"
             value={editFormData.gender}
             onChange={(value) => setEditFormData(prev => ({ ...prev, gender: value as 'MALE' | 'FEMALE' | '' }))}
-            data={[
-              { value: 'MALE', label: 'Мужской' },
-              { value: 'FEMALE', label: 'Женский' },
-            ]}
+            data={GENDER_OPTIONS}
           />
 
           <Group justify="flex-end" gap="sm" mt="md">

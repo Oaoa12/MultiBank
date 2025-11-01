@@ -1,251 +1,26 @@
-[00:00:10.683] Server  LOG      ✓ Ready in 7.3s
-[00:00:21.116] Server  LOG      ○ Compiling / ...
-[00:00:40.537] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:46.063] Server  LOG      ○ Compiling /profile ...
-[00:00:55.622] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:56.199] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:00:21.362] Server  LOG      ✓ Ready in 13.5s
+[00:00:29.751] Server  LOG      ○ Compiling / ...
+[00:00:59.203] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:06.262] Server  LOG      ○ Compiling /profile ...
+[00:01:22.152] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:23.094] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:03:10.984] Server  LOG      ✓ Compiled in 78ms
-[00:03:16.837] Server  LOG      ✓ Compiled in 109ms
-[00:03:22.081] Server  LOG      ✓ Compiled in 130ms
-[00:03:38.491] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:03:38.707] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:01:23.094] Browser WARN    SerializableStateInvariantMiddleware took 48ms, which is more than the warning threshold of 32ms. 
+If your state or actions are very large, you may want to disable the middleware as it might cause too much of a slowdown in development mode. See https://redux-toolkit.js.org/api/getDefaultMiddleware for instructions.
+It is disabled in production builds, so you don't need to worry about that.
+[00:01:48.352] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:48.727] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:03:39.737] Server  LOG      ✓ Compiled in 60ms
-[00:04:00.280] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:04:00.602] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:04:10.525] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:04:10.704] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:04:20.877] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:04:21.062] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:04:25.486] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:04:25.647] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:05:09.635] Browser ERROR   Ошибка при загрузке аватара: {"data":{"error":"Not Found","message":"Cannot POST /user/profile/avatar","statusCode":404},"status":404}
-[00:05:40.660] Server  LOG      ✓ Compiled in 75ms
-[00:06:19.181] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:06:19.663] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:07:33.249] Browser ERROR   Ошибка при сохранении профиля: {"data":{"error":"Bad Request","message":["phone must be shorter than or equal to 20 characters"],"statusCode":400},"status":400}
-[00:07:33.249] Browser ERROR   Детали ошибки: {
-  "status": 400,
-  "data": {
-    "message": [
-      "phone must be shorter than or equal to 20 characters"
-    ],
-    "error": "Bad Request",
-    "statusCode": 400
-  }
-}
-[00:07:44.271] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:07:44.461] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:10:50.719] Server  LOG      ✓ Compiled in 489ms
-[00:10:56.408] Server  LOG      ✓ Compiled in 117ms
-[00:11:07.098] Server  LOG      ✓ Compiled in 158ms
-[00:13:12.358] Server  LOG      ✓ Compiled in 220ms
-[00:13:44.518] Server  LOG      ✓ Compiled in 98ms
-[00:13:55.065] Server  LOG      ✓ Compiled in 118ms
-[00:15:05.604] Server  LOG      ✓ Compiled in 147ms
-[00:15:10.282] Server  LOG      ✓ Compiled in 140ms
-[00:15:14.220] Server  LOG      ✓ Compiled in 79ms
-[00:15:23.458] Server  LOG      ✓ Compiled in 222ms
-[00:15:28.386] Server  LOG      ✓ Compiled in 155ms
-[00:15:33.121] Server  LOG      ✓ Compiled in 182ms
-[00:15:37.885] Server  LOG      ✓ Compiled in 146ms
-[00:15:51.398] Server  LOG      ✓ Compiled in 155ms
-[00:16:52.577] Server  LOG      ✓ Compiled in 75ms
-[00:17:24.809] Server  LOG      ✓ Compiled in 265ms
-[00:27:24.787] Server  LOG      ✓ Compiled in 68ms
-[00:27:39.735] Server  LOG      ✓ Compiled in 6.1s
-[00:27:41.985] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:27:41.986] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:27:41.986] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:27:41.986] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:27:41.986] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:27:41.986] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:27:51.274] Server  LOG      ✓ Compiled in 900ms
-[01:19:53.858] Server  LOG      ✓ Compiled in 1481ms
-[01:20:00.240] Server  LOG      ✓ Compiled in 111ms
-[01:20:57.288] Server  LOG      ✓ Compiled in 326ms
-[01:22:37.883] Server  LOG      ✓ Compiled in 145ms
-[01:23:52.805] Server  LOG      ✓ Compiled in 45ms
-[01:23:59.069] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:23:59.393] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:24:05.216] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:24:05.216] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:24:05.216] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:24:05.216] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:24:05.216] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:24:05.216] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:25:19.278] Server  LOG      ✓ Compiled in 62ms
-[01:25:24.137] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:25:24.442] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:25:30.060] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:25:30.060] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:25:30.060] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:25:30.060] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:25:30.060] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:25:30.060] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:26:03.782] Server  LOG      ✓ Compiled in 104ms
-[01:26:10.954] Server  LOG      ✓ Compiled in 34ms
-[01:27:21.682] Server  LOG      ✓ Compiled in 301ms
-[01:27:27.896] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:27:28.193] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:27:38.716] Server  LOG      ✓ Compiled in 1314ms
-[01:27:39.905] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:27:39.905] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:27:39.905] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:27:39.905] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:27:39.905] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:27:39.906] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:29:42.061] Server  LOG      ✓ Compiled in 274ms
-[01:29:51.852] Server  LOG      ✓ Compiled in 68ms
-[01:30:23.527] Server  LOG      ✓ Compiled in 838ms
-[01:30:26.152] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:26.152] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:26.152] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:26.152] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:26.152] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:26.152] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:26.739] Server  LOG      ✓ Compiled in 107ms
-[01:30:34.743] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:30:35.025] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:30:45.317] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:45.317] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:45.317] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:45.317] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:45.317] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:30:45.317] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[01:31:35.307] Server  LOG      ✓ Compiled in 882ms
-[01:31:48.034] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:31:48.313] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:33:36.479] Server  LOG      ✓ Compiled in 50ms
-[01:33:38.597] Server  LOG      ✓ Compiled in 63ms
-[01:33:41.054] Server  LOG      ✓ Compiled in 120ms
-[01:33:41.179] Browser ERROR   ./src/app/profile/AnalyticsCard.tsx:81:1
+[00:05:29.211] Server  LOG      ✓ Compiled in 372ms
+[00:08:32.244] Server  LOG      ✓ Compiled in 170ms
+[00:08:48.181] Server  LOG      ✓ Compiled in 83ms
+[00:08:48.341] Browser ERROR   ./src/app/profile/AnalyticsCard.tsx:135:1
 Parsing ecmascript source code failed
-  79 |     </Card>
-  80 |   );
-> 81 | }
-     | ^
-  82 |
+  133 |     </Card>
+  134 |   );
+> 135 | }
+      | ^
+  136 |
 
 Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
 
@@ -261,63 +36,114 @@ Import traces:
     ./src/app/profile/AnalyticsSection.tsx [Client Component SSR]
     ./src/app/profile/page.tsx [Client Component SSR]
     ./src/app/profile/page.tsx [Server Component]
-[01:33:43.594] Server  LOG      ✓ Compiled in 92ms
-[01:34:41.248] Server  LOG      ✓ Compiled in 176ms
-[01:35:50.747] Server  LOG      ✓ Compiled in 39ms
-[01:36:54.748] Server  LOG      ✓ Compiled in 47ms
-[01:39:47.346] Server  LOG      ✓ Compiled in 36ms
-[01:40:56.854] Server  LOG      ✓ Compiled in 36ms
-[01:40:59.498] Server  LOG      ✓ Compiled in 125ms
-[01:41:47.359] Server  LOG      ✓ Compiled in 55ms
-[01:41:51.044] Server  LOG      ✓ Compiled in 79ms
-[01:44:15.277] Server  LOG      ✓ Compiled in 50ms
-[01:44:19.001] Server  LOG      ✓ Compiled in 402ms
-[01:46:49.245] Server  LOG      ✓ Compiled in 35ms
-[01:46:51.291] Server  LOG      ✓ Compiled in 60ms
-[01:46:56.644] Server  LOG      ✓ Compiled in 122ms
-[01:46:58.918] Server  LOG      ✓ Compiled in 28ms
-[01:47:02.233] Server  LOG      ✓ Compiled in 70ms
-[01:48:29.336] Server  LOG      ✓ Compiled in 43ms
-[01:48:30.371] Browser ERROR   uncaughtError: ReferenceError: chartHeight is not defined
-[01:48:33.785] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:48:33.804] Server  LOG      ✓ Compiled in 72ms
-[01:48:36.702] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:48:44.625] Server  LOG      ✓ Compiled in 39ms
-[01:48:45.147] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:10:18.931] Server  LOG      ✓ Compiled in 47ms
+[00:10:23.729] Server  LOG      ✓ Compiled in 64ms
+[00:10:26.044] Server  LOG      ✓ Compiled in 78ms
+[00:11:28.840] Server  LOG      ✓ Compiled in 100ms
+[00:11:33.760] Server  LOG      ✓ Compiled in 120ms
+[00:11:37.246] Server  LOG      ✓ Compiled in 33ms
+[00:12:57.701] Server  LOG      ✓ Compiled in 60ms
+[00:14:02.652] Server  LOG      ✓ Compiled in 107ms
+[00:21:11.478] Server  LOG      ✓ Compiled in 2.3s
+[00:21:26.285] Server  LOG      ✓ Compiled in 100ms
+[00:21:28.848] Server  LOG      ✓ Compiled in 112ms
+[00:23:01.128] Server  LOG      ✓ Compiled in 83ms
+[00:23:06.316] Server  LOG      ✓ Compiled in 319ms
+[00:24:06.774] Server  LOG      ✓ Compiled in 147ms
+[00:24:13.784] Server  LOG      ✓ Compiled in 134ms
+[00:25:23.302] Server  LOG      ✓ Compiled in 128ms
+[00:27:09.388] Server  LOG      ✓ Compiled in 5.7s
+[00:27:12.423] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/profile. Falling back to browser navigation. {}
+[00:27:14.400] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:14.760] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:49:46.384] Server  LOG      ✓ Compiled in 48ms
-[01:49:55.162] Server  LOG      ✓ Compiled in 34ms
-[01:51:03.079] Server  LOG      ✓ Compiled in 672ms
-[01:51:08.046] Server  LOG      ✓ Compiled in 132ms
-[01:51:23.646] Server  LOG      ✓ Compiled in 85ms
-[01:51:40.854] Server  LOG      ✓ Compiled in 380ms
-[01:51:46.113] Server  LOG      ✓ Compiled in 129ms
-[01:51:56.302] Server  LOG      ✓ Compiled in 254ms
-[01:53:54.499] Server  LOG      ✓ Compiled in 56ms
-[01:53:58.570] Server  LOG      ✓ Compiled in 41ms
-[01:54:02.038] Server  LOG      ✓ Compiled in 32ms
-[01:54:33.939] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:54:34.379] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:27:33.086] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/profile. Falling back to browser navigation. {}
+[00:27:35.489] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:35.953] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:55:52.825] Server  LOG      ✓ Compiled in 45ms
-[01:55:55.744] Server  LOG      ✓ Compiled in 105ms
-[01:55:56.854] Browser ERROR   uncaughtError: ReferenceError: updateProfileLoading is not defined
-[01:56:01.465] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:56:01.491] Server  LOG      ✓ Compiled in 37ms
-[01:56:04.777] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:56:17.372] Server  LOG      ✓ Compiled in 22ms
-[01:56:47.359] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:27:40.830] Server  LOG      ✓ Compiled in 82ms
+[00:29:10.988] Server  LOG      ○ Compiling /analytics ...
+[00:29:17.162] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:29:17.163] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:29:24.914] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:29:25.234] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:57:35.927] Browser ERROR   Ошибка при загрузке аватара: {"data":{"message":"Internal server error","statusCode":500},"status":500}
-[01:57:45.307] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:57:45.635] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:29:57.527] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:29:57.527] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:03.078] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:30:03.324] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:59:16.418] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:59:16.568] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:30:29.531] Server  LOG      ✓ Compiled in 129ms
+[00:30:47.031] Server  LOG      ✓ Compiled in 79ms
+[00:30:48.642] Server  LOG      ✓ Compiled in 81ms
+[00:30:49.826] Server  LOG      ✓ Compiled in 86ms
+[00:30:50.963] Server  LOG      ✓ Compiled in 55ms
+[00:30:56.824] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:56.824] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:31:00.937] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:31:01.110] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:59:22.514] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:59:22.740] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:59:28.426] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:59:28.607] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:32:42.077] Server  LOG      ✓ Compiled in 157ms
+[00:33:44.279] Server  LOG      ✓ Compiled in 47ms
+[00:34:42.231] Server  LOG      ✓ Compiled in 127ms
+[00:34:45.356] Server  LOG      ✓ Compiled in 86ms
+[00:34:48.367] Server  LOG      ✓ Compiled in 79ms
+[00:34:52.255] Server  LOG      ✓ Compiled in 110ms
+[00:34:56.011] Server  LOG      ✓ Compiled in 83ms
+[00:34:59.538] Server  LOG      ✓ Compiled in 67ms
+[00:35:05.010] Server  LOG      ✓ Compiled in 171ms
+[00:35:10.875] Server  LOG      ✓ Compiled in 133ms
+[00:36:11.288] Server  LOG      ✓ Compiled in 73ms
+[00:39:00.071] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:39:00.071] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:39:03.118] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:39:03.118] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:39:03.749] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:39:03.749] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:39:04.624] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:39:04.624] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:39:15.820] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:39:16.062] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
