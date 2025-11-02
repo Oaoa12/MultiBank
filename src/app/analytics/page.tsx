@@ -7,11 +7,16 @@ export default function Dashboard() {
     return (
         <Container mr={150} size="xl" py="xl">
             <SimpleGrid cols={{ base: 1, lg: 3 }} spacing="md">
-                <div style={{ gridColumn: 'span 2' }}>
-                    <BalanceAnalytics />
-                </div>
                 <div>
                     <Cards />
+                </div>
+                <div style={{ 
+                    gridColumn: 'span 2', 
+                    marginLeft: '220px',
+                    borderLeft: '1px solid rgba(0, 0, 0, 0.1)',
+                    paddingLeft: '20px'
+                }}>
+                    <BalanceAnalytics />
                 </div>
             </SimpleGrid>
         </Container>

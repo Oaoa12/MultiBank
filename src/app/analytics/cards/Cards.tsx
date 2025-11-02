@@ -92,11 +92,11 @@ export default function Cards() {
               slidesPerView={1}
               spaceBetween={16}
               navigation
-              pagination={{ 
-                clickable: true,
-                dynamicBullets: false,
-                el: '.swiper-pagination'
-              }}
+              // pagination={{ 
+              //   clickable: true,
+              //   dynamicBullets: false,
+              //   el: '.swiper-pagination'
+              // }}
               loop={false}
               keyboard={{ enabled: true }}
               a11y={{ enabled: true }}
@@ -106,6 +106,9 @@ export default function Cards() {
               {cardsData.map((card) => (
                 <SwiperSlide key={card.id}>
                   <div className={styles.bankCard} style={{ background: card.color }}>
+                    <div className={styles.cardPattern}></div>
+                    <div className={styles.cardGeometricPattern}></div>
+                    
                     <div className={styles.cardTop}>
                       <Group justify="space-between" align="flex-start">
                         <div>
@@ -120,10 +123,13 @@ export default function Cards() {
                     </div>
 
                     <div className={styles.cardMiddle}>
+                      {/* <img src="/chip.png" className={styles.chip} alt="Chip" /> */}
                       <Text className={styles.cardNumber}>
                         {isCardVisible ? card.number : '•••• •••• •••• ••••'}
                       </Text>
                     </div>
+
+                    <div className={styles.cardDecorativeLines}></div>
 
                     <div className={styles.cardBottom}>
                       <Group justify="space-between" align="flex-end">
@@ -148,17 +154,32 @@ export default function Cards() {
             <div className="swiper-pagination"></div>
           </div>
 
-          <Stack gap="xs">
-            <Button variant="light" fullWidth size="sm" leftSection={<IconSettings size={16} />}>
-              Управление картами
-            </Button>
-            <Button variant="outline" fullWidth size="sm" leftSection={<IconHistory size={16} />}>
+          <Group gap="xs" grow style={{ width: '400px', marginLeft: '105px' }}>
+            <Button 
+              variant="outline" 
+              size="sm"
+              style={{
+                marginTop: '-50px',
+                backgroundColor: 'transparent',
+                borderColor: '#2563eb',
+                color: '#2563eb'
+              }}
+            >
               История операций
             </Button>
-            <Button variant="subtle" fullWidth size="sm" leftSection={<IconPlus size={16} />}>
+            <Button 
+              variant="outline" 
+              size="sm"
+              style={{
+                marginTop: '-50px',
+                backgroundColor: 'transparent',
+                borderColor: '#2563eb',
+                color: '#2563eb'
+              }}
+            >
               Добавить карту
             </Button>
-          </Stack>
+          </Group>
 
           <Divider />
 

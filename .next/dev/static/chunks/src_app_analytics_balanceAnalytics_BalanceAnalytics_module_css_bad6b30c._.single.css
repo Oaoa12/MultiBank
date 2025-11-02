@@ -1,7 +1,7 @@
 /* [project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [app-client] (css) */
 .BalanceAnalytics-module__Wxx4tq__analyticsWrapper {
   justify-content: flex-start;
-  padding: 20px;
+  width: 100%;
   display: flex;
   position: relative;
 }
@@ -10,6 +10,7 @@
   background: linear-gradient(#f9fafb 0%, #fff 100%);
   border: 1px solid #0000001a;
   border-radius: 8px;
+  width: 100%;
   min-width: 700px;
   min-height: 320px;
   transition: transform .2s, box-shadow .2s;

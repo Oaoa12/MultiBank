@@ -424,15 +424,19 @@ __turbopack_context__.v({
   "cardBank": "Cards-module__uj5W9W__cardBank",
   "cardBottom": "Cards-module__uj5W9W__cardBottom",
   "cardContainer": "Cards-module__uj5W9W__cardContainer",
+  "cardDecorativeLines": "Cards-module__uj5W9W__cardDecorativeLines",
+  "cardGeometricPattern": "Cards-module__uj5W9W__cardGeometricPattern",
   "cardLabel": "Cards-module__uj5W9W__cardLabel",
   "cardMiddle": "Cards-module__uj5W9W__cardMiddle",
   "cardNumber": "Cards-module__uj5W9W__cardNumber",
+  "cardPattern": "Cards-module__uj5W9W__cardPattern",
   "cardTitle": "Cards-module__uj5W9W__cardTitle",
   "cardTop": "Cards-module__uj5W9W__cardTop",
   "cardType": "Cards-module__uj5W9W__cardType",
   "cardValue": "Cards-module__uj5W9W__cardValue",
   "cardsWrapper": "Cards-module__uj5W9W__cardsWrapper",
   "carouselContainer": "Cards-module__uj5W9W__carouselContainer",
+  "chip": "Cards-module__uj5W9W__chip",
   "mantine-Group-root": "Cards-module__uj5W9W__mantine-Group-root",
   "mantine-Stack-root": "Cards-module__uj5W9W__mantine-Stack-root",
   "swiper": "Cards-module__uj5W9W__swiper",
@@ -464,9 +468,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tabler$2f$icons$2d$react$2f$dist$2f$esm$2f$icons$2f$IconCreditCard$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__IconCreditCard$3e$__ = __turbopack_context__.i("[project]/node_modules/@tabler/icons-react/dist/esm/icons/IconCreditCard.mjs [app-client] (ecmascript) <export default as IconCreditCard>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tabler$2f$icons$2d$react$2f$dist$2f$esm$2f$icons$2f$IconEye$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__IconEye$3e$__ = __turbopack_context__.i("[project]/node_modules/@tabler/icons-react/dist/esm/icons/IconEye.mjs [app-client] (ecmascript) <export default as IconEye>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tabler$2f$icons$2d$react$2f$dist$2f$esm$2f$icons$2f$IconEyeOff$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__IconEyeOff$3e$__ = __turbopack_context__.i("[project]/node_modules/@tabler/icons-react/dist/esm/icons/IconEyeOff.mjs [app-client] (ecmascript) <export default as IconEyeOff>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tabler$2f$icons$2d$react$2f$dist$2f$esm$2f$icons$2f$IconPlus$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__IconPlus$3e$__ = __turbopack_context__.i("[project]/node_modules/@tabler/icons-react/dist/esm/icons/IconPlus.mjs [app-client] (ecmascript) <export default as IconPlus>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tabler$2f$icons$2d$react$2f$dist$2f$esm$2f$icons$2f$IconHistory$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__IconHistory$3e$__ = __turbopack_context__.i("[project]/node_modules/@tabler/icons-react/dist/esm/icons/IconHistory.mjs [app-client] (ecmascript) <export default as IconHistory>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tabler$2f$icons$2d$react$2f$dist$2f$esm$2f$icons$2f$IconSettings$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__IconSettings$3e$__ = __turbopack_context__.i("[project]/node_modules/@tabler/icons-react/dist/esm/icons/IconSettings.mjs [app-client] (ecmascript) <export default as IconSettings>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$swiper$2d$react$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/swiper/swiper-react.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$modules$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/swiper/modules/index.mjs [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$modules$2f$navigation$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Navigation$3e$__ = __turbopack_context__.i("[project]/node_modules/swiper/modules/navigation.mjs [app-client] (ecmascript) <export default as Navigation>");
@@ -619,11 +620,11 @@ function Cards() {
                                     slidesPerView: 1,
                                     spaceBetween: 16,
                                     navigation: true,
-                                    pagination: {
-                                        clickable: true,
-                                        dynamicBullets: false,
-                                        el: '.swiper-pagination'
-                                    },
+                                    // pagination={{ 
+                                    //   clickable: true,
+                                    //   dynamicBullets: false,
+                                    //   el: '.swiper-pagination'
+                                    // }}
                                     loop: false,
                                     keyboard: {
                                         enabled: true
@@ -643,6 +644,20 @@ function Cards() {
                                                 },
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$cards$2f$Cards$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cardPattern
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/analytics/cards/Cards.tsx",
+                                                        lineNumber: 109,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$cards$2f$Cards$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cardGeometricPattern
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/analytics/cards/Cards.tsx",
+                                                        lineNumber: 110,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$cards$2f$Cards$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cardTop,
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Group"], {
                                                             justify: "space-between",
@@ -655,7 +670,7 @@ function Cards() {
                                                                             children: card.bank
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                                            lineNumber: 112,
+                                                                            lineNumber: 115,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Group"], {
@@ -667,7 +682,7 @@ function Cards() {
                                                                                     children: card.type
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                                                    lineNumber: 114,
+                                                                                    lineNumber: 117,
                                                                                     columnNumber: 29
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Badge$2f$Badge$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
@@ -677,19 +692,19 @@ function Cards() {
                                                                                     children: card.status
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                                                    lineNumber: 115,
+                                                                                    lineNumber: 118,
                                                                                     columnNumber: 29
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                                            lineNumber: 113,
+                                                                            lineNumber: 116,
                                                                             columnNumber: 27
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                                    lineNumber: 111,
+                                                                    lineNumber: 114,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tabler$2f$icons$2d$react$2f$dist$2f$esm$2f$icons$2f$IconCreditCard$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__IconCreditCard$3e$__["IconCreditCard"], {
@@ -697,18 +712,18 @@ function Cards() {
                                                                     color: "#ffffff"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                                    lineNumber: 118,
+                                                                    lineNumber: 121,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                            lineNumber: 110,
+                                                            lineNumber: 113,
                                                             columnNumber: 23
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                        lineNumber: 109,
+                                                        lineNumber: 112,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -718,12 +733,19 @@ function Cards() {
                                                             children: isCardVisible ? card.number : '•••• •••• •••• ••••'
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                            lineNumber: 123,
+                                                            lineNumber: 127,
                                                             columnNumber: 23
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                        lineNumber: 122,
+                                                        lineNumber: 125,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$cards$2f$Cards$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cardDecorativeLines
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/analytics/cards/Cards.tsx",
+                                                        lineNumber: 132,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -739,36 +761,12 @@ function Cards() {
                                                                             children: "Владелец"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                                            lineNumber: 131,
-                                                                            columnNumber: 27
-                                                                        }, this),
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
-                                                                            className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$cards$2f$Cards$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cardValue,
-                                                                            children: isCardVisible ? card.owner : '•••• ••••••'
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                                            lineNumber: 132,
-                                                                            columnNumber: 27
-                                                                        }, this)
-                                                                    ]
-                                                                }, void 0, true, {
-                                                                    fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                                    lineNumber: 130,
-                                                                    columnNumber: 25
-                                                                }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
-                                                                            className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$cards$2f$Cards$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cardLabel,
-                                                                            children: "Срок действия"
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/app/analytics/cards/Cards.tsx",
                                                                             lineNumber: 137,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
                                                                             className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$cards$2f$Cards$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cardValue,
-                                                                            children: isCardVisible ? card.expiry : '••/••'
+                                                                            children: isCardVisible ? card.owner : '•••• ••••••'
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
                                                                             lineNumber: 138,
@@ -779,16 +777,40 @@ function Cards() {
                                                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
                                                                     lineNumber: 136,
                                                                     columnNumber: 25
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
+                                                                            className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$cards$2f$Cards$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cardLabel,
+                                                                            children: "Срок действия"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/app/analytics/cards/Cards.tsx",
+                                                                            lineNumber: 143,
+                                                                            columnNumber: 27
+                                                                        }, this),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
+                                                                            className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$cards$2f$Cards$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cardValue,
+                                                                            children: isCardVisible ? card.expiry : '••/••'
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/app/analytics/cards/Cards.tsx",
+                                                                            lineNumber: 144,
+                                                                            columnNumber: 27
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/src/app/analytics/cards/Cards.tsx",
+                                                                    lineNumber: 142,
+                                                                    columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                            lineNumber: 129,
+                                                            lineNumber: 135,
                                                             columnNumber: 23
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                        lineNumber: 128,
+                                                        lineNumber: 134,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
@@ -811,7 +833,7 @@ function Cards() {
                                     className: "swiper-pagination"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                    lineNumber: 148,
+                                    lineNumber: 154,
                                     columnNumber: 13
                                 }, this)
                             ]
@@ -820,69 +842,53 @@ function Cards() {
                             lineNumber: 87,
                             columnNumber: 11
                         }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Stack$2f$Stack$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Stack"], {
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Group"], {
                             gap: "xs",
+                            grow: true,
+                            style: {
+                                width: '400px',
+                                marginLeft: '105px'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Button$2f$Button$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                    variant: "light",
-                                    fullWidth: true,
+                                    variant: "outline",
                                     size: "sm",
-                                    leftSection: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tabler$2f$icons$2d$react$2f$dist$2f$esm$2f$icons$2f$IconSettings$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__IconSettings$3e$__["IconSettings"], {
-                                        size: 16
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                        lineNumber: 152,
-                                        columnNumber: 70
-                                    }, void 0),
-                                    children: "Управление картами"
+                                    style: {
+                                        marginTop: '-50px',
+                                        backgroundColor: 'transparent',
+                                        borderColor: '#2563eb',
+                                        color: '#2563eb'
+                                    },
+                                    children: "История операций"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                    lineNumber: 152,
+                                    lineNumber: 158,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Button$2f$Button$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                     variant: "outline",
-                                    fullWidth: true,
                                     size: "sm",
-                                    leftSection: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tabler$2f$icons$2d$react$2f$dist$2f$esm$2f$icons$2f$IconHistory$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__IconHistory$3e$__["IconHistory"], {
-                                        size: 16
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                        lineNumber: 155,
-                                        columnNumber: 72
-                                    }, void 0),
-                                    children: "История операций"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                    lineNumber: 155,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Button$2f$Button$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                    variant: "subtle",
-                                    fullWidth: true,
-                                    size: "sm",
-                                    leftSection: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tabler$2f$icons$2d$react$2f$dist$2f$esm$2f$icons$2f$IconPlus$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__IconPlus$3e$__["IconPlus"], {
-                                        size: 16
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                        lineNumber: 158,
-                                        columnNumber: 71
-                                    }, void 0),
+                                    style: {
+                                        marginTop: '-50px',
+                                        backgroundColor: 'transparent',
+                                        borderColor: '#2563eb',
+                                        color: '#2563eb'
+                                    },
                                     children: "Добавить карту"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                    lineNumber: 158,
+                                    lineNumber: 170,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                            lineNumber: 151,
+                            lineNumber: 157,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Divider$2f$Divider$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Divider"], {}, void 0, false, {
                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                            lineNumber: 163,
+                            lineNumber: 184,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Stack$2f$Stack$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Stack"], {
@@ -899,7 +905,7 @@ function Cards() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                    lineNumber: 166,
+                                    lineNumber: 187,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Group"], {
@@ -910,7 +916,7 @@ function Cards() {
                                             children: "Операций за месяц"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                            lineNumber: 168,
+                                            lineNumber: 189,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Badge$2f$Badge$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
@@ -919,13 +925,13 @@ function Cards() {
                                             children: currentCard.operations
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                            lineNumber: 169,
+                                            lineNumber: 190,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                    lineNumber: 167,
+                                    lineNumber: 188,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Group"], {
@@ -936,7 +942,7 @@ function Cards() {
                                             children: "Потрачено"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                            lineNumber: 172,
+                                            lineNumber: 193,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -945,13 +951,13 @@ function Cards() {
                                             children: currentCard.spent
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                            lineNumber: 173,
+                                            lineNumber: 194,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                    lineNumber: 171,
+                                    lineNumber: 192,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Group"], {
@@ -962,7 +968,7 @@ function Cards() {
                                             children: "Кэшбэк"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                            lineNumber: 176,
+                                            lineNumber: 197,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -972,19 +978,19 @@ function Cards() {
                                             children: currentCard.cashback
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                            lineNumber: 177,
+                                            lineNumber: 198,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                    lineNumber: 175,
+                                    lineNumber: 196,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                            lineNumber: 165,
+                            lineNumber: 186,
                             columnNumber: 11
                         }, this)
                     ]

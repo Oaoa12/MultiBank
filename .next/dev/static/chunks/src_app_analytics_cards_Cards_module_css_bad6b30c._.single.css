@@ -7,8 +7,7 @@
 
 .Cards-module__uj5W9W__cardsWrapper {
   justify-content: flex-start;
-  margin-left: -150px;
-  padding: 20px;
+  width: 100%;
   display: flex;
   position: relative;
 }
@@ -16,14 +15,14 @@
 .Cards-module__uj5W9W__cardContainer {
   width: var(--container-width);
   min-width: var(--container-width);
-  background: linear-gradient(#f9fafb 0%, #fff 100%);
-  border: 1px solid #0000001a;
-  border-radius: 12px;
   max-width: 100%;
   min-height: 600px;
+  box-shadow: none;
+  background: none;
+  border: none;
+  border-radius: 12px;
   position: relative;
   overflow: visible;
-  box-shadow: 0 8px 24px #00000014;
 }
 
 .Cards-module__uj5W9W__cardTitle {
@@ -55,10 +54,36 @@
   box-shadow: 0 8px 24px #667eea59;
 }
 
+.Cards-module__uj5W9W__cardPattern {
+  pointer-events: none;
+  z-index: 1;
+  background-image: repeating-linear-gradient(45deg, #ffffff08 0 2px, #0000 2px 8px), repeating-linear-gradient(-45deg, #ffffff05 0 1px, #0000 1px 6px), radial-gradient(circle at 15% 25%, #ffffff14 0 2px, #0000 2px), radial-gradient(circle at 85% 75%, #ffffff0f 0 1px, #0000 1px);
+  border-radius: 16px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.Cards-module__uj5W9W__cardGeometricPattern {
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle at 30% 30%, #ffffff1a 0%, #0000 50%), conic-gradient(#0000 0deg, #ffffff0d 90deg, #0000 180deg);
+  border-radius: 16px;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  right: -30%;
+}
+
 .Cards-module__uj5W9W__bankCard:before {
   content: "";
   pointer-events: none;
+  z-index: 2;
   background: radial-gradient(circle, #ffffff1f 0%, #0000 70%);
+  border-radius: 16px;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -66,8 +91,33 @@
   right: -40%;
 }
 
+.Cards-module__uj5W9W__chip {
+  object-fit: contain;
+  z-index: 3;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  width: 80px;
+  height: auto;
+  position: absolute;
+  top: -28px;
+  right: -10px;
+}
+
+.Cards-module__uj5W9W__cardDecorativeLines {
+  z-index: 2;
+  background: linear-gradient(90deg, #0000 0%, #ffffff4d 20% 80%, #0000 100%);
+  height: 1px;
+  position: absolute;
+  bottom: 20px;
+  left: 24px;
+  right: 24px;
+}
+
 .Cards-module__uj5W9W__cardTop {
+  z-index: 3;
   margin-bottom: 18px;
+  position: relative;
 }
 
 .Cards-module__uj5W9W__cardBank {
@@ -83,7 +133,12 @@
 }
 
 .Cards-module__uj5W9W__cardMiddle {
+  z-index: 3;
+  flex-direction: column;
   margin-bottom: 20px;
+  padding-right: 70px;
+  display: flex;
+  position: relative;
 }
 
 .Cards-module__uj5W9W__cardNumber {
@@ -94,7 +149,9 @@
 }
 
 .Cards-module__uj5W9W__cardBottom {
+  z-index: 3;
   margin-top: auto;
+  position: relative;
 }
 
 .Cards-module__uj5W9W__cardLabel {
@@ -116,6 +173,7 @@
   height: var(--carousel-height);
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
   display: flex;
   position: relative;
   overflow: visible;
@@ -156,9 +214,12 @@
 }
 
 .Cards-module__uj5W9W__swiper-pagination {
-  margin-top: 12px !important;
-  position: relative !important;
-  bottom: auto !important;
+  width: auto !important;
+  margin-top: 0 !important;
+  position: absolute !important;
+  bottom: -60px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
 }
 
 .Cards-module__uj5W9W__swiper-pagination-bullet {
