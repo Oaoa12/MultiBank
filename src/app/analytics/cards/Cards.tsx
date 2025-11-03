@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Paper, Text, Stack, Group, Button, Title, Divider, Badge } from '@mantine/core';
-import { IconCreditCard, IconEye, IconEyeOff, IconPlus, IconHistory, IconSettings } from '@tabler/icons-react';
+import { Paper, Text, Stack, Group, Button, Title, Divider, Badge, Avatar } from '@mantine/core';
+import { IconCreditCard, IconEye, IconEyeOff, IconPlus, IconHistory, IconSettings, IconShoppingCart, IconCar, IconPlane, IconBuilding, IconPizza } from '@tabler/icons-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Keyboard, A11y } from 'swiper/modules';
 import 'swiper/css';
@@ -49,6 +49,44 @@ const cardsData = [
     operations: 31,
     spent: '₽ 67,890',
     cashback: '₽ 2,036'
+  }
+];
+
+const popularCategories = [
+  {
+    id: 1,
+    name: 'Супермаркеты',
+    icon: IconShoppingCart,
+    color: '#2563eb',
+    amount: '₽ 45,230'
+  },
+  {
+    id: 2,
+    name: 'Транспорт',
+    icon: IconCar,
+    color: '#10b981',
+    amount: '₽ 12,500'
+  },
+  {
+    id: 3,
+    name: 'Путешествия',
+    icon: IconPlane,
+    color: '#f59e0b',
+    amount: '₽ 89,000'
+  },
+  {
+    id: 4,
+    name: 'Кафе и рестораны',
+    icon: IconPizza,
+    color: '#ef4444',
+    amount: '₽ 28,750'
+  },
+  {
+    id: 5,
+    name: 'Жильё',
+    icon: IconBuilding,
+    color: '#8b5cf6',
+    amount: '₽ 35,000'
   }
 ];
 
@@ -181,22 +219,33 @@ export default function Cards() {
             </Button>
           </Group>
 
-          <Divider />
+          <Divider mt="md" />
 
-          <Stack gap="xs">
-            <Text size="sm" fw={500} c="dimmed">Статистика ({currentCard.bank})</Text>
-            <Group justify="space-between">
-              <Text size="sm">Операций за месяц</Text>
-              <Badge color="blue" variant="light">{currentCard.operations}</Badge>
-            </Group>
-            <Group justify="space-between">
-              <Text size="sm">Потрачено</Text>
-              <Text size="sm" fw={500}>{currentCard.spent}</Text>
-            </Group>
-            <Group justify="space-between">
-              <Text size="sm">Кэшбэк</Text>
-              <Text size="sm" fw={500} c="green">{currentCard.cashback}</Text>
-            </Group>
+          <Stack gap="xs" mt="md">
+            <Text size="lg" fw={600} c="#000">Популярные категории</Text>
+            <Stack gap="xs" mt="md">
+            {popularCategories.map((category) => {
+              const IconComponent = category.icon;
+              return (
+                <Group key={category.id} justify="space-between" align="center">
+                  <Group gap="sm">
+                    <Avatar 
+                      size={40} 
+                      radius="xl" 
+                      style={{ 
+                        backgroundColor: `${category.color}15`,
+                        border: `1px solid ${category.color}30`
+                      }}
+                    >
+                      <IconComponent size={20} color={category.color} />
+                    </Avatar>
+                    <Text size="sm" fw={500}>{category.name}</Text>
+                  </Group>
+                  <Text size="sm" fw={600}>{category.amount}</Text>
+                </Group>
+              );
+            })}
+            </Stack>
           </Stack>
         </Stack>
       </Paper>

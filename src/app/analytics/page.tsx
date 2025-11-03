@@ -12,7 +12,7 @@ export default function Dashboard() {
                 </div>
                 <div style={{ 
                     gridColumn: 'span 2', 
-                    marginLeft: '220px',
+                    marginLeft: '320px',
                     borderLeft: '1px solid rgba(0, 0, 0, 0.1)',
                     paddingLeft: '20px'
                 }}>

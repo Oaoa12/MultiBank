@@ -1,6 +1,6 @@
 'use client';
 
-import { Paper, Text, Stack, Group, Button } from '@mantine/core';
+import { Paper, Text, Stack, Group, Button, Divider } from '@mantine/core';
 import { LineChart } from '@mantine/charts';
 import { IconTrendingUp } from '@tabler/icons-react';
 import { useState, useEffect } from 'react';
@@ -59,6 +59,7 @@ export default function BalanceAnalytics() {
   return (
 
     <div className={styles.analyticsWrapper}>
+      <Divider mx="md" />
       <Paper shadow="lg" radius="lg" className={styles.balanceCard}>
         <div className={styles.balanceHeader}>
           <Group justify="space-between" align="center" w="100%">
@@ -99,6 +100,7 @@ export default function BalanceAnalytics() {
           <div
             key={selectedBank}
             className={animate ? styles.chartVisible : styles.chartHidden}
+            style={{ marginTop: '16px' }}
           >
             <svg style={{ position: 'absolute', width: 0, height: 0 }}>
               <defs>
@@ -110,7 +112,7 @@ export default function BalanceAnalytics() {
             </svg>
 
             <LineChart
-              h={180}
+              h={140}
               data={currentBank.data}
               dataKey="month"
               series={[{ name: 'value', color: '#2563eb' }]}

@@ -1,29 +1,33 @@
 .analyticsWrapper {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   width: 100%;
+  margin-top: 55px;
 }
 
 .balanceCard {
   position: relative;
   width: 100%;
-  min-width: 700px;
-  min-height: 320px;
-  background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+  min-width: 500px;
+  min-height: 280px;
+  background: transparent;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 40px;
 }
 
 .balanceHeader {
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(8px);
-  padding: 12px 20px;
+  background-color: transparent;
+  backdrop-filter: none;
+  padding: 16px;
+  padding-bottom: 8px;
   width: 100%;
-  height: 56px;
+  height: auto;
   display: flex;
   align-items: center;
 }
