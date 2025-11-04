@@ -1,12 +1,24 @@
 'use client';
 
-import { Paper, Text, Stack, Group, Button, Divider } from '@mantine/core';
+import { Paper, Text, Stack, Divider } from '@mantine/core';
 import { LineChart } from '@mantine/charts';
-import { IconTrendingUp } from '@tabler/icons-react';
 import { useState, useEffect } from 'react';
 import styles from './BalanceAnalytics.module.css';
 
-const bankData = {
+interface ChartDataPoint {
+  month: string;
+  value: number;
+}
+
+interface BankData {
+  balance: number;
+  growth: string;
+  data: ChartDataPoint[];
+}
+
+type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+
+const bankData: Record<BankName, BankData> = {
   'ВТБ': {
     balance: 1250000,
     growth: '+5.6%',
@@ -45,68 +57,60 @@ const bankData = {
   }
 };
 
-export default function BalanceAnalytics() {
-  const [selectedBank, setSelectedBank] = useState('ВТБ');
-  const [animate, setAnimate] = useState(false);
-  const currentBank = bankData[selectedBank as keyof typeof bankData];
+interface BalanceAnalyticsProps {
+  selectedBank: string;
+}
+
+const TOOLTIP_STYLE = {
+  background: 'rgba(17, 24, 39, 0.9)',
+  color: 'white',
+  padding: '8px 12px',
+  borderRadius: '6px',
+  fontSize: '14px',
+  fontWeight: 'bold' as const,
+};
+
+const CHART_COLOR = '#2563eb';
+const ANIMATION_DELAY = 50;
+
+export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps) {
+  const [isAnimated, setIsAnimated] = useState(false);
+  const currentBank = bankData[selectedBank as BankName] || bankData['ВТБ'];
 
   useEffect(() => {
-    setAnimate(false);
-    const timeout = setTimeout(() => setAnimate(true), 50);
+    setIsAnimated(false);
+    const timeout = setTimeout(() => setIsAnimated(true), ANIMATION_DELAY);
     return () => clearTimeout(timeout);
   }, [selectedBank]);
 
-  return (
+  const tooltipContent = ({ payload }: { payload?: Array<{ value: number }> }) => {
+    if (!payload?.length) return null;
+    return (
+      <div style={TOOLTIP_STYLE}>
+        {payload[0].value.toLocaleString()} ₽
+      </div>
+    );
+  };
 
+  return (
     <div className={styles.analyticsWrapper}>
       <Divider mx="md" />
       <Paper shadow="lg" radius="lg" className={styles.balanceCard}>
-        <div className={styles.balanceHeader}>
-          <Group justify="space-between" align="center" w="100%">
-            <Text className={styles.balanceLabel}>Баланс</Text>
-            <Group gap="md" align="center">
-          <Group gap="xs">
-                {['ВТБ', 'Т-Банк', 'Сбер'].map(bank => (
-                  <div key={bank} style={{ position: 'relative' }}>
-                    <Button
-                     size="xs"
-                      variant="subtle"
-                      color="gray"
-                      c="#111827"
-                   radius="sm"
-                      onClick={() => setSelectedBank(bank)}
-                      style={{
-                        borderBottom: selectedBank === bank ? '2px solid #2563eb' : '2px solid transparent',
-                        transition: 'border-bottom 0.3s ease',
-                      }}
-                    >
-                      {bank}
-                    </Button>
-                  </div>
-                ))}
-              </Group>
-
-              <Group gap={6}>
-                <IconTrendingUp size={16} color="#2563eb" />
-                <Text className={styles.growth}>{currentBank.growth} за месяц</Text>
-              </Group>
-            </Group>
-          </Group>
-        </div>
-
         <Stack gap="xs" p="md">
-          <Text className={styles.balanceAmount}>{currentBank.balance.toLocaleString()} ₽</Text>
+          <Text className={styles.balanceAmount}>
+            {currentBank.balance.toLocaleString()} ₽
+          </Text>
 
           <div
             key={selectedBank}
-            className={animate ? styles.chartVisible : styles.chartHidden}
+            className={isAnimated ? styles.chartVisible : styles.chartHidden}
             style={{ marginTop: '16px' }}
           >
             <svg style={{ position: 'absolute', width: 0, height: 0 }}>
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor="#2563eb" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.05" />
+                  <stop offset="0%" stopColor={CHART_COLOR} stopOpacity={0.2} />
+                  <stop offset="100%" stopColor="#60a5fa" stopOpacity={0.05} />
                 </linearGradient>
               </defs>
             </svg>
@@ -115,29 +119,28 @@ export default function BalanceAnalytics() {
               h={140}
               data={currentBank.data}
               dataKey="month"
-              series={[{ name: 'value', color: '#2563eb' }]}
+              series={[{ name: 'value', color: CHART_COLOR }]}
               fillOpacity={0.3}
               curveType="linear"
               withDots
               withTooltip
-              tooltipProps={{
-                content: ({ payload }) => payload?.length ? (
-                  <div style={{
-                    background: 'rgba(17, 24, 39, 0.9)',
-                    color: 'white',
-                    padding: '8px 12px',
-                    borderRadius: '6px',
-                    fontSize: '14px',
-                    fontWeight: 'bold',
-                  }}>{payload[0].value.toLocaleString()} ₽</div>
-                ) : null
-              }}
+              tooltipProps={{ content: tooltipContent }}
               withXAxis
               withYAxis={false}
               gridAxis="none"
               strokeWidth={3}
-              dotProps={{ r: 4, fill: '#2563eb', stroke: '#ffffff', strokeWidth: 2 }}
-              xAxisProps={{ tick: { fill: '#111827', fontSize: 12 }, tickFormatter: val => val.slice(0, 3), domain: ['dataMin', 'dataMax'], padding: { left: 20, right: 20 } }}
+              dotProps={{
+                r: 4,
+                fill: CHART_COLOR,
+                stroke: '#ffffff',
+                strokeWidth: 2
+              }}
+              xAxisProps={{
+                tick: { fill: '#111827', fontSize: 12 },
+                tickFormatter: (val: string) => val.slice(0, 3),
+                domain: ['dataMin', 'dataMax'],
+                padding: { left: 20, right: 20 }
+              }}
             />
           </div>
         </Stack>
