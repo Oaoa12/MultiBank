@@ -7,6 +7,8 @@ import classes from './Header.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useGetCurrentUserQuery } from '@/lib/store/api/UserApi';
+import { useLogoutMutation } from '@/lib/store/api/AuthApi';
 
 const links = [
     { link: '/', label: 'Главная' },
@@ -19,16 +21,18 @@ const links = [
 
 export function Header() {
     const [isAuth, setIsAuth] = useState(false);
+    const { data: me, isSuccess, isLoading } = useGetCurrentUserQuery();
+    const [logout] = useLogoutMutation();
     const [opened, { toggle }] = useDisclosure(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token');
-        setIsAuth(!!token);
-    }, []);
+        setIsAuth(!!isSuccess);
+    }, [isSuccess]);
 
-    const handleLogout = () => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('user');
+    const handleLogout = async () => {
+        try {
+            await logout().unwrap();
+        } catch {}
         setIsAuth(false);
         window.location.href = '/';
     };
@@ -41,7 +45,7 @@ export function Header() {
         }
     });
 
-    const items = visibleLinks.map((link) => {
+    const items = isLoading ? [] : visibleLinks.map((link) => {
         if (link.label === 'Профиль') {
             return (
                 <Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal>
@@ -52,7 +56,7 @@ export function Header() {
                             onClick={(event) => event.preventDefault()}
                         >
                             <Center>
-                                <span className={classes.linkLabel}>{link.label}</span>
+                                <span className={classes.linkLabel}>{me?.username || 'Профиль'}</span>
                                 <IconChevronDown size={14} stroke={1.5} />
                             </Center>
                         </a>

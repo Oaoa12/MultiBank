@@ -41,6 +41,8 @@ import { userApi } from '@/lib/store/api/UserApi';
 import { authApi } from '@/lib/store/api/AuthApi';
 import { useDispatch } from 'react-redux';
 import AnalyticsSection from './AnalyticsSection';
+import { useGetCurrentUserQuery } from '@/lib/store/api/UserApi';
+import Link from 'next/link';
 
 const PAGE_STYLES = {
   background: 'linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%)',
@@ -81,6 +83,7 @@ const getStatusColor = (status: string): string => {
 };
 
 export default function ProfilePage() {
+  const { data: authUser, isLoading: authLoading, isSuccess: authOk } = useGetCurrentUserQuery();
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [notifications, setNotifications] = useState({
@@ -194,7 +197,7 @@ export default function ProfilePage() {
     }
   };
 
-  if (isLoading && !user && !profile) {
+  if ((authLoading || isLoading) && !user && !profile) {
     return (
       <Container size="xl" py="xl">
         <Center h={400}>
@@ -203,6 +206,21 @@ export default function ProfilePage() {
           </Stack>
         </Center>
       </Container>
+    );
+  }
+
+  if (!authOk && !authLoading) {
+    return (
+      <Center h={"70dvh"}>
+        <Stack align="center" gap="md">
+          <Title order={2}>Пожалуйста, авторизуйтесь</Title>
+          <Text c="dimmed">Для доступа к профилю нужен вход в систему</Text>
+          <Group>
+            <Button component={Link as any} href="/login">Войти</Button>
+            <Button variant="light" component={Link as any} href="/registration">Регистрация</Button>
+          </Group>
+        </Stack>
+      </Center>
     );
   }
 

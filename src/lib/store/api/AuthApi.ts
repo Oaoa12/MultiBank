@@ -35,26 +35,13 @@ export interface ProfileResponse {
   updatedAt: string;
 }
 
-const getTokenFromCookie = () => {
-  if (typeof document !== 'undefined') {
-    const cookies = document.cookie.split(';');
-    const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('access_token='));
-    return tokenCookie ? tokenCookie.split('=')[1] : null;
-  }
-  return null;
-};
+// We rely on secure HTTP-only cookies; no JS access to token
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: 'https://vtb-hack-ruby.vercel.app/',
-    prepareHeaders: (headers) => {
-      const token = getTokenFromCookie();
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
+    baseUrl: '/api/',
+    credentials: 'include',
   }),
   tagTypes: ['Auth'],
   endpoints: (builder) => ({

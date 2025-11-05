@@ -284,25 +284,11 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$react$2f$rtk$2d$query$2d$react$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/@reduxjs/toolkit/dist/query/react/rtk-query-react.modern.mjs [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@reduxjs/toolkit/dist/query/rtk-query.modern.mjs [app-client] (ecmascript)");
 ;
-const getTokenFromCookie = ()=>{
-    if (typeof document !== 'undefined') {
-        const cookies = document.cookie.split(';');
-        const tokenCookie = cookies.find((cookie)=>cookie.trim().startsWith('access_token='));
-        return tokenCookie ? tokenCookie.split('=')[1] : null;
-    }
-    return null;
-};
 const authApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$react$2f$rtk$2d$query$2d$react$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createApi"])({
     reducerPath: 'authApi',
     baseQuery: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["fetchBaseQuery"])({
-        baseUrl: 'https://vtb-hack-ruby.vercel.app/',
-        prepareHeaders: (headers)=>{
-            const token = getTokenFromCookie();
-            if (token) {
-                headers.set('authorization', `Bearer ${token}`);
-            }
-            return headers;
-        }
+        baseUrl: '/api/',
+        credentials: 'include'
     }),
     tagTypes: [
         'Auth'
@@ -368,8 +354,12 @@ __turbopack_context__.s([
     ()=>useRefreshAvatarUrlMutation,
     "useRestoreProfileMutation",
     ()=>useRestoreProfileMutation,
+    "useUpdateProfileAuthorizedMutation",
+    ()=>useUpdateProfileAuthorizedMutation,
     "useUpdateProfileMutation",
     ()=>useUpdateProfileMutation,
+    "useUpdateUserAuthorizedMutation",
+    ()=>useUpdateUserAuthorizedMutation,
     "useUpdateUserMutation",
     ()=>useUpdateUserMutation,
     "useUploadAvatarMutation",
@@ -380,26 +370,12 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$react$2f$rtk$2d$query$2d$react$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/@reduxjs/toolkit/dist/query/react/rtk-query-react.modern.mjs [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@reduxjs/toolkit/dist/query/rtk-query.modern.mjs [app-client] (ecmascript)");
 ;
-const BASE_URL = 'https://vtb-hack-ruby.vercel.app/';
-const getTokenFromCookie = ()=>{
-    if (typeof document !== 'undefined') {
-        const cookies = document.cookie.split(';');
-        const tokenCookie = cookies.find((cookie)=>cookie.trim().startsWith('access_token='));
-        return tokenCookie ? tokenCookie.split('=')[1] : null;
-    }
-    return null;
-};
+const BASE_URL = '/api/';
 const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$react$2f$rtk$2d$query$2d$react$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createApi"])({
     reducerPath: 'userApi',
     baseQuery: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["fetchBaseQuery"])({
         baseUrl: BASE_URL,
-        prepareHeaders: (headers)=>{
-            const token = getTokenFromCookie();
-            if (token) {
-                headers.set('authorization', `Bearer ${token}`);
-            }
-            return headers;
-        }
+        credentials: 'include'
     }),
     tagTypes: [
         'User',
@@ -423,6 +399,21 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
                     'Profile'
                 ]
             }),
+            // Same as updateUser, but explicitly sets Authorization header with a provided token
+            updateUserAuthorized: builder.mutation({
+                query: ({ data, accessToken })=>({
+                        url: 'user/me',
+                        method: 'PUT',
+                        body: data,
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`
+                        }
+                    }),
+                invalidatesTags: [
+                    'User',
+                    'Profile'
+                ]
+            }),
             getProfile: builder.query({
                 query: ()=>'user/profile',
                 providesTags: [
@@ -440,9 +431,23 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
                     'Profile'
                 ]
             }),
+            updateProfileAuthorized: builder.mutation({
+                query: ({ data, accessToken })=>({
+                        url: 'user/me',
+                        method: 'PUT',
+                        body: data,
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`
+                        }
+                    }),
+                invalidatesTags: [
+                    'User',
+                    'Profile'
+                ]
+            }),
             deleteProfile: builder.mutation({
                 query: ()=>({
-                        url: 'user',
+                        url: 'user/profile',
                         method: 'DELETE'
                     }),
                 invalidatesTags: [
@@ -452,7 +457,7 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
             }),
             restoreProfile: builder.mutation({
                 query: ()=>({
-                        url: 'user/restore',
+                        url: 'user/profile/restore',
                         method: 'POST'
                     }),
                 invalidatesTags: [
@@ -462,7 +467,7 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
             }),
             uploadAvatar: builder.mutation({
                 query: (formData)=>({
-                        url: 'user/avatar',
+                        url: 'user/profile/avatar',
                         method: 'POST',
                         body: formData
                     }),
@@ -473,13 +478,13 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
             }),
             getAvatar: builder.query({
                 query: (fileId)=>({
-                        url: `user/avatar/${fileId}`,
+                        url: `user/profile/avatar/${fileId}`,
                         responseHandler: (response)=>response.blob()
                     })
             }),
             deleteAvatar: builder.mutation({
                 query: (fileId)=>({
-                        url: `user/avatar/${fileId}`,
+                        url: `user/profile/avatar/${fileId}`,
                         method: 'DELETE'
                     }),
                 invalidatesTags: [
@@ -489,7 +494,7 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
             }),
             refreshAvatarUrl: builder.mutation({
                 query: ({ fileId, expiry })=>({
-                        url: `user/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
+                        url: `user/profile/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
                         method: 'POST'
                     }),
                 invalidatesTags: [
@@ -499,7 +504,7 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
             })
         })
 });
-const { useGetCurrentUserQuery, useUpdateUserMutation, useGetProfileQuery, useUpdateProfileMutation, useDeleteProfileMutation, useRestoreProfileMutation, useUploadAvatarMutation, useGetAvatarQuery, useDeleteAvatarMutation, useRefreshAvatarUrlMutation } = userApi;
+const { useGetCurrentUserQuery, useUpdateUserMutation, useUpdateUserAuthorizedMutation, useGetProfileQuery, useUpdateProfileMutation, useUpdateProfileAuthorizedMutation, useDeleteProfileMutation, useRestoreProfileMutation, useUploadAvatarMutation, useGetAvatarQuery, useDeleteAvatarMutation, useRefreshAvatarUrlMutation } = userApi;
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -540,7 +545,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$red
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$Index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/store/Index.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$MantineProvider$2f$MantineProvider$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@mantine/core/esm/core/MantineProvider/MantineProvider.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$MantineProvider$2f$create$2d$theme$2f$create$2d$theme$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@mantine/core/esm/core/MantineProvider/create-theme/create-theme.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$notifications$2f$esm$2f$Notifications$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@mantine/notifications/esm/Notifications.mjs [app-client] (ecmascript)");
 'use client';
+;
 ;
 ;
 ;
@@ -558,15 +565,24 @@ function Providers({ children }) {
         theme: theme,
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Provider"], {
             store: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$store$2f$Index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["store"],
-            children: children
-        }, void 0, false, {
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$notifications$2f$esm$2f$Notifications$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Notifications"], {
+                    position: "top-center"
+                }, void 0, false, {
+                    fileName: "[project]/src/app/providers.tsx",
+                    lineNumber: 20,
+                    columnNumber: 9
+                }, this),
+                children
+            ]
+        }, void 0, true, {
             fileName: "[project]/src/app/providers.tsx",
-            lineNumber: 18,
+            lineNumber: 19,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/providers.tsx",
-        lineNumber: 17,
+        lineNumber: 18,
         columnNumber: 5
     }, this);
 }

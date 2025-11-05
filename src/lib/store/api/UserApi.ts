@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const BASE_URL = 'https://vtb-hack-ruby.vercel.app/';
+const BASE_URL = '/api/';
 
 export interface User {
   id: number;
@@ -43,32 +43,24 @@ export interface UpdateProfileData {
   gender?: 'MALE' | 'FEMALE' | 'OTHER';
 }
 
+export interface AuthorizedPayload<T> {
+  data: T;
+  accessToken: string;
+}
+
 export interface AvatarUploadResponse {
   file: any;
   url: string;
   profile: Profile;
 }
 
-const getTokenFromCookie = () => {
-  if (typeof document !== 'undefined') {
-    const cookies = document.cookie.split(';');
-    const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('access_token='));
-    return tokenCookie ? tokenCookie.split('=')[1] : null;
-  }
-  return null;
-};
+// We rely on secure HTTP-only cookies; no JS access to token
 
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
-    prepareHeaders: (headers) => {
-      const token = getTokenFromCookie();
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
+    credentials: 'include',
   }),
   tagTypes: ['User', 'Profile'],
   endpoints: (builder) => ({
@@ -82,6 +74,17 @@ export const userApi = createApi({
         url: 'user/me',
         method: 'PUT',
         body: userData,
+      }),
+      invalidatesTags: ['User', 'Profile'],
+    }),
+
+    // Same as updateUser, but explicitly sets Authorization header with a provided token
+    updateUserAuthorized: builder.mutation<User, AuthorizedPayload<UpdateUserData>>({
+      query: ({ data, accessToken }) => ({
+        url: 'user/me',
+        method: 'PUT',
+        body: data,
+        headers: { Authorization: `Bearer ${accessToken}` },
       }),
       invalidatesTags: ['User', 'Profile'],
     }),
@@ -100,9 +103,19 @@ export const userApi = createApi({
       invalidatesTags: ['User', 'Profile'],
     }),
 
+    updateProfileAuthorized: builder.mutation<Profile, AuthorizedPayload<UpdateProfileData>>({
+      query: ({ data, accessToken }) => ({
+        url: 'user/me',
+        method: 'PUT',
+        body: data,
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }),
+      invalidatesTags: ['User', 'Profile'],
+    }),
+
     deleteProfile: builder.mutation<{ message: string }, void>({
       query: () => ({
-        url: 'user',
+        url: 'user/profile',
         method: 'DELETE',
       }),
       invalidatesTags: ['User', 'Profile'],
@@ -110,7 +123,7 @@ export const userApi = createApi({
 
     restoreProfile: builder.mutation<{ message: string }, void>({
       query: () => ({
-        url: 'user/restore',
+        url: 'user/profile/restore',
         method: 'POST',
       }),
       invalidatesTags: ['User', 'Profile'],
@@ -118,7 +131,7 @@ export const userApi = createApi({
     
     uploadAvatar: builder.mutation<AvatarUploadResponse, FormData>({
       query: (formData) => ({
-        url: 'user/avatar',
+        url: 'user/profile/avatar',
         method: 'POST',
         body: formData,
       }),
@@ -127,14 +140,14 @@ export const userApi = createApi({
     
     getAvatar: builder.query<Blob, number>({
       query: (fileId) => ({
-        url: `user/avatar/${fileId}`,
+        url: `user/profile/avatar/${fileId}`,
         responseHandler: (response) => response.blob(),
       }),
     }),
     
     deleteAvatar: builder.mutation<{ message: string }, number>({
       query: (fileId) => ({
-        url: `user/avatar/${fileId}`,
+        url: `user/profile/avatar/${fileId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Profile', 'User'],
@@ -142,7 +155,7 @@ export const userApi = createApi({
     
     refreshAvatarUrl: builder.mutation<AvatarUploadResponse, { fileId: number; expiry?: number }>({
       query: ({ fileId, expiry }) => ({
-        url: `user/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
+        url: `user/profile/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
         method: 'POST',
       }),
       invalidatesTags: ['Profile', 'User'],
@@ -153,8 +166,10 @@ export const userApi = createApi({
 export const {
   useGetCurrentUserQuery,
   useUpdateUserMutation,
+  useUpdateUserAuthorizedMutation,
   useGetProfileQuery,
   useUpdateProfileMutation,
+  useUpdateProfileAuthorizedMutation,
   useDeleteProfileMutation,
   useRestoreProfileMutation,
   useUploadAvatarMutation,
