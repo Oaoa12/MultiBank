@@ -33,8 +33,10 @@ const bankDonutData: Record<BankName, BankDonutData> = {
   'Сбер': {
     income: 2100000,
     expenses: 450000,
-  }
+  },
 };
+
+const DEFAULT_BANK: BankName = 'ВТБ';
 
 const CHART_SIZE = 200;
 const CHART_CENTER = 100;
@@ -66,21 +68,26 @@ const CENTER_TEXT_STYLE: React.CSSProperties = {
 const AMOUNT_TEXT_STYLE: React.CSSProperties = {
   textAlign: 'center',
   color: TEXT_COLOR,
+  fontFamily: 'var(--font-inter), sans-serif',
+  letterSpacing: '-0.02em',
 };
 
 const LABEL_TEXT_STYLE: React.CSSProperties = {
   textAlign: 'center',
   color: LABEL_COLOR,
   marginTop: '4px',
+  fontFamily: 'var(--font-inter), sans-serif',
+  letterSpacing: '-0.005em',
+  fontWeight: 500,
 };
 
 export default function DonutChart({ selectedBank }: DonutChartProps) {
-  const bankData = bankDonutData[selectedBank as BankName] || bankDonutData['ВТБ'];
+  const bankData = bankDonutData[selectedBank as BankName] || bankDonutData[DEFAULT_BANK];
   const { income, expenses } = bankData;
 
   const chartData: ChartDataPoint[] = [
     { name: 'Траты', value: expenses, color: EXPENSES_COLOR },
-    { name: 'Поступления', value: income, color: INCOME_COLOR }, 
+    { name: 'Поступления', value: income, color: INCOME_COLOR },
   ];
 
   return (
@@ -95,24 +102,17 @@ export default function DonutChart({ selectedBank }: DonutChartProps) {
           dataKey="value"
           stroke="none"
         >
-          {chartData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} />
+          {chartData.map((entry) => (
+            <Cell key={entry.name} fill={entry.color} />
           ))}
         </Pie>
       </PieChart>
 
       <div style={CENTER_TEXT_STYLE}>
-        <Text
-          size="md"
-          fw={700}
-          style={AMOUNT_TEXT_STYLE}
-        >
+        <Text size="md" fw={700} style={AMOUNT_TEXT_STYLE}>
           {expenses.toLocaleString()} ₽
         </Text>
-        <Text
-          size="xs"
-          style={LABEL_TEXT_STYLE}
-        >
+        <Text size="xs" style={LABEL_TEXT_STYLE}>
           Траты за месяц
         </Text>
       </div>

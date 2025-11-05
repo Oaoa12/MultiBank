@@ -4,11 +4,12 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  margin-top: 55px;
+  margin-top: 45px;
 }
 
 .dividerContainer {
   position: relative;
+  margin-top: 10px;
 }
 
 .transactionsLabel {
@@ -16,29 +17,31 @@
   top: -35px;
   left: -220px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #111827;
+  letter-spacing: -0.01em;
+  font-family: var(--font-inter), sans-serif;
   z-index: 1;
 }
 
 .dividerLine {
   width: calc(100% + 220px);
-  margin-left: -220px;
+  margin-left: -227px;
   margin-top: 1px;
 }
 
 .balanceCard {
   position: relative;
   width: 100%;
-  min-width: 500px;
-  min-height: 280px;
+  min-width: 520px;
+  min-height: 200px;
   background: transparent;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .balanceHeader {
@@ -54,9 +57,10 @@
 
 .balanceLabel {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #111827;
-  letter-spacing: 0.3px;
+  letter-spacing: -0.01em;
+  font-family: var(--font-inter), sans-serif;
 }
 
 .balanceAmount {
@@ -64,6 +68,9 @@
   font-weight: 700;
   color: #111827;
   margin-top: 10px;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .growth {

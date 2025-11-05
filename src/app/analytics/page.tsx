@@ -9,7 +9,6 @@ import Cards from "./cards/Cards";
 type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
 
 const DEFAULT_BANK: BankName = 'ВТБ';
-
 const CONTAINER_MARGIN_RIGHT = 150;
 
 const CHART_CONTAINER_STYLE: React.CSSProperties = {
@@ -19,18 +18,18 @@ const CHART_CONTAINER_STYLE: React.CSSProperties = {
   paddingLeft: '20px',
   display: 'flex',
   gap: '20px',
-  alignItems: 'flex-start'
+  alignItems: 'flex-start',
 };
 
 const DONUT_CHART_WRAPPER_STYLE: React.CSSProperties = {
-  marginTop: '80px'
+  marginTop: '80px',
 };
 
 const isValidBankName = (bank: string): bank is BankName => {
   return bank === 'ВТБ' || bank === 'Т-Банк' || bank === 'Сбер';
 };
 
-export default function Dashboard() {
+export default function AnalyticsPage() {
   const [selectedBank, setSelectedBank] = useState<BankName>(DEFAULT_BANK);
 
   const handleCardChange = (bank: string) => {

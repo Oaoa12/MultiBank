@@ -1,7 +1,9 @@
 :root {
-  --card-width: 400px;      
-  --container-width: 640px; 
+  --card-width: 400px;
+  --container-width: 640px;
   --carousel-height: 240px;
+  --card-border-radius: 16px;
+  --button-size: 34px;
 }
 
 .cardsWrapper {
@@ -28,7 +30,8 @@
   font-size: 1rem;
   font-weight: 600;
   color: #111827;
-  letter-spacing: 0.3px;
+  letter-spacing: -0.01em;
+  font-family: var(--font-inter), sans-serif;
 }
 
 .cardContainer > .mantine-Stack-root,
@@ -38,7 +41,7 @@
 
 .bankCard {
   width: var(--card-width);
-  border-radius: 16px;
+  border-radius: var(--card-border-radius);
   padding: 24px;
   color: white;
   position: relative;
@@ -65,7 +68,7 @@
     radial-gradient(circle at 15% 25%, rgba(255,255,255,0.08) 0px 2px, transparent 2px),
     radial-gradient(circle at 85% 75%, rgba(255,255,255,0.06) 0px 1px, transparent 1px);
   pointer-events: none;
-  border-radius: 16px;
+  border-radius: var(--card-border-radius);
   z-index: 1;
 }
 
@@ -80,7 +83,7 @@
     conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.05) 90deg, transparent 180deg);
   pointer-events: none;
   z-index: 1;
-  border-radius: 16px;
+  border-radius: var(--card-border-radius);
 }
 
 .bankCard::before {
@@ -93,7 +96,7 @@
   background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
   pointer-events: none;
   z-index: 2;
-  border-radius: 16px;
+  border-radius: var(--card-border-radius);
 }
 
 .chip {
@@ -128,12 +131,16 @@
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 6px;
+  letter-spacing: -0.02em;
+  font-family: var(--font-inter), sans-serif;
 }
 
 .cardType {
   font-size: 0.85rem;
   opacity: 0.9;
   font-weight: 500;
+  letter-spacing: -0.005em;
+  font-family: var(--font-inter), sans-serif;
 }
 
 .cardMiddle {
@@ -149,7 +156,8 @@
   font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: 2px;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-feature-settings: 'tnum', 'lnum';
 }
 
 .cardBottom {
@@ -164,12 +172,15 @@
   margin-bottom: 4px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
 }
 
 .cardValue {
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 1px;
+  font-family: var(--font-mono), monospace;
 }
 
 .carouselContainer {
@@ -203,8 +214,8 @@
   border-radius: 8px;
   padding: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  width: 34px;
-  height: 34px;
+  width: var(--button-size);
+  height: var(--button-size);
   display: flex;
   align-items: center;
   justify-content: center;

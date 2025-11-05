@@ -81,35 +81,35 @@ const popularCategories: CategoryData[] = [
     name: 'Супермаркеты',
     icon: IconShoppingCart,
     color: '#2563eb',
-    amount: '₽ 45,230'
+    amount: '₽ 45 230'
   },
   {
     id: 2,
     name: 'Транспорт',
     icon: IconCar,
     color: '#10b981',
-    amount: '₽ 12,500'
+    amount: '₽ 12 500'
   },
   {
     id: 3,
     name: 'Путешествия',
     icon: IconPlane,
     color: '#f59e0b',
-    amount: '₽ 89,000'
+    amount: '₽ 89 000'
   },
   {
     id: 4,
     name: 'Кафе и рестораны',
     icon: IconPizza,
     color: '#ef4444',
-    amount: '₽ 28,750'
+    amount: '₽ 28 750'
   },
   {
     id: 5,
     name: 'Жильё',
     icon: IconBuilding,
     color: '#8b5cf6',
-    amount: '₽ 35,000'
+    amount: '₽ 35 000'
   }
 ];
 
@@ -117,28 +117,27 @@ interface CardsProps {
   onCardChange?: (bank: string) => void;
 }
 
-const BUTTON_STYLE = {
+const BUTTON_STYLE: React.CSSProperties = {
   marginTop: '-50px',
   backgroundColor: 'transparent',
   borderColor: '#2563eb',
-  color: '#2563eb'
+  color: '#2563eb',
 };
 
 const SWIPER_HEIGHT = '240px';
 const HIDDEN_CARD_NUMBER = '•••• •••• •••• ••••';
 const HIDDEN_OWNER = '•••• ••••••';
 const HIDDEN_EXPIRY = '••/••';
+const FIRST_CARD_INDEX = 0;
 
 export default function Cards({ onCardChange }: CardsProps) {
   const [isCardVisible, setIsCardVisible] = useState(true);
-  const [activeCard, setActiveCard] = useState(0);
   const swiperRef = useRef<SwiperType | null>(null);
 
   const toggleCardVisibility = () => setIsCardVisible(prev => !prev);
 
   const handleSlideChange = (swiper: SwiperType) => {
     const newIndex = swiper.realIndex;
-    setActiveCard(newIndex);
     const selectedCard = cardsData[newIndex];
     if (onCardChange && selectedCard) {
       onCardChange(selectedCard.bank);
@@ -146,22 +145,15 @@ export default function Cards({ onCardChange }: CardsProps) {
   };
 
   useEffect(() => {
-    if (onCardChange && cardsData[0]) {
-      onCardChange(cardsData[0].bank);
+    const firstCard = cardsData[FIRST_CARD_INDEX];
+    if (onCardChange && firstCard) {
+      onCardChange(firstCard.bank);
     }
   }, []);
 
-  const renderCardNumber = (card: CardData) => {
-    return isCardVisible ? card.number : HIDDEN_CARD_NUMBER;
-  };
-
-  const renderOwner = (card: CardData) => {
-    return isCardVisible ? card.owner : HIDDEN_OWNER;
-  };
-
-  const renderExpiry = (card: CardData) => {
-    return isCardVisible ? card.expiry : HIDDEN_EXPIRY;
-  };
+  const getCardNumber = (card: CardData) => isCardVisible ? card.number : HIDDEN_CARD_NUMBER;
+  const getCardOwner = (card: CardData) => isCardVisible ? card.owner : HIDDEN_OWNER;
+  const getCardExpiry = (card: CardData) => isCardVisible ? card.expiry : HIDDEN_EXPIRY;
 
   return (
     <div className={styles.cardsWrapper}>
@@ -201,8 +193,8 @@ export default function Cards({ onCardChange }: CardsProps) {
               {cardsData.map((card) => (
                 <SwiperSlide key={card.id}>
                   <div className={styles.bankCard} style={{ background: card.color }}>
-                    <div className={styles.cardPattern}></div>
-                    <div className={styles.cardGeometricPattern}></div>
+                    <div className={styles.cardPattern} />
+                    <div className={styles.cardGeometricPattern} />
                     
                     <div className={styles.cardTop}>
                       <Group justify="space-between" align="flex-start">
@@ -221,24 +213,24 @@ export default function Cards({ onCardChange }: CardsProps) {
 
                     <div className={styles.cardMiddle}>
                       <Text className={styles.cardNumber}>
-                        {renderCardNumber(card)}
+                        {getCardNumber(card)}
                       </Text>
                     </div>
 
-                    <div className={styles.cardDecorativeLines}></div>
+                    <div className={styles.cardDecorativeLines} />
 
                     <div className={styles.cardBottom}>
                       <Group justify="space-between" align="flex-end">
                         <div>
                           <Text className={styles.cardLabel}>Владелец</Text>
                           <Text className={styles.cardValue}>
-                            {renderOwner(card)}
+                            {getCardOwner(card)}
                           </Text>
                         </div>
                         <div>
                           <Text className={styles.cardLabel}>Срок действия</Text>
                           <Text className={styles.cardValue}>
-                            {renderExpiry(card)}
+                            {getCardExpiry(card)}
                           </Text>
                         </div>
                       </Group>
@@ -268,7 +260,17 @@ export default function Cards({ onCardChange }: CardsProps) {
           </Group>
 
           <Stack gap="xs" mt="md">
-            <Text size="lg" fw={600} c="#000">Популярные категории</Text>
+            <Text 
+              size="lg" 
+              fw={600} 
+              c="#000"
+              style={{ 
+                fontFamily: 'var(--font-inter), sans-serif',
+                letterSpacing: '-0.01em'
+              }}
+            >
+              Популярные категории
+            </Text>
             <Stack gap="xs" mt="md">
               {popularCategories.map((category) => {
                 const IconComponent = category.icon;
@@ -280,14 +282,33 @@ export default function Cards({ onCardChange }: CardsProps) {
                         radius="xl" 
                         style={{ 
                           backgroundColor: `${category.color}15`,
-                          border: `1px solid ${category.color}30`
+                          border: `1px solid ${category.color}30`,
                         }}
                       >
                         <IconComponent size={20} color={category.color} />
                       </Avatar>
-                      <Text size="sm" fw={500}>{category.name}</Text>
+                      <Text 
+                        size="sm" 
+                        fw={500}
+                        style={{ 
+                          fontFamily: 'var(--font-inter), sans-serif',
+                          letterSpacing: '-0.005em',
+                        }}
+                      >
+                        {category.name}
+                      </Text>
                     </Group>
-                    <Text size="sm" fw={600}>{category.amount}</Text>
+                    <Text 
+                      size="sm" 
+                      fw={600}
+                      style={{ 
+                        fontFamily: 'var(--font-mono), monospace',
+                        letterSpacing: '-0.01em',
+                        fontFeatureSettings: "'tnum', 'lnum'",
+                      }}
+                    >
+                      {category.amount}
+                    </Text>
                   </Group>
                 );
               })}

@@ -12,7 +12,6 @@ interface ChartDataPoint {
 
 interface BankData {
   balance: number;
-  growth: string;
   data: ChartDataPoint[];
 }
 
@@ -21,7 +20,6 @@ type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
 const bankData: Record<BankName, BankData> = {
   'ВТБ': {
     balance: 1250000,
-    growth: '+5.6%',
     data: [
       { month: 'Июн', value: 1200000 },
       { month: 'Июл', value: 1350000 },
@@ -33,7 +31,6 @@ const bankData: Record<BankName, BankData> = {
   },
   'Т-Банк': {
     balance: 850000,
-    growth: '+2.1%',
     data: [
       { month: 'Июн', value: 800000 },
       { month: 'Июл', value: 820000 },
@@ -45,7 +42,6 @@ const bankData: Record<BankName, BankData> = {
   },
   'Сбер': {
     balance: 2100000,
-    growth: '+8.3%',
     data: [
       { month: 'Июн', value: 1900000 },
       { month: 'Июл', value: 2050000 },
@@ -73,24 +69,42 @@ const transactions: Transaction[] = [
   { id: 2, name: 'Пополнение счета', amount: 5000, type: 'income' },
   { id: 3, name: 'Кафе', amount: 450, type: 'expense' },
   { id: 4, name: 'Такси', amount: 320, type: 'expense' },
-  { id: 5, name: 'Зарплата', amount: 50000, type: 'income' },
+  { id: 5, name: 'Перевод', amount: 50000, type: 'income' },
+  { id: 6, name: 'Аптека', amount: 890, type: 'expense' },
+  { id: 7, name: 'Перевод', amount: 3000, type: 'income' },
+  { id: 8, name: 'Кинотеатр', amount: 1200, type: 'expense' },
+  { id: 9, name: 'Бензин', amount: 2500, type: 'expense' },
+  { id: 10, name: 'Возврат покупки', amount: 3400, type: 'income' },
 ];
 
-const TOOLTIP_STYLE = {
+const TOOLTIP_STYLE: React.CSSProperties = {
   background: 'rgba(17, 24, 39, 0.9)',
   color: 'white',
   padding: '8px 12px',
   borderRadius: '6px',
   fontSize: '14px',
-  fontWeight: 'bold' as const,
+  fontWeight: 600,
+  fontFamily: 'var(--font-mono), monospace',
+  letterSpacing: '-0.01em',
+  fontFeatureSettings: "'tnum', 'lnum'",
+};
+
+const TRANSACTION_ICON_STYLE: React.CSSProperties = {
+  width: '40px',
+  height: '40px',
+  borderRadius: '50%',
+  backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  border: '1px solid rgba(0, 0, 0, 0.1)',
+  flexShrink: 0,
 };
 
 const CHART_COLOR = '#2563eb';
 const ANIMATION_DELAY = 50;
+const DEFAULT_BANK: BankName = 'ВТБ';
 
 export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps) {
   const [isAnimated, setIsAnimated] = useState(false);
-  const currentBank = bankData[selectedBank as BankName] || bankData['ВТБ'];
+  const currentBank = bankData[selectedBank as BankName] || bankData[DEFAULT_BANK];
 
   useEffect(() => {
     setIsAnimated(false);
@@ -122,7 +136,7 @@ export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps
           <div
             key={selectedBank}
             className={isAnimated ? styles.chartVisible : styles.chartHidden}
-            style={{ marginTop: '16px' }}
+            style={{ marginTop: '8px' }}
           >
             <svg style={{ position: 'absolute', width: 0, height: 0 }}>
               <defs>
@@ -134,7 +148,7 @@ export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps
             </svg>
 
             <LineChart
-              h={140}
+              h={100}
               data={currentBank.data}
               dataKey="month"
               series={[{ name: 'value', color: CHART_COLOR }]}
@@ -154,7 +168,13 @@ export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps
                 strokeWidth: 2
               }}
               xAxisProps={{
-                tick: { fill: '#111827', fontSize: 12 },
+                tick: { 
+                  fill: '#111827', 
+                  fontSize: 12,
+                  fontFamily: 'var(--font-inter), sans-serif',
+                  fontWeight: 500,
+                  letterSpacing: '-0.005em'
+                },
                 tickFormatter: (val: string) => val.slice(0, 3),
                 domain: ['dataMin', 'dataMax'],
                 padding: { left: 20, right: 20 }
@@ -164,27 +184,42 @@ export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps
         </Stack>
       </Paper>
       <Stack gap="xs" style={{ marginLeft: '-210px', marginTop: '32px' }}>
-        <Text size="lg" fw={600} c="#000">Последние транзакции</Text>
+        <Text 
+          size="lg" 
+          fw={600} 
+          c="#000"
+          style={{ 
+            fontFamily: 'var(--font-inter), sans-serif',
+            letterSpacing: '-0.01em'
+          }}
+        >
+          Последние транзакции
+        </Text>
         <Stack gap="xs" mt="md">
           {transactions.map((transaction) => (
             <Group key={transaction.id} justify="space-between" align="center">
               <Group gap="sm">
-                <div 
+                <div style={TRANSACTION_ICON_STYLE} />
+                <Text 
+                  size="sm" 
+                  fw={500}
                   style={{ 
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(0, 0, 0, 0.05)',
-                    border: '1px solid rgba(0, 0, 0, 0.1)',
-                    flexShrink: 0
+                    fontFamily: 'var(--font-inter), sans-serif',
+                    letterSpacing: '-0.005em'
                   }}
-                />
-                <Text size="sm" fw={500}>{transaction.name}</Text>
+                >
+                  {transaction.name}
+                </Text>
               </Group>
               <Text 
                 size="sm" 
                 fw={600}
                 c={transaction.type === 'income' ? '#10b981' : '#000'}
+                style={{ 
+                  fontFamily: 'var(--font-mono), monospace',
+                  letterSpacing: '-0.01em',
+                  fontFeatureSettings: "'tnum', 'lnum'"
+                }}
               >
                 {transaction.type === 'income' ? '+' : '-'}₽ {transaction.amount.toLocaleString()}
               </Text>

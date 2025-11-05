@@ -3,20 +3,23 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  margin-top: 55px;
+  margin-top: 45px;
   display: flex;
   position: relative;
 }
 
 .BalanceAnalytics-module__Wxx4tq__dividerContainer {
+  margin-top: 10px;
   position: relative;
 }
 
 .BalanceAnalytics-module__Wxx4tq__transactionsLabel {
   color: #111827;
-  z-index: 1;
+  letter-spacing: -.01em;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: var(--font-inter), sans-serif;
+  z-index: 1;
   position: absolute;
   top: -35px;
   left: -220px;
@@ -25,18 +28,18 @@
 .BalanceAnalytics-module__Wxx4tq__dividerLine {
   width: calc(100% + 220px);
   margin-top: 1px;
-  margin-left: -220px;
+  margin-left: -227px;
 }
 
 .BalanceAnalytics-module__Wxx4tq__balanceCard {
   width: 100%;
-  min-width: 500px;
-  min-height: 280px;
+  min-width: 520px;
+  min-height: 200px;
   box-shadow: none;
   background: none;
   border: 1px solid #0000001a;
   border-radius: 8px;
-  margin-top: 40px;
+  margin-top: 30px;
   transition: transform .2s, box-shadow .2s;
   position: relative;
   overflow: hidden;
@@ -55,16 +58,20 @@
 
 .BalanceAnalytics-module__Wxx4tq__balanceLabel {
   color: #111827;
-  letter-spacing: .3px;
+  letter-spacing: -.01em;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: var(--font-inter), sans-serif;
 }
 
 .BalanceAnalytics-module__Wxx4tq__balanceAmount {
   color: #111827;
-  margin-top: 10px;
   font-size: 2rem;
   font-weight: 700;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -.02em;
+  margin-top: 10px;
+  line-height: 1.2;
 }
 
 .BalanceAnalytics-module__Wxx4tq__growth {
