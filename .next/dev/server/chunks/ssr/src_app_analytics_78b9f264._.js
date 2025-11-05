@@ -9,7 +9,10 @@ __turbopack_context__.v({
   "balanceLabel": "BalanceAnalytics-module__Wxx4tq__balanceLabel",
   "chartHidden": "BalanceAnalytics-module__Wxx4tq__chartHidden",
   "chartVisible": "BalanceAnalytics-module__Wxx4tq__chartVisible",
+  "dividerContainer": "BalanceAnalytics-module__Wxx4tq__dividerContainer",
+  "dividerLine": "BalanceAnalytics-module__Wxx4tq__dividerLine",
   "growth": "BalanceAnalytics-module__Wxx4tq__growth",
+  "transactionsLabel": "BalanceAnalytics-module__Wxx4tq__transactionsLabel",
 });
 }),
 "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
@@ -24,6 +27,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@mantine/core/esm/components/Text/Text.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Stack$2f$Stack$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@mantine/core/esm/components/Stack/Stack.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Divider$2f$Divider$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@mantine/core/esm/components/Divider/Divider.mjs [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@mantine/core/esm/components/Group/Group.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$charts$2f$esm$2f$LineChart$2f$LineChart$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@mantine/charts/esm/LineChart/LineChart.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$balanceAnalytics$2f$BalanceAnalytics$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__ = __turbopack_context__.i("[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [app-ssr] (css module)");
@@ -125,6 +129,38 @@ const bankData = {
         ]
     }
 };
+const transactions = [
+    {
+        id: 1,
+        name: 'Магнит',
+        amount: 1250,
+        type: 'expense'
+    },
+    {
+        id: 2,
+        name: 'Пополнение счета',
+        amount: 5000,
+        type: 'income'
+    },
+    {
+        id: 3,
+        name: 'Кафе',
+        amount: 450,
+        type: 'expense'
+    },
+    {
+        id: 4,
+        name: 'Такси',
+        amount: 320,
+        type: 'expense'
+    },
+    {
+        id: 5,
+        name: 'Зарплата',
+        amount: 50000,
+        type: 'income'
+    }
+];
 const TOOLTIP_STYLE = {
     background: 'rgba(17, 24, 39, 0.9)',
     color: 'white',
@@ -155,18 +191,35 @@ function BalanceAnalytics({ selectedBank }) {
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-            lineNumber: 89,
+            lineNumber: 104,
             columnNumber: 7
         }, this);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$balanceAnalytics$2f$BalanceAnalytics$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].analyticsWrapper,
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Divider$2f$Divider$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Divider"], {
-                mx: "md"
-            }, void 0, false, {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$balanceAnalytics$2f$BalanceAnalytics$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].dividerContainer,
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$balanceAnalytics$2f$BalanceAnalytics$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].transactionsLabel,
+                        children: "Транзакции"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
+                        lineNumber: 113,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Divider$2f$Divider$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Divider"], {
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$analytics$2f$balanceAnalytics$2f$BalanceAnalytics$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].dividerLine
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
+                        lineNumber: 114,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                lineNumber: 97,
+                lineNumber: 112,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Paper$2f$Paper$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Paper"], {
@@ -185,7 +238,7 @@ function BalanceAnalytics({ selectedBank }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                            lineNumber: 100,
+                            lineNumber: 118,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -214,7 +267,7 @@ function BalanceAnalytics({ selectedBank }) {
                                                     stopOpacity: 0.2
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                                                    lineNumber: 112,
+                                                    lineNumber: 130,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("stop", {
@@ -223,23 +276,23 @@ function BalanceAnalytics({ selectedBank }) {
                                                     stopOpacity: 0.05
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                                                    lineNumber: 113,
+                                                    lineNumber: 131,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                                            lineNumber: 111,
+                                            lineNumber: 129,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                                        lineNumber: 110,
+                                        lineNumber: 128,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                                    lineNumber: 109,
+                                    lineNumber: 127,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$charts$2f$esm$2f$LineChart$2f$LineChart$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["LineChart"], {
@@ -286,30 +339,117 @@ function BalanceAnalytics({ selectedBank }) {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                                    lineNumber: 118,
+                                    lineNumber: 136,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, selectedBank, true, {
                             fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                            lineNumber: 104,
+                            lineNumber: 122,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                    lineNumber: 99,
+                    lineNumber: 117,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-                lineNumber: 98,
+                lineNumber: 116,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Stack$2f$Stack$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Stack"], {
+                gap: "xs",
+                style: {
+                    marginLeft: '-210px',
+                    marginTop: '32px'
+                },
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
+                        size: "lg",
+                        fw: 600,
+                        c: "#000",
+                        children: "Последние транзакции"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
+                        lineNumber: 167,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Stack$2f$Stack$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Stack"], {
+                        gap: "xs",
+                        mt: "md",
+                        children: transactions.map((transaction)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Group"], {
+                                justify: "space-between",
+                                align: "center",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Group"], {
+                                        gap: "sm",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                style: {
+                                                    width: '40px',
+                                                    height: '40px',
+                                                    borderRadius: '50%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                                                    border: '1px solid rgba(0, 0, 0, 0.1)',
+                                                    flexShrink: 0
+                                                }
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
+                                                lineNumber: 172,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
+                                                size: "sm",
+                                                fw: 500,
+                                                children: transaction.name
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
+                                                lineNumber: 182,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
+                                        lineNumber: 171,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
+                                        size: "sm",
+                                        fw: 600,
+                                        c: transaction.type === 'income' ? '#10b981' : '#000',
+                                        children: [
+                                            transaction.type === 'income' ? '+' : '-',
+                                            "₽ ",
+                                            transaction.amount.toLocaleString()
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
+                                        lineNumber: 184,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, transaction.id, true, {
+                                fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
+                                lineNumber: 170,
+                                columnNumber: 13
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
+                        lineNumber: 168,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
+                lineNumber: 166,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx",
-        lineNumber: 96,
+        lineNumber: 111,
         columnNumber: 5
     }, this);
 }
@@ -987,13 +1127,6 @@ function Cards({ onCardChange }) {
                             lineNumber: 253,
                             columnNumber: 11
                         }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Divider$2f$Divider$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Divider"], {
-                            mt: "md"
-                        }, void 0, false, {
-                            fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                            lineNumber: 270,
-                            columnNumber: 11
-                        }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Stack$2f$Stack$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Stack"], {
                             gap: "xs",
                             mt: "md",
@@ -1005,7 +1138,7 @@ function Cards({ onCardChange }) {
                                     children: "Популярные категории"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                    lineNumber: 273,
+                                    lineNumber: 271,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Stack$2f$Stack$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Stack"], {
@@ -1032,12 +1165,12 @@ function Cards({ onCardChange }) {
                                                                 color: category.color
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                                lineNumber: 288,
+                                                                lineNumber: 286,
                                                                 columnNumber: 25
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                            lineNumber: 280,
+                                                            lineNumber: 278,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -1046,13 +1179,13 @@ function Cards({ onCardChange }) {
                                                             children: category.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                            lineNumber: 290,
+                                                            lineNumber: 288,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                    lineNumber: 279,
+                                                    lineNumber: 277,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -1061,25 +1194,25 @@ function Cards({ onCardChange }) {
                                                     children: category.amount
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                                    lineNumber: 292,
+                                                    lineNumber: 290,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, category.id, true, {
                                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                            lineNumber: 278,
+                                            lineNumber: 276,
                                             columnNumber: 19
                                         }, this);
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                                    lineNumber: 274,
+                                    lineNumber: 272,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/analytics/cards/Cards.tsx",
-                            lineNumber: 272,
+                            lineNumber: 270,
                             columnNumber: 11
                         }, this)
                     ]

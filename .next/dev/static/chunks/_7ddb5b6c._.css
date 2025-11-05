@@ -8,6 +8,26 @@
   position: relative;
 }
 
+.BalanceAnalytics-module__Wxx4tq__dividerContainer {
+  position: relative;
+}
+
+.BalanceAnalytics-module__Wxx4tq__transactionsLabel {
+  color: #111827;
+  z-index: 1;
+  font-size: 1rem;
+  font-weight: 500;
+  position: absolute;
+  top: -35px;
+  left: -220px;
+}
+
+.BalanceAnalytics-module__Wxx4tq__dividerLine {
+  width: calc(100% + 220px);
+  margin-top: 1px;
+  margin-left: -220px;
+}
+
 .BalanceAnalytics-module__Wxx4tq__balanceCard {
   width: 100%;
   min-width: 500px;

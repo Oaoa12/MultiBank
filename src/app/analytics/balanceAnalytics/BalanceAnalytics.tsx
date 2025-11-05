@@ -1,6 +1,6 @@
 'use client';
 
-import { Paper, Text, Stack, Divider } from '@mantine/core';
+import { Paper, Text, Stack, Divider, Group } from '@mantine/core';
 import { LineChart } from '@mantine/charts';
 import { useState, useEffect } from 'react';
 import styles from './BalanceAnalytics.module.css';
@@ -57,9 +57,24 @@ const bankData: Record<BankName, BankData> = {
   }
 };
 
+interface Transaction {
+  id: number;
+  name: string;
+  amount: number;
+  type: 'expense' | 'income';
+}
+
 interface BalanceAnalyticsProps {
   selectedBank: string;
 }
+
+const transactions: Transaction[] = [
+  { id: 1, name: 'Магнит', amount: 1250, type: 'expense' },
+  { id: 2, name: 'Пополнение счета', amount: 5000, type: 'income' },
+  { id: 3, name: 'Кафе', amount: 450, type: 'expense' },
+  { id: 4, name: 'Такси', amount: 320, type: 'expense' },
+  { id: 5, name: 'Зарплата', amount: 50000, type: 'income' },
+];
 
 const TOOLTIP_STYLE = {
   background: 'rgba(17, 24, 39, 0.9)',
@@ -94,7 +109,10 @@ export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps
 
   return (
     <div className={styles.analyticsWrapper}>
-      <Divider mx="md" />
+      <div className={styles.dividerContainer}>
+        <Text className={styles.transactionsLabel}>Транзакции</Text>
+        <Divider className={styles.dividerLine} />
+      </div>
       <Paper shadow="lg" radius="lg" className={styles.balanceCard}>
         <Stack gap="xs" p="md">
           <Text className={styles.balanceAmount}>
@@ -145,6 +163,35 @@ export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps
           </div>
         </Stack>
       </Paper>
+      <Stack gap="xs" style={{ marginLeft: '-210px', marginTop: '32px' }}>
+        <Text size="lg" fw={600} c="#000">Последние транзакции</Text>
+        <Stack gap="xs" mt="md">
+          {transactions.map((transaction) => (
+            <Group key={transaction.id} justify="space-between" align="center">
+              <Group gap="sm">
+                <div 
+                  style={{ 
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                    border: '1px solid rgba(0, 0, 0, 0.1)',
+                    flexShrink: 0
+                  }}
+                />
+                <Text size="sm" fw={500}>{transaction.name}</Text>
+              </Group>
+              <Text 
+                size="sm" 
+                fw={600}
+                c={transaction.type === 'income' ? '#10b981' : '#000'}
+              >
+                {transaction.type === 'income' ? '+' : '-'}₽ {transaction.amount.toLocaleString()}
+              </Text>
+            </Group>
+          ))}
+        </Stack>
+      </Stack>
     </div>
   );
 }

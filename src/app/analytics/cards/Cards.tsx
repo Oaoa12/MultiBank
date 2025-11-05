@@ -267,8 +267,6 @@ export default function Cards({ onCardChange }: CardsProps) {
             </Button>
           </Group>
 
-          <Divider mt="md" />
-
           <Stack gap="xs" mt="md">
             <Text size="lg" fw={600} c="#000">Популярные категории</Text>
             <Stack gap="xs" mt="md">

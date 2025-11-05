@@ -7,6 +7,26 @@
   margin-top: 55px;
 }
 
+.dividerContainer {
+  position: relative;
+}
+
+.transactionsLabel {
+  position: absolute;
+  top: -35px;
+  left: -220px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+  z-index: 1;
+}
+
+.dividerLine {
+  width: calc(100% + 220px);
+  margin-left: -220px;
+  margin-top: 1px;
+}
+
 .balanceCard {
   position: relative;
   width: 100%;
