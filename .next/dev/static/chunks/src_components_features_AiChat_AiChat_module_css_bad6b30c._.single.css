@@ -1,0 +1,80 @@
+/* [project]/src/components/features/AiChat/AiChat.module.css [app-client] (css) */
+.AiChat-module__VUR-sW__bubbleContainer {
+  z-index: 1000;
+  cursor: pointer;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+}
+
+.AiChat-module__VUR-sW__bubble {
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 12px #1e3a8a4d;
+}
+
+.AiChat-module__VUR-sW__bubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px #1e3a8a66;
+}
+
+.AiChat-module__VUR-sW__modalOverlay {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  background: #00000080;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 24px;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.AiChat-module__VUR-sW__modalContent {
+  flex-direction: column;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  position: relative;
+}
+
+.AiChat-module__VUR-sW__chatPaper {
+  flex-direction: column;
+  display: flex;
+  overflow: hidden;
+}
+
+.AiChat-module__VUR-sW__chatHeader {
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+}
+
+.AiChat-module__VUR-sW__messagesArea {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.AiChat-module__VUR-sW__inputArea {
+  border-top: 1px solid var(--mantine-color-gray-3);
+  background: var(--mantine-color-gray-0);
+}
+
+@media (max-width: 480px) {
+  .AiChat-module__VUR-sW__modalOverlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .AiChat-module__VUR-sW__modalContent {
+    border-radius: 0;
+    max-width: 100%;
+    height: 100% !important;
+  }
+
+  .AiChat-module__VUR-sW__chatPaper {
+    border-radius: 0;
+    height: 100% !important;
+  }
+}
+
+/*# sourceMappingURL=src_components_features_AiChat_AiChat_module_css_bad6b30c._.single.css.map*/

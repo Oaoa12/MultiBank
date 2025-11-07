@@ -4,6 +4,8 @@ import "./globals.css";
 import '@mantine/core/styles.css';
 import { Header } from "@/components/features/Header/Header";
 import { Providers } from "./providers";
+import { AiChat } from "@/components/features/AiChat";
+import { Footer } from "@/components/features/Footer";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -35,6 +37,8 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+          <AiChat />
+          <Footer />
         </Providers>
       </body>
     </html>
