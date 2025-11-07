@@ -84,12 +84,15 @@ export function Header() {
         <header className={classes.header}>
             <Container size="md">
                 <div className={classes.inner}>
-                    <Image
-                        src={Logo}
-                        width={100}
-                        height={30}
-                        alt="Logo"
-                    />
+                    <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+                        <Image
+                            src={Logo}
+                            width={100}
+                            height={30}
+                            alt="Logo"
+                            style={{ cursor: 'pointer' }}
+                        />
+                    </Link>
                     <Group gap={5} visibleFrom="sm">
                         {items}
                     </Group>

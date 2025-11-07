@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Paper, Text, Stack, Group, Button, Title, Divider, Badge, Avatar } from '@mantine/core';
+import { Paper, Text, Stack, Group, Button, Title, Divider, Badge, Avatar, ThemeIcon } from '@mantine/core';
 import { IconCreditCard, IconEye, IconEyeOff, IconShoppingCart, IconCar, IconPlane, IconBuilding, IconPizza } from '@tabler/icons-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper';
 import { Navigation, Pagination, Keyboard, A11y } from 'swiper/modules';
+import { useRouter } from 'next/navigation';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -131,6 +132,7 @@ const HIDDEN_EXPIRY = '••/••';
 const FIRST_CARD_INDEX = 0;
 
 export default function Cards({ onCardChange }: CardsProps) {
+  const router = useRouter();
   const [isCardVisible, setIsCardVisible] = useState(true);
   const swiperRef = useRef<SwiperType | null>(null);
 
@@ -159,7 +161,28 @@ export default function Cards({ onCardChange }: CardsProps) {
     <div className={styles.cardsWrapper}>
       <Paper shadow="lg" radius="lg" className={styles.cardContainer}>
         <Group justify="space-between" align="center" p="md" pb="xs">
-          <Title order={4} className={styles.cardTitle}>Банковские карты</Title>
+          <Group gap="sm" align="center">
+            <Title order={4} className={styles.cardTitle}>Банковские карты</Title>
+            <Badge
+              size="lg"
+              radius="xl"
+              variant="light"
+              color="blue"
+              style={{
+                width: '28px',
+                height: '28px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 600,
+                fontSize: '14px',
+                padding: 0,
+                borderRadius: '50%',
+              }}
+            >
+              {cardsData.length}
+            </Badge>
+          </Group>
           <Group gap="xs">
             <Button
               size="xs"
@@ -254,6 +277,7 @@ export default function Cards({ onCardChange }: CardsProps) {
               variant="outline" 
               size="sm"
               style={BUTTON_STYLE}
+              onClick={() => router.push('/dashboard')}
             >
               Добавить карту
             </Button>
