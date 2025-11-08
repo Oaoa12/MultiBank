@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Отключаем экспериментальные функции Turbopack
+  experimental: {},
+  // Убеждаемся, что webpack используется вместо Turbopack
+  webpack: (config, { isServer }) => {
+    return config;
+  },
 };
 
 export default nextConfig;

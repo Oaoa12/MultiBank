@@ -12,6 +12,8 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-inter",
   display: "swap",
+  preload: true,
+  fallback: ["system-ui", "arial"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -19,6 +21,8 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600", "700"],
   variable: "--font-mono",
   display: "swap",
+  preload: true,
+  fallback: ["monospace"],
 });
 
 export const metadata: Metadata = {
