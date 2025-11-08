@@ -1,0 +1,137 @@
+.chartContainer {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.pieChart {
+  width: 100%;
+  height: 100%;
+  display: block;
+  flex-shrink: 0;
+}
+
+.centerText {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.amountText {
+  text-align: center;
+  color: #111827;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.labelText {
+  text-align: center;
+  color: #9ca3af;
+  margin-top: 4px;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.005em;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .chartContainer {
+    width: 160px !important;
+    height: 160px !important;
+    min-width: 160px !important;
+    min-height: 160px !important;
+  }
+
+  .pieChart {
+    width: 160px !important;
+    height: 160px !important;
+    min-width: 160px !important;
+    min-height: 160px !important;
+  }
+
+  .pieChart :global(.recharts-wrapper) {
+    width: 160px !important;
+    height: 160px !important;
+    min-width: 160px !important;
+    min-height: 160px !important;
+  }
+
+  .pieChart :global(.recharts-surface) {
+    width: 160px !important;
+    height: 160px !important;
+  }
+
+  .amountText {
+    font-size: 0.875rem !important;
+  }
+
+  .labelText {
+    font-size: 0.7rem !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .chartContainer {
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  .pieChart {
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  .pieChart :global(.recharts-wrapper) {
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  .pieChart :global(.recharts-surface) {
+    width: 180px !important;
+    height: 180px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .chartContainer {
+    width: 140px !important;
+    height: 140px !important;
+    min-width: 140px !important;
+    min-height: 140px !important;
+  }
+
+  .pieChart {
+    width: 140px !important;
+    height: 140px !important;
+    min-width: 140px !important;
+    min-height: 140px !important;
+  }
+
+  .pieChart :global(.recharts-wrapper) {
+    width: 140px !important;
+    height: 140px !important;
+    min-width: 140px !important;
+    min-height: 140px !important;
+  }
+
+  .pieChart :global(.recharts-surface) {
+    width: 140px !important;
+    height: 140px !important;
+  }
+
+  .amountText {
+    font-size: 0.75rem !important;
+  }
+
+  .labelText {
+    font-size: 0.65rem !important;
+  }
+}
+

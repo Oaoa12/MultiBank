@@ -6,7 +6,7 @@ import Logo from '../../../../public/Logo.png'
 import classes from './Header.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { useGetCurrentUserQuery } from '@/lib/store/api/UserApi';
 import { useLogoutMutation } from '@/lib/store/api/AuthApi';
 
@@ -20,14 +20,11 @@ const links = [
 ];
 
 export function Header() {
-    const [isAuth, setIsAuth] = useState(false);
-    const { data: me, isSuccess, isLoading } = useGetCurrentUserQuery();
+    const { data: me, isSuccess, isLoading, isError } = useGetCurrentUserQuery();
     const [logout] = useLogoutMutation();
     const [opened, { toggle }] = useDisclosure(false);
 
-    useEffect(() => {
-        setIsAuth(!!isSuccess);
-    }, [isSuccess]);
+    const isAuth = useMemo(() => !!me || !!isSuccess, [me, isSuccess]);
 
     const handleLogout = async () => {
         try {
@@ -45,7 +42,14 @@ export function Header() {
         }
     });
 
-    const items = isLoading ? [] : visibleLinks.map((link) => {
+    const items = (isLoading && !isAuth) ? visibleLinks
+      .filter(l => l.label !== 'Профиль')
+      .map((link) => (
+        <Link key={link.label} href={link.link} className={classes.link}>
+            {link.label}
+        </Link>
+      ))
+      : visibleLinks.map((link) => {
         if (link.label === 'Профиль') {
             return (
                 <Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal>
@@ -84,12 +88,15 @@ export function Header() {
         <header className={classes.header}>
             <Container size="md">
                 <div className={classes.inner}>
-                    <Image
-                        src={Logo}
-                        width={100}
-                        height={30}
-                        alt="Logo"
-                    />
+                    <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+                        <Image
+                            src={Logo}
+                            width={100}
+                            height={30}
+                            alt="Logo"
+                            style={{ cursor: 'pointer' }}
+                        />
+                    </Link>
                     <Group gap={5} visibleFrom="sm">
                         {items}
                     </Group>

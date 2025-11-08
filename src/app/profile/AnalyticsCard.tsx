@@ -3,6 +3,7 @@
 import { useState, useRef, useMemo } from 'react';
 import { Card, Text, Stack, Group, ThemeIcon } from '@mantine/core';
 import { IconArrowUpRight } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
 
 interface AnalyticsCardProps {
   value: number;
@@ -37,6 +38,7 @@ export default function AnalyticsCard({
   color = '#E67E22',
   heights = [35, 28, 52, 45, 68],
 }: AnalyticsCardProps) {
+  const router = useRouter();
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -117,12 +119,17 @@ export default function AnalyticsCard({
     [heights, color]
   );
 
+  const handleClick = () => {
+    router.push('/analytics');
+  };
+
   return (
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}
+      onClick={handleClick}
       style={{
         transform,
         transition,

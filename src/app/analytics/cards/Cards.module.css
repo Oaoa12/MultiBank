@@ -197,6 +197,11 @@
 .carouselContainer .swiper {
   width: 100%;
   height: 100%;
+  overflow: visible;
+}
+
+.carouselContainer .swiper-wrapper {
+  overflow: visible;
 }
 
 .carouselContainer .swiper-slide {
@@ -205,6 +210,8 @@
   justify-content: center;
   height: 100%;
   touch-action: pan-y;
+  width: auto !important;
+  overflow: visible;
 }
 
 .swiper-button-prev,
@@ -247,16 +254,44 @@
   background: #2563eb;
 }
 
+.actionsGroup {
+  width: 400px;
+  margin-left: 105px;
+  margin-top: -50px;
+}
+
+.actionButton {
+  margin-top: 0;
+  background-color: transparent;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
 @media (max-width: 768px) {
   :root {
     --container-width: 100%;
-    --card-width: 340px;
+    --card-width: min(340px, calc(100vw - 40px));
+    --carousel-height: 220px;
   }
 
   .cardsWrapper {
     margin-left: 0;
     padding: 10px;
+    padding-top: 20px;
     justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .cardContainer {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: 560px;
+    padding: 12px;
+    padding-top: 20px;
+    overflow: visible !important;
   }
 
   .swiper-button-prev {
@@ -267,7 +302,170 @@
     right: 8px;
   }
 
+  .carouselContainer {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    margin-bottom: 30px !important;
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+
+  .carouselContainer .swiper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .carouselContainer .swiper-wrapper {
+    overflow: visible !important;
+  }
+
+  .carouselContainer .swiper-slide {
+    width: var(--card-width) !important;
+    max-width: calc(100vw - 60px) !important;
+    overflow: visible !important;
+  }
+
+  .bankCard {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 20px;
+    min-height: 180px;
+  }
+
+  .cardBank {
+    font-size: 1.1rem;
+  }
+
+  .cardNumber {
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+  }
+
+  .cardType {
+    font-size: 0.75rem;
+  }
+
+  .cardValue {
+    font-size: 0.8rem;
+  }
+
+  .cardLabel {
+    font-size: 0.65rem;
+  }
+
+  .actionsGroup {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-top: 16px !important;
+    flex-direction: column !important;
+  }
+
+  .actionButton {
+    width: 100% !important;
+    margin-top: 0 !important;
+  }
+
+  /* Популярные категории - уменьшаем размеры */
+  .cardContainer :global([class*="mantine-Avatar-root"]) {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .cardContainer :global([class*="mantine-Avatar-root"]) svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  /* Текст категорий на мобильных */
+  .cardContainer :global([class*="mantine-Text-root"]) {
+    font-size: 0.875rem !important;
+  }
+}
+
+/* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ */
+@media (max-width: 480px) {
+  :root {
+    --card-width: min(300px, calc(100vw - 32px));
+    --carousel-height: 200px;
+  }
+
+  .cardsWrapper {
+    padding: 8px;
+    padding-top: 20px;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
   .cardContainer {
-    min-height: 560px;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 8px;
+    padding-top: 20px;
+    min-height: 520px;
+    overflow: visible !important;
+  }
+
+  .carouselContainer {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+    overflow: visible !important;
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+
+  .carouselContainer .swiper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .carouselContainer .swiper-wrapper {
+    overflow: visible !important;
+  }
+
+  .carouselContainer .swiper-slide {
+    width: var(--card-width) !important;
+    max-width: calc(100vw - 40px) !important;
+    overflow: visible !important;
+  }
+
+  .bankCard {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 16px;
+    min-height: 160px;
+  }
+
+  .cardBank {
+    font-size: 1rem;
+  }
+
+  .cardNumber {
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .cardType {
+    font-size: 0.7rem;
+  }
+
+  .cardValue {
+    font-size: 0.75rem;
+  }
+
+  .cardLabel {
+    font-size: 0.6rem;
+  }
+
+  .swiper-button-prev {
+    left: 4px;
+  }
+
+  .swiper-button-next {
+    right: 4px;
   }
 }

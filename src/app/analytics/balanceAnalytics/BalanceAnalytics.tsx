@@ -89,14 +89,6 @@ const TOOLTIP_STYLE: React.CSSProperties = {
   fontFeatureSettings: "'tnum', 'lnum'",
 };
 
-const TRANSACTION_ICON_STYLE: React.CSSProperties = {
-  width: '40px',
-  height: '40px',
-  borderRadius: '50%',
-  backgroundColor: 'rgba(0, 0, 0, 0.05)',
-  border: '1px solid rgba(0, 0, 0, 0.1)',
-  flexShrink: 0,
-};
 
 const CHART_COLOR = '#2563eb';
 const ANIMATION_DELAY = 50;
@@ -135,8 +127,7 @@ export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps
 
           <div
             key={selectedBank}
-            className={isAnimated ? styles.chartVisible : styles.chartHidden}
-            style={{ marginTop: '8px' }}
+            className={`${isAnimated ? styles.chartVisible : styles.chartHidden} ${styles.chartWrapper}`}
           >
             <svg style={{ position: 'absolute', width: 0, height: 0 }}>
               <defs>
@@ -147,66 +138,63 @@ export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps
               </defs>
             </svg>
 
-            <LineChart
-              h={100}
-              data={currentBank.data}
-              dataKey="month"
-              series={[{ name: 'value', color: CHART_COLOR }]}
-              fillOpacity={0.3}
-              curveType="linear"
-              withDots
-              withTooltip
-              tooltipProps={{ content: tooltipContent }}
-              withXAxis
-              withYAxis={false}
-              gridAxis="none"
-              strokeWidth={3}
-              dotProps={{
-                r: 4,
-                fill: CHART_COLOR,
-                stroke: '#ffffff',
-                strokeWidth: 2
-              }}
-              xAxisProps={{
-                tick: { 
-                  fill: '#111827', 
-                  fontSize: 12,
-                  fontFamily: 'var(--font-inter), sans-serif',
-                  fontWeight: 500,
-                  letterSpacing: '-0.005em'
-                },
-                tickFormatter: (val: string) => val.slice(0, 3),
-                domain: ['dataMin', 'dataMax'],
-                padding: { left: 20, right: 20 }
-              }}
-            />
+            <div className={styles.lineChartContainer}>
+              <LineChart
+                className={styles.lineChart}
+                h={100}
+                data={currentBank.data}
+                dataKey="month"
+                series={[{ name: 'value', color: CHART_COLOR }]}
+                fillOpacity={0.3}
+                curveType="linear"
+                withDots
+                withTooltip
+                tooltipProps={{ content: tooltipContent }}
+                withXAxis
+                withYAxis={false}
+                gridAxis="none"
+                strokeWidth={3}
+                dotProps={{
+                  r: 4,
+                  fill: CHART_COLOR,
+                  stroke: '#ffffff',
+                  strokeWidth: 2
+                }}
+                xAxisProps={{
+                  tick: { 
+                    fill: '#111827', 
+                    fontSize: 12,
+                    fontFamily: 'var(--font-inter), sans-serif',
+                    fontWeight: 500,
+                    letterSpacing: '-0.005em'
+                  },
+                  tickFormatter: (val: string) => val.slice(0, 3),
+                  domain: ['dataMin', 'dataMax'],
+                  padding: { left: 20, right: 20 }
+                }}
+              />
+            </div>
           </div>
         </Stack>
       </Paper>
-      <Stack gap="xs" style={{ marginLeft: '-210px', marginTop: '32px' }}>
+      <Stack gap="xs" className={styles.transactionsSection}>
         <Text 
           size="lg" 
           fw={600} 
           c="#000"
-          style={{ 
-            fontFamily: 'var(--font-inter), sans-serif',
-            letterSpacing: '-0.01em'
-          }}
+          className={styles.transactionsTitle}
         >
           Последние транзакции
         </Text>
-        <Stack gap="xs" mt="md">
+        <Stack gap="xs" mt="md" className={styles.transactionsList}>
           {transactions.map((transaction) => (
-            <Group key={transaction.id} justify="space-between" align="center">
+            <Group key={transaction.id} justify="space-between" align="center" className={styles.transactionItem}>
               <Group gap="sm">
-                <div style={TRANSACTION_ICON_STYLE} />
+                <div className={styles.transactionIcon} />
                 <Text 
                   size="sm" 
                   fw={500}
-                  style={{ 
-                    fontFamily: 'var(--font-inter), sans-serif',
-                    letterSpacing: '-0.005em'
-                  }}
+                  className={styles.transactionName}
                 >
                   {transaction.name}
                 </Text>
@@ -215,11 +203,7 @@ export default function BalanceAnalytics({ selectedBank }: BalanceAnalyticsProps
                 size="sm" 
                 fw={600}
                 c={transaction.type === 'income' ? '#10b981' : '#000'}
-                style={{ 
-                  fontFamily: 'var(--font-mono), monospace',
-                  letterSpacing: '-0.01em',
-                  fontFeatureSettings: "'tnum', 'lnum'"
-                }}
+                className={styles.transactionAmount}
               >
                 {transaction.type === 'income' ? '+' : '-'}₽ {transaction.amount.toLocaleString()}
               </Text>
