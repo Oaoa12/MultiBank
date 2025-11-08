@@ -131,7 +131,7 @@ export const userApi = createApi({
     
     uploadAvatar: builder.mutation<AvatarUploadResponse, FormData>({
       query: (formData) => ({
-        url: 'user/profile/avatar',
+        url: 'user/avatar',
         method: 'POST',
         body: formData,
       }),
@@ -140,14 +140,14 @@ export const userApi = createApi({
     
     getAvatar: builder.query<Blob, number>({
       query: (fileId) => ({
-        url: `user/profile/avatar/${fileId}`,
+        url: `user/avatar/${fileId}`,
         responseHandler: (response) => response.blob(),
       }),
     }),
     
     deleteAvatar: builder.mutation<{ message: string }, number>({
       query: (fileId) => ({
-        url: `user/profile/avatar/${fileId}`,
+        url: `user/avatar/${fileId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Profile', 'User'],
@@ -155,7 +155,7 @@ export const userApi = createApi({
     
     refreshAvatarUrl: builder.mutation<AvatarUploadResponse, { fileId: number; expiry?: number }>({
       query: ({ fileId, expiry }) => ({
-        url: `user/profile/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
+        url: `user/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
         method: 'POST',
       }),
       invalidatesTags: ['Profile', 'User'],

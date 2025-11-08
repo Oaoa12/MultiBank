@@ -93,4 +93,27 @@ input, textarea, select, [class*="mantine-Input"], [class*="mantine-TextInput"] 
   display: none !important;
 }
 
+.transactions-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: silver #f5f5f5;
+}
+
+.transactions-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.transactions-scroll::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.transactions-scroll::-webkit-scrollbar-thumb {
+  background: silver;
+  border-radius: 10px;
+}
+
+.transactions-scroll::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
 /*# sourceMappingURL=src_app_globals_css_bad6b30c._.single.css.map*/

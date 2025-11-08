@@ -1,0 +1,413 @@
+/* Анимации для страницы профиля */
+
+/* Базовые анимации появления */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Классы анимаций */
+.animateFadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animateFadeInLeft {
+  animation: fadeInLeft 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animateFadeInRight {
+  animation: fadeInRight 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animateScaleIn {
+  animation: scaleIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.animateSlideInFromTop {
+  animation: slideInFromTop 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.animateSlideInFromLeft {
+  animation: slideInFromLeft 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+/* Задержки для последовательного появления */
+.delay100 {
+  animation-delay: 0.1s;
+}
+
+.delay200 {
+  animation-delay: 0.2s;
+}
+
+.delay300 {
+  animation-delay: 0.3s;
+}
+
+.delay400 {
+  animation-delay: 0.4s;
+}
+
+.delay500 {
+  animation-delay: 0.5s;
+}
+
+.delay600 {
+  animation-delay: 0.6s;
+}
+
+.delay700 {
+  animation-delay: 0.7s;
+}
+
+.delay800 {
+  animation-delay: 0.8s;
+}
+
+/* Анимация для статистических карточек */
+.statsCard {
+  animation: scaleIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.statsCard:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.statsCard:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.statsCard:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.statsCard:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Анимация для элементов транзакций */
+.transactionItem {
+  animation: slideInFromLeft 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.transactionItem:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.transactionItem:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.transactionItem:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Дополнительная анимация для транзакций */
+.transactionSlideIn {
+  animation: slideInFromLeft 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.transactionSlideIn:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.transactionSlideIn:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.transactionSlideIn:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Анимация для кнопок уведомлений */
+.notificationItem {
+  animation: fadeInUp 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+.notificationItem:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.notificationItem:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.notificationItem:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.notificationItem:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Анимация для аватара */
+.avatarContainer {
+  animation: scaleIn 0.8s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.2s;
+}
+
+/* Анимация для информации профиля */
+.profileInfo {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.4s;
+}
+
+/* Анимация для кнопок быстрых действий */
+.quickActionButton {
+  animation: fadeInLeft 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+.quickActionButton:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.quickActionButton:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.quickActionButton:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.quickActionButton:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Анимация для модального окна */
+.modalContent {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+/* Анимация для загрузчика */
+.loaderContainer {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Hover эффекты */
+.hoverScale {
+  transition: transform 0.2s ease;
+}
+
+.hoverScale:hover {
+  transform: scale(1.02);
+}
+
+/* Анимация для карточек при наведении */
+.cardHover {
+  transition: all 0.2s ease;
+}
+
+
+/* Улучшенные hover эффекты для кнопок */
+.buttonHover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.buttonHover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.2s;
+}
+
+.buttonHover:hover::before {
+  left: 100%;
+}
+
+.buttonHover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.buttonHover:active {
+  transform: translateY(0);
+  transition: transform 0.1s;
+}
+
+/* Специальные эффекты для разных типов кнопок */
+.primaryButtonHover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.primaryButtonHover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34, 139, 34, 0.3);
+  filter: brightness(1.05);
+}
+
+.subtleButtonHover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.subtleButtonHover:hover {
+  transform: translateX(4px);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.actionButtonHover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.actionButtonHover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.actionButtonHover:active {
+  transform: scale(0.98);
+}
+
+/* Эффект для кнопок уведомлений */
+.notificationButtonHover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.notificationButtonHover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notificationButtonHover:active {
+  transform: translateY(0);
+}
+
+/* Эффект для кнопок в меню */
+.menuButtonHover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menuButtonHover:hover {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Эффект для кнопок редактирования */
+.editButtonHover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.editButtonHover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.editButtonHover:active {
+  transform: translateY(0);
+}
+
+/* Эффект для кнопок в модальном окне */
+.modalButtonHover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modalButtonHover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Пульсирующий эффект для активных элементов */
+.pulseEffect {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 21, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+  }
+}
+

@@ -166,7 +166,7 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
             }),
             uploadAvatar: builder.mutation({
                 query: (formData)=>({
-                        url: 'user/profile/avatar',
+                        url: 'user/avatar',
                         method: 'POST',
                         body: formData
                     }),
@@ -177,13 +177,13 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
             }),
             getAvatar: builder.query({
                 query: (fileId)=>({
-                        url: `user/profile/avatar/${fileId}`,
+                        url: `user/avatar/${fileId}`,
                         responseHandler: (response)=>response.blob()
                     })
             }),
             deleteAvatar: builder.mutation({
                 query: (fileId)=>({
-                        url: `user/profile/avatar/${fileId}`,
+                        url: `user/avatar/${fileId}`,
                         method: 'DELETE'
                     }),
                 invalidatesTags: [
@@ -193,7 +193,7 @@ const userApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
             }),
             refreshAvatarUrl: builder.mutation({
                 query: ({ fileId, expiry })=>({
-                        url: `user/profile/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
+                        url: `user/avatar/${fileId}/refresh-url${expiry ? `?expiry=${expiry}` : ''}`,
                         method: 'POST'
                     }),
                 invalidatesTags: [
@@ -211,24 +211,87 @@ const { useGetCurrentUserQuery, useUpdateUserMutation, useUpdateUserAuthorizedMu
 __turbopack_context__.s([
     "authApi",
     ()=>authApi,
+    "useAddToGoalMutation",
+    ()=>useAddToGoalMutation,
+    "useBankConsentMutation",
+    ()=>useBankConsentMutation,
+    "useCreateGoalMutation",
+    ()=>useCreateGoalMutation,
+    "useDeleteGoalMutation",
+    ()=>useDeleteGoalMutation,
+    "useGetAccountTransactionsQuery",
+    ()=>useGetAccountTransactionsQuery,
     "useGetAuthProfileQuery",
     ()=>useGetAuthProfileQuery,
+    "useGetBankAccountsQuery",
+    ()=>useGetBankAccountsQuery,
+    "useGetBankConsentStatusQuery",
+    ()=>useGetBankConsentStatusQuery,
+    "useGetBankOverviewQuery",
+    ()=>useGetBankOverviewQuery,
+    "useGetBanksQuery",
+    ()=>useGetBanksQuery,
+    "useGetGoalByIdQuery",
+    ()=>useGetGoalByIdQuery,
+    "useGetGoalsQuery",
+    ()=>useGetGoalsQuery,
+    "useGetTransactionsQuery",
+    ()=>useGetTransactionsQuery,
+    "useGetTransactionsStatisticsQuery",
+    ()=>useGetTransactionsStatisticsQuery,
+    "useLazyGetAccountTransactionsQuery",
+    ()=>useLazyGetAccountTransactionsQuery,
+    "useLazyGetBankAccountsQuery",
+    ()=>useLazyGetBankAccountsQuery,
+    "useLazyGetBankConsentStatusQuery",
+    ()=>useLazyGetBankConsentStatusQuery,
+    "useLazyGetBankOverviewQuery",
+    ()=>useLazyGetBankOverviewQuery,
+    "useLazyGetGoalByIdQuery",
+    ()=>useLazyGetGoalByIdQuery,
+    "useLazyGetGoalsQuery",
+    ()=>useLazyGetGoalsQuery,
+    "useLazyGetTransactionsQuery",
+    ()=>useLazyGetTransactionsQuery,
     "useLoginMutation",
     ()=>useLoginMutation,
     "useLogoutMutation",
     ()=>useLogoutMutation,
     "useRegisterMutation",
-    ()=>useRegisterMutation
+    ()=>useRegisterMutation,
+    "useSyncBanksMutation",
+    ()=>useSyncBanksMutation,
+    "useUpdateGoalMutation",
+    ()=>useUpdateGoalMutation,
+    "useUpdateGoalStatusMutation",
+    ()=>useUpdateGoalStatusMutation
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$react$2f$rtk$2d$query$2d$react$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/@reduxjs/toolkit/dist/query/react/rtk-query-react.modern.mjs [app-ssr] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@reduxjs/toolkit/dist/query/rtk-query.modern.mjs [app-ssr] (ecmascript)");
 ;
+// We rely on secure HTTP-only cookies; no JS access to token
+const baseQuery = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchBaseQuery"])({
+    baseUrl: '/api/',
+    credentials: 'include'
+});
+const baseQueryWithoutApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchBaseQuery"])({
+    baseUrl: 'http://localhost:3000',
+    credentials: 'include'
+});
+// Base query для транзакций API с JWT токеном
+const baseQueryTransactions = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchBaseQuery"])({
+    baseUrl: 'http://localhost:3000',
+    credentials: 'include',
+    prepareHeaders: async (headers, { getState })=>{
+        // Пытаемся получить токен из localStorage или sessionStorage
+        if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+        ;
+        return headers;
+    }
+});
 const authApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$react$2f$rtk$2d$query$2d$react$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createApi"])({
     reducerPath: 'authApi',
-    baseQuery: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$query$2f$rtk$2d$query$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchBaseQuery"])({
-        baseUrl: '/api/',
-        credentials: 'include'
-    }),
+    baseQuery,
     tagTypes: [
         'Auth'
     ],
@@ -267,10 +330,332 @@ const authApi = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
                 invalidatesTags: [
                     'Auth'
                 ]
+            }),
+            getBanks: builder.query({
+                queryFn: async (arg, api, extraOptions)=>{
+                    // Используем отдельный baseQuery без префикса /api/
+                    const result = await baseQueryWithoutApi('/bank/supported/list', api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                providesTags: [
+                    'Auth'
+                ]
+            }),
+            bankConsent: builder.mutation({
+                queryFn: async ({ bankId, data }, api, extraOptions)=>{
+                    // Используем отдельный baseQuery без префикса /api/
+                    const result = await baseQueryWithoutApi({
+                        url: `/connection/connect/${bankId}`,
+                        method: 'POST',
+                        body: data || {}
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                invalidatesTags: [
+                    'Auth'
+                ]
+            }),
+            getBankConsentStatus: builder.query({
+                query: ({ bankId, requestId })=>`auth/bank-consent/${bankId}/${requestId}`,
+                providesTags: [
+                    'Auth'
+                ]
+            }),
+            getBankOverview: builder.query({
+                queryFn: async ({ refresh }, api, extraOptions)=>{
+                    // Используем отдельный baseQuery без префикса /api/
+                    // Добавляем параметр refresh только если он явно указан как true
+                    const url = refresh === true ? `/bank/overview?refresh=true` : `/bank/overview`;
+                    const result = await baseQueryWithoutApi({
+                        url
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                providesTags: [
+                    'Auth'
+                ]
+            }),
+            syncBanks: builder.mutation({
+                queryFn: async (arg, api, extraOptions)=>{
+                    // Используем отдельный baseQuery без префикса /api/
+                    const result = await baseQueryWithoutApi({
+                        url: '/bank/sync',
+                        method: 'GET'
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                invalidatesTags: [
+                    'Auth'
+                ]
+            }),
+            getBankAccounts: builder.query({
+                queryFn: async (bankId, api, extraOptions)=>{
+                    // Используем отдельный baseQuery без префикса /api/
+                    const result = await baseQueryWithoutApi({
+                        url: `/bank/accounts/${bankId}`
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                providesTags: [
+                    'Auth'
+                ]
+            }),
+            getAccountTransactions: builder.query({
+                queryFn: async ({ bankId, accountId }, api, extraOptions)=>{
+                    // Используем отдельный baseQuery без префикса /api/
+                    const result = await baseQueryWithoutApi({
+                        url: `/transactions/${bankId}/accId/${accountId}`
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                providesTags: [
+                    'Auth'
+                ]
+            }),
+            // Новый эндпоинт для получения транзакций по туториалу
+            getTransactions: builder.query({
+                queryFn: async (filters, api, extraOptions)=>{
+                    const params = new URLSearchParams();
+                    const filterParams = filters || {};
+                    // Добавляем параметры фильтрации
+                    if (filterParams.page) params.append('page', filterParams.page.toString());
+                    if (filterParams.limit) params.append('limit', filterParams.limit.toString());
+                    if (filterParams.type) params.append('type', filterParams.type);
+                    if (filterParams.category) params.append('category', filterParams.category);
+                    if (filterParams.accountId) params.append('accountId', filterParams.accountId.toString());
+                    if (filterParams.merchant) params.append('merchant', filterParams.merchant);
+                    if (filterParams.startDate) params.append('startDate', filterParams.startDate);
+                    if (filterParams.endDate) params.append('endDate', filterParams.endDate);
+                    if (filterParams.search) params.append('search', filterParams.search);
+                    const url = `/transactions${params.toString() ? `?${params.toString()}` : ''}`;
+                    const result = await baseQueryTransactions({
+                        url
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                providesTags: [
+                    'Auth'
+                ]
+            }),
+            // API для статистики транзакций
+            getTransactionsStatistics: builder.query({
+                queryFn: async (arg, api, extraOptions)=>{
+                    const result = await baseQueryTransactions({
+                        url: '/transactions/statistics/monthly'
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                providesTags: [
+                    'Auth'
+                ]
+            }),
+            // API для целей
+            getGoals: builder.query({
+                queryFn: async (filters, api, extraOptions)=>{
+                    const params = new URLSearchParams();
+                    const filterParams = filters || {};
+                    if (filterParams.status) params.append('status', filterParams.status);
+                    if (filterParams.priority) params.append('priority', filterParams.priority);
+                    if (filterParams.category) params.append('category', filterParams.category);
+                    if (filterParams.page) params.append('page', filterParams.page.toString());
+                    if (filterParams.limit) params.append('limit', filterParams.limit.toString());
+                    const url = `/goals${params.toString() ? `?${params.toString()}` : ''}`;
+                    const result = await baseQueryTransactions({
+                        url
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                providesTags: [
+                    'Auth'
+                ]
+            }),
+            getGoalById: builder.query({
+                queryFn: async (id, api, extraOptions)=>{
+                    const result = await baseQueryTransactions({
+                        url: `/goals/${id}`
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                providesTags: [
+                    'Auth'
+                ]
+            }),
+            createGoal: builder.mutation({
+                queryFn: async (goalData, api, extraOptions)=>{
+                    const result = await baseQueryTransactions({
+                        url: '/goals',
+                        method: 'POST',
+                        body: goalData
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                invalidatesTags: [
+                    'Auth'
+                ]
+            }),
+            updateGoal: builder.mutation({
+                queryFn: async ({ id, data }, api, extraOptions)=>{
+                    const result = await baseQueryTransactions({
+                        url: `/goals/${id}`,
+                        method: 'PATCH',
+                        body: data
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                invalidatesTags: [
+                    'Auth'
+                ]
+            }),
+            deleteGoal: builder.mutation({
+                queryFn: async (id, api, extraOptions)=>{
+                    const result = await baseQueryTransactions({
+                        url: `/goals/${id}`,
+                        method: 'DELETE'
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                invalidatesTags: [
+                    'Auth'
+                ]
+            }),
+            addToGoal: builder.mutation({
+                queryFn: async ({ id, amount }, api, extraOptions)=>{
+                    const result = await baseQueryTransactions({
+                        url: `/goals/${id}/add`,
+                        method: 'POST',
+                        body: {
+                            amount
+                        }
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                invalidatesTags: [
+                    'Auth'
+                ]
+            }),
+            updateGoalStatus: builder.mutation({
+                queryFn: async ({ id, status }, api, extraOptions)=>{
+                    const result = await baseQueryTransactions({
+                        url: `/goals/${id}/status`,
+                        method: 'PATCH',
+                        body: {
+                            status
+                        }
+                    }, api, extraOptions);
+                    if (result.error) {
+                        return {
+                            error: result.error
+                        };
+                    }
+                    return {
+                        data: result.data
+                    };
+                },
+                invalidatesTags: [
+                    'Auth'
+                ]
             })
         })
 });
-const { useRegisterMutation, useLoginMutation, useGetAuthProfileQuery, useLogoutMutation } = authApi;
+const { useRegisterMutation, useLoginMutation, useGetAuthProfileQuery, useLogoutMutation, useGetBanksQuery, useBankConsentMutation, useGetBankConsentStatusQuery, useLazyGetBankConsentStatusQuery, useGetBankOverviewQuery, useLazyGetBankOverviewQuery, useSyncBanksMutation, useGetBankAccountsQuery, useLazyGetBankAccountsQuery, useGetAccountTransactionsQuery, useLazyGetAccountTransactionsQuery, useGetTransactionsQuery, useLazyGetTransactionsQuery, useGetTransactionsStatisticsQuery, useGetGoalsQuery, useLazyGetGoalsQuery, useGetGoalByIdQuery, useLazyGetGoalByIdQuery, useCreateGoalMutation, useUpdateGoalMutation, useDeleteGoalMutation, useAddToGoalMutation, useUpdateGoalStatusMutation } = authApi;
 }),
 "[project]/src/components/features/Header/Header.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";

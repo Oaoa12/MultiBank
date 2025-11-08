@@ -3,6 +3,9 @@ self.__BUILD_MANIFEST = {
     "afterFiles": [
       {
         "source": "/api/:path*"
+      },
+      {
+        "source": "/bank/:path*"
       }
     ],
     "beforeFiles": [],
