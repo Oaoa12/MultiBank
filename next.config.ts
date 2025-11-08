@@ -5,11 +5,11 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "https://vtb-hack-ruby.vercel.app/:path*",
+        destination: "http://localhost:3000/:path*",
       },
       {
         source: "/bank/:path*",
-        destination: "https://vtb-hack-ruby.vercel.app/bank/:path*",
+        destination: "http://localhost:3000/bank/:path*",
       },
     ];
   },

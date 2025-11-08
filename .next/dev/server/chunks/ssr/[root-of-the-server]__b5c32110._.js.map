@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/vchug/OneDrive/Desktop/vtb-front/src/app/dashboard/page.tsx"],"sourcesContent":["export default function Dashboard() {\n    return <div>Заглушка для главного дашборда</div>\n}"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACpB,qBAAO,8OAAC;kBAAI;;;;;;AAChB","debugId":null}}]
-}
