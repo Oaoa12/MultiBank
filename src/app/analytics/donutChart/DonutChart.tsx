@@ -1,7 +1,9 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell } from 'recharts';
 import { Text } from '@mantine/core';
+import styles from './DonutChart.module.css';
 
 interface BankDonutData {
   income: number;
@@ -38,50 +40,45 @@ const bankDonutData: Record<BankName, BankDonutData> = {
 
 const DEFAULT_BANK: BankName = 'ВТБ';
 
-const CHART_SIZE = 200;
-const CHART_CENTER = 100;
-const INNER_RADIUS = 65;
-const OUTER_RADIUS = 95;
-
 const EXPENSES_COLOR = '#d1d5db';
 const INCOME_COLOR = '#2563eb';
-const TEXT_COLOR = '#111827';
-const LABEL_COLOR = '#9ca3af';
-
-const CONTAINER_STYLE: React.CSSProperties = {
-  position: 'relative',
-  width: CHART_SIZE,
-  height: CHART_SIZE,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-};
-
-const CENTER_TEXT_STYLE: React.CSSProperties = {
-  position: 'absolute',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
-
-const AMOUNT_TEXT_STYLE: React.CSSProperties = {
-  textAlign: 'center',
-  color: TEXT_COLOR,
-  fontFamily: 'var(--font-inter), sans-serif',
-  letterSpacing: '-0.02em',
-};
-
-const LABEL_TEXT_STYLE: React.CSSProperties = {
-  textAlign: 'center',
-  color: LABEL_COLOR,
-  marginTop: '4px',
-  fontFamily: 'var(--font-inter), sans-serif',
-  letterSpacing: '-0.005em',
-  fontWeight: 500,
-};
 
 export default function DonutChart({ selectedBank }: DonutChartProps) {
+  const [chartSize, setChartSize] = useState(200);
+  const [chartCenter, setChartCenter] = useState(100);
+  const [innerRadius, setInnerRadius] = useState(65);
+  const [outerRadius, setOuterRadius] = useState(95);
+
+  useEffect(() => {
+    const updateChartSize = () => {
+      if (window.innerWidth <= 480) {
+        setChartSize(140);
+        setChartCenter(70);
+        setInnerRadius(45);
+        setOuterRadius(66);
+      } else if (window.innerWidth <= 768) {
+        setChartSize(160);
+        setChartCenter(80);
+        setInnerRadius(52);
+        setOuterRadius(76);
+      } else if (window.innerWidth <= 1024) {
+        setChartSize(180);
+        setChartCenter(90);
+        setInnerRadius(58);
+        setOuterRadius(85);
+      } else {
+        setChartSize(200);
+        setChartCenter(100);
+        setInnerRadius(65);
+        setOuterRadius(95);
+      }
+    };
+
+    updateChartSize();
+    window.addEventListener('resize', updateChartSize);
+    return () => window.removeEventListener('resize', updateChartSize);
+  }, []);
+
   const bankData = bankDonutData[selectedBank as BankName] || bankDonutData[DEFAULT_BANK];
   const { income, expenses } = bankData;
 
@@ -91,14 +88,22 @@ export default function DonutChart({ selectedBank }: DonutChartProps) {
   ];
 
   return (
-    <div style={CONTAINER_STYLE}>
-      <PieChart width={CHART_SIZE} height={CHART_SIZE}>
+    <div 
+      className={styles.chartContainer}
+      style={{ 
+        width: `${chartSize}px`, 
+        height: `${chartSize}px`,
+        minWidth: `${chartSize}px`,
+        minHeight: `${chartSize}px`
+      }}
+    >
+      <PieChart width={chartSize} height={chartSize} className={styles.pieChart}>
         <Pie
           data={chartData}
-          cx={CHART_CENTER}
-          cy={CHART_CENTER}
-          innerRadius={INNER_RADIUS}
-          outerRadius={OUTER_RADIUS}
+          cx={chartCenter}
+          cy={chartCenter}
+          innerRadius={innerRadius}
+          outerRadius={outerRadius}
           dataKey="value"
           stroke="none"
         >
@@ -108,11 +113,11 @@ export default function DonutChart({ selectedBank }: DonutChartProps) {
         </Pie>
       </PieChart>
 
-      <div style={CENTER_TEXT_STYLE}>
-        <Text size="md" fw={700} style={AMOUNT_TEXT_STYLE}>
+      <div className={styles.centerText}>
+        <Text size="md" fw={700} className={styles.amountText}>
           {expenses.toLocaleString()} ₽
         </Text>
-        <Text size="xs" style={LABEL_TEXT_STYLE}>
+        <Text size="xs" className={styles.labelText}>
           Траты за месяц
         </Text>
       </div>

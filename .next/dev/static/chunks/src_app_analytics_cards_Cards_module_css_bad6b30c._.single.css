@@ -193,6 +193,11 @@
 .Cards-module__uj5W9W__carouselContainer .Cards-module__uj5W9W__swiper {
   width: 100%;
   height: 100%;
+  overflow: visible;
+}
+
+.Cards-module__uj5W9W__carouselContainer .Cards-module__uj5W9W__swiper-wrapper {
+  overflow: visible;
 }
 
 .Cards-module__uj5W9W__carouselContainer .Cards-module__uj5W9W__swiper-slide {
@@ -201,6 +206,8 @@
   align-items: center;
   height: 100%;
   display: flex;
+  overflow: visible;
+  width: auto !important;
 }
 
 .Cards-module__uj5W9W__swiper-button-prev, .Cards-module__uj5W9W__swiper-button-next {
@@ -242,16 +249,42 @@
   background: #2563eb;
 }
 
+.Cards-module__uj5W9W__actionsGroup {
+  width: 400px;
+  margin-top: -50px;
+  margin-left: 105px;
+}
+
+.Cards-module__uj5W9W__actionButton {
+  color: #2563eb;
+  background-color: #0000;
+  border-color: #2563eb;
+  margin-top: 0;
+}
+
 @media (max-width: 768px) {
   :root {
     --container-width: 100%;
-    --card-width: 340px;
+    --card-width: min(340px, calc(100vw - 40px));
+    --carousel-height: 220px;
   }
 
   .Cards-module__uj5W9W__cardsWrapper {
     justify-content: center;
+    width: 100%;
+    max-width: 100%;
     margin-left: 0;
-    padding: 10px;
+    padding: 20px 10px 10px;
+    overflow: visible;
+  }
+
+  .Cards-module__uj5W9W__cardContainer {
+    min-height: 560px;
+    padding: 20px 12px 12px;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
   }
 
   .Cards-module__uj5W9W__swiper-button-prev {
@@ -262,8 +295,166 @@
     right: 8px;
   }
 
+  .Cards-module__uj5W9W__carouselContainer {
+    margin-top: 10px;
+    padding-top: 10px;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 30px !important;
+    overflow: visible !important;
+  }
+
+  .Cards-module__uj5W9W__carouselContainer .Cards-module__uj5W9W__swiper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .Cards-module__uj5W9W__carouselContainer .Cards-module__uj5W9W__swiper-wrapper {
+    overflow: visible !important;
+  }
+
+  .Cards-module__uj5W9W__carouselContainer .Cards-module__uj5W9W__swiper-slide {
+    width: var(--card-width) !important;
+    max-width: calc(100vw - 60px) !important;
+    overflow: visible !important;
+  }
+
+  .Cards-module__uj5W9W__bankCard {
+    min-height: 180px;
+    padding: 20px;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .Cards-module__uj5W9W__cardBank {
+    font-size: 1.1rem;
+  }
+
+  .Cards-module__uj5W9W__cardNumber {
+    letter-spacing: 1.5px;
+    font-size: 1.1rem;
+  }
+
+  .Cards-module__uj5W9W__cardType {
+    font-size: .75rem;
+  }
+
+  .Cards-module__uj5W9W__cardValue {
+    font-size: .8rem;
+  }
+
+  .Cards-module__uj5W9W__cardLabel {
+    font-size: .65rem;
+  }
+
+  .Cards-module__uj5W9W__actionsGroup {
+    flex-direction: column !important;
+    width: 100% !important;
+    margin-top: 16px !important;
+    margin-left: 0 !important;
+  }
+
+  .Cards-module__uj5W9W__actionButton {
+    width: 100% !important;
+    margin-top: 0 !important;
+  }
+
+  .Cards-module__uj5W9W__cardContainer [class*="mantine-Avatar-root"] {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .Cards-module__uj5W9W__cardContainer [class*="mantine-Avatar-root"] svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .Cards-module__uj5W9W__cardContainer [class*="mantine-Text-root"] {
+    font-size: .875rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --card-width: min(300px, calc(100vw - 32px));
+    --carousel-height: 200px;
+  }
+
+  .Cards-module__uj5W9W__cardsWrapper {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px 8px 8px;
+    overflow: visible;
+  }
+
   .Cards-module__uj5W9W__cardContainer {
-    min-height: 560px;
+    min-height: 520px;
+    padding: 20px 8px 8px;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .Cards-module__uj5W9W__carouselContainer {
+    margin-top: 10px;
+    padding-top: 10px;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+    overflow: visible !important;
+  }
+
+  .Cards-module__uj5W9W__carouselContainer .Cards-module__uj5W9W__swiper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .Cards-module__uj5W9W__carouselContainer .Cards-module__uj5W9W__swiper-wrapper {
+    overflow: visible !important;
+  }
+
+  .Cards-module__uj5W9W__carouselContainer .Cards-module__uj5W9W__swiper-slide {
+    width: var(--card-width) !important;
+    max-width: calc(100vw - 40px) !important;
+    overflow: visible !important;
+  }
+
+  .Cards-module__uj5W9W__bankCard {
+    min-height: 160px;
+    padding: 16px;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .Cards-module__uj5W9W__cardBank {
+    font-size: 1rem;
+  }
+
+  .Cards-module__uj5W9W__cardNumber {
+    letter-spacing: 1px;
+    font-size: 1rem;
+  }
+
+  .Cards-module__uj5W9W__cardType {
+    font-size: .7rem;
+  }
+
+  .Cards-module__uj5W9W__cardValue {
+    font-size: .75rem;
+  }
+
+  .Cards-module__uj5W9W__cardLabel {
+    font-size: .6rem;
+  }
+
+  .Cards-module__uj5W9W__swiper-button-prev {
+    left: 4px;
+  }
+
+  .Cards-module__uj5W9W__swiper-button-next {
+    right: 4px;
   }
 }
 

@@ -42,7 +42,7 @@
   margin-top: 30px;
   transition: transform .2s, box-shadow .2s;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .BalanceAnalytics-module__Wxx4tq__balanceHeader {
@@ -80,6 +80,12 @@
   font-weight: 500;
 }
 
+.BalanceAnalytics-module__Wxx4tq__chartWrapper {
+  width: 100%;
+  margin-top: 8px;
+  position: relative;
+}
+
 .BalanceAnalytics-module__Wxx4tq__chartHidden {
   opacity: 0;
   transition: opacity .6s, transform .6s;
@@ -90,6 +96,286 @@
   opacity: 1;
   transition: opacity .6s, transform .6s;
   transform: translateY(0);
+}
+
+.BalanceAnalytics-module__Wxx4tq__lineChartContainer {
+  width: 100%;
+  height: 100px;
+  position: relative;
+}
+
+.BalanceAnalytics-module__Wxx4tq__lineChart {
+  width: 100%;
+  height: 100%;
+}
+
+.BalanceAnalytics-module__Wxx4tq__transactionsSection {
+  width: calc(100% + 210px);
+  margin-top: 32px;
+  margin-left: -210px;
+}
+
+.BalanceAnalytics-module__Wxx4tq__transactionsTitle {
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -.01em;
+}
+
+.BalanceAnalytics-module__Wxx4tq__transactionsList, .BalanceAnalytics-module__Wxx4tq__transactionItem {
+  width: 100%;
+}
+
+.BalanceAnalytics-module__Wxx4tq__transactionIcon {
+  background-color: #0000000d;
+  border: 1px solid #0000001a;
+  border-radius: 50%;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.BalanceAnalytics-module__Wxx4tq__transactionName {
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -.005em;
+}
+
+.BalanceAnalytics-module__Wxx4tq__transactionAmount {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: -.01em;
+  font-feature-settings: "tnum", "lnum";
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .BalanceAnalytics-module__Wxx4tq__analyticsWrapper {
+    width: 100% !important;
+    margin-top: 20px !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__dividerContainer {
+    margin-top: 0 !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__transactionsLabel {
+    margin-bottom: 8px;
+    position: static !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__dividerLine {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__balanceCard {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 180px !important;
+    margin-top: 16px !important;
+    overflow: visible !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__balanceCard .mantine-Stack-root {
+    overflow: visible !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__balanceCard .mantine-Paper-root {
+    overflow: visible !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__chartHidden, .BalanceAnalytics-module__Wxx4tq__chartVisible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__balanceAmount {
+    font-size: 1.5rem !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__transactionsSection {
+    width: 100% !important;
+    margin-top: 24px !important;
+    margin-left: 0 !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__transactionIcon {
+    width: 32px !important;
+    min-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__transactionName, .BalanceAnalytics-module__Wxx4tq__transactionAmount {
+    font-size: .875rem !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__transactionItem {
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    padding: 4px 0 !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__chartWrapper {
+    width: 100% !important;
+    min-height: 120px !important;
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChartContainer {
+    width: 100% !important;
+    height: 120px !important;
+    min-height: 120px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart {
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-wrapper {
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 120px !important;
+    min-height: 120px !important;
+    display: block !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-surface {
+    visibility: visible !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 120px !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-cartesian-grid {
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-line {
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-area {
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-cartesian-axis {
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-cartesian-axis-tick {
+    visibility: visible !important;
+    font-size: 10px !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-dot {
+    r: 3 !important;
+    visibility: visible !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .BalanceAnalytics-module__Wxx4tq__transactionsSection {
+    width: calc(100% + 100px) !important;
+    margin-left: -100px !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__balanceCard {
+    min-width: 450px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .BalanceAnalytics-module__Wxx4tq__balanceAmount {
+    font-size: 1.25rem !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__transactionIcon {
+    width: 28px !important;
+    min-width: 28px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__transactionName, .BalanceAnalytics-module__Wxx4tq__transactionAmount {
+    font-size: .8rem !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__chartWrapper {
+    min-height: 100px !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__chartHidden, .BalanceAnalytics-module__Wxx4tq__chartVisible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChartContainer {
+    width: 100% !important;
+    height: 100px !important;
+    min-height: 100px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart {
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-wrapper {
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 100px !important;
+    min-height: 100px !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-surface {
+    visibility: visible !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 100px !important;
+    overflow: visible !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-cartesian-axis {
+    visibility: visible !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-cartesian-axis-tick {
+    visibility: visible !important;
+    font-size: 9px !important;
+  }
+
+  .BalanceAnalytics-module__Wxx4tq__lineChart .recharts-dot {
+    r: 2.5 !important;
+    visibility: visible !important;
+  }
 }
 
 /*# sourceMappingURL=src_app_analytics_balanceAnalytics_BalanceAnalytics_module_css_bad6b30c._.single.css.map*/

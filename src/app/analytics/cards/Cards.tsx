@@ -118,12 +118,6 @@ interface CardsProps {
   onCardChange?: (bank: string) => void;
 }
 
-const BUTTON_STYLE: React.CSSProperties = {
-  marginTop: '-50px',
-  backgroundColor: 'transparent',
-  borderColor: '#2563eb',
-  color: '#2563eb',
-};
 
 const SWIPER_HEIGHT = '240px';
 const HIDDEN_CARD_NUMBER = '•••• •••• •••• ••••';
@@ -265,18 +259,18 @@ export default function Cards({ onCardChange }: CardsProps) {
             <div className="swiper-pagination"></div>
           </div>
 
-          <Group gap="xs" grow style={{ width: '400px', marginLeft: '105px' }}>
+          <Group gap="xs" grow className={styles.actionsGroup}>
             <Button 
               variant="outline" 
               size="sm"
-              style={BUTTON_STYLE}
+              className={styles.actionButton}
             >
               История операций
             </Button>
             <Button 
               variant="outline" 
               size="sm"
-              style={BUTTON_STYLE}
+              className={styles.actionButton}
               onClick={() => router.push('/dashboard')}
             >
               Добавить карту

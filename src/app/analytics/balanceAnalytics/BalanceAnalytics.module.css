@@ -37,7 +37,7 @@
   min-height: 200px;
   background: transparent;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -79,6 +79,12 @@
   font-weight: 500;
 }
 
+.chartWrapper {
+  width: 100%;
+  margin-top: 8px;
+  position: relative;
+}
+
 .chartHidden {
   opacity: 0;
   transform: translateY(20px);
@@ -89,4 +95,310 @@
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.lineChartContainer {
+  width: 100%;
+  height: 100px;
+  position: relative;
+}
+
+.lineChart {
+  width: 100%;
+  height: 100%;
+}
+
+.transactionsSection {
+  margin-left: -210px;
+  margin-top: 32px;
+  width: calc(100% + 210px);
+}
+
+.transactionsTitle {
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.transactionsList {
+  width: 100%;
+}
+
+.transactionItem {
+  width: 100%;
+}
+
+.transactionIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.transactionName {
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.005em;
+}
+
+.transactionAmount {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: -0.01em;
+  font-feature-settings: 'tnum', 'lnum';
+  white-space: nowrap;
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 768px) {
+  .analyticsWrapper {
+    margin-top: 20px !important;
+    width: 100% !important;
+  }
+
+  .dividerContainer {
+    margin-top: 0 !important;
+  }
+
+  .transactionsLabel {
+    position: static !important;
+    left: 0 !important;
+    top: 0 !important;
+    margin-bottom: 8px;
+  }
+
+  .dividerLine {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  .balanceCard {
+    min-width: 0 !important;
+    min-height: 180px !important;
+    margin-top: 16px !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .balanceCard :global(.mantine-Stack-root) {
+    overflow: visible !important;
+  }
+
+  .balanceCard :global(.mantine-Paper-root) {
+    overflow: visible !important;
+  }
+
+  .chartHidden {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .chartVisible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .balanceAmount {
+    font-size: 1.5rem !important;
+  }
+
+  .transactionsSection {
+    margin-left: 0 !important;
+    margin-top: 24px !important;
+    width: 100% !important;
+  }
+
+  .transactionIcon {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+  }
+
+  .transactionName {
+    font-size: 0.875rem !important;
+  }
+
+  .transactionAmount {
+    font-size: 0.875rem !important;
+  }
+
+  .transactionItem {
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    padding: 4px 0 !important;
+  }
+
+  /* График на мобильных */
+  .chartWrapper {
+    width: 100% !important;
+    overflow: visible !important;
+    display: block !important;
+    position: relative !important;
+    min-height: 120px !important;
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .lineChartContainer {
+    width: 100% !important;
+    height: 120px !important;
+    min-height: 120px !important;
+    position: relative !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .lineChart {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    min-width: 100% !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .lineChart :global(.recharts-wrapper) {
+    width: 100% !important;
+    height: 120px !important;
+    min-width: 100% !important;
+    min-height: 120px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .lineChart :global(.recharts-surface) {
+    width: 100% !important;
+    height: 120px !important;
+    min-width: 100% !important;
+    display: block !important;
+    visibility: visible !important;
+    overflow: visible !important;
+  }
+
+  .lineChart :global(.recharts-cartesian-grid) {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  .lineChart :global(.recharts-line) {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  .lineChart :global(.recharts-area) {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  .lineChart :global(.recharts-cartesian-axis) {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  .lineChart :global(.recharts-cartesian-axis-tick) {
+    font-size: 10px !important;
+    visibility: visible !important;
+  }
+
+  .lineChart :global(.recharts-dot) {
+    r: 3 !important;
+    visibility: visible !important;
+  }
+}
+
+/* ПЛАНШЕТНАЯ АДАПТАЦИЯ */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .transactionsSection {
+    margin-left: -100px !important;
+    width: calc(100% + 100px) !important;
+  }
+
+  .balanceCard {
+    min-width: 450px !important;
+  }
+}
+
+/* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ */
+@media (max-width: 480px) {
+  .balanceAmount {
+    font-size: 1.25rem !important;
+  }
+
+  .transactionIcon {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+  }
+
+  .transactionName {
+    font-size: 0.8rem !important;
+  }
+
+  .transactionAmount {
+    font-size: 0.8rem !important;
+  }
+
+  .chartWrapper {
+    min-height: 100px !important;
+  }
+
+  .chartHidden {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .chartVisible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .lineChartContainer {
+    width: 100% !important;
+    height: 100px !important;
+    min-height: 100px !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .lineChart {
+    width: 100% !important;
+    min-width: 100% !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .lineChart :global(.recharts-wrapper) {
+    width: 100% !important;
+    height: 100px !important;
+    min-width: 100% !important;
+    min-height: 100px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .lineChart :global(.recharts-surface) {
+    width: 100% !important;
+    height: 100px !important;
+    min-width: 100% !important;
+    visibility: visible !important;
+    overflow: visible !important;
+  }
+
+  .lineChart :global(.recharts-cartesian-axis) {
+    visibility: visible !important;
+  }
+
+  .lineChart :global(.recharts-cartesian-axis-tick) {
+    font-size: 9px !important;
+    visibility: visible !important;
+  }
+
+  .lineChart :global(.recharts-dot) {
+    r: 2.5 !important;
+    visibility: visible !important;
+  }
 }

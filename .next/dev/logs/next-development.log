@@ -1,39 +1,1881 @@
-[00:00:01.017] Server  LOG      ✓ Ready in 745ms
-[00:00:04.051] Server  LOG      ○ Compiling /profile ...
-[00:00:05.231] Server  ERROR   (node:17068) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[00:00:06.131] Server  LOG      ✓ Ready in 5.4s
+[00:00:11.514] Server  LOG      ○ Compiling / ...
+[00:00:26.833] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:27.748] Server  ERROR   (node:5676) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-[00:00:05.266] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:00:10.802] Browser ERROR   Error getting financial advice: {"data":{"message":"У вас нет транзакций за последние 6 месяцев. Создайте несколько транзакций для получения финансового совета.","statusCode":404},"status":404}
-[00:00:46.282] Browser ERROR   Error getting financial advice: {"data":{"message":"У вас нет транзакций за последние 6 месяцев. Создайте несколько транзакций для получения финансового совета.","statusCode":404},"status":404}
-[00:00:55.899] Server  LOG      ✓ Compiled in 21ms
-[00:01:15.366] Browser ERROR   Error getting financial advice: {"data":{"message":"У вас нет транзакций за последние 6 месяцев. Создайте несколько транзакций для получения финансового совета.","statusCode":404},"status":404}
-[00:01:32.661] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:04:37.671] Server  LOG      ✓ Compiled in 20ms
-[00:04:52.058] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:04:55.877] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:05:03.144] Browser ERROR   Error getting financial advice: {"data":{"message":"У вас нет транзакций за последние 6 месяцев. Создайте несколько транзакций для получения финансового совета.","statusCode":404},"status":404}
-[00:05:07.655] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:06:31.697] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+[00:00:52.216] Server  LOG      ○ Compiling /login ...
+[00:01:55.522] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:18.991] Server  LOG      ○ Compiling /registration ...
+[00:04:33.933] Server  LOG      ○ Compiling /analytics ...
+[00:04:39.366] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.
-[00:06:31.697] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+[00:04:39.366] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.
-[00:07:09.419] Server  LOG      ✓ Compiled in 38ms
-[00:07:54.649] Server  LOG      ✓ Compiled in 246ms
-[00:15:56.681] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+[00:04:50.919] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.
-[00:15:56.681] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+[00:04:50.919] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.
-[00:16:19.854] Browser ERROR   Error getting financial advice: {"data":{"message":"У вас нет транзакций за последние 6 месяцев. Создайте несколько транзакций для получения финансового совета.","statusCode":404},"status":404}
+[00:04:51.665] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:04:51.665] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:04:54.217] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:04:54.217] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:07.368] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:07.368] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:46.244] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:46.244] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:47.461] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:47.461] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:55.676] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:55.676] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:56.505] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:56.505] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:58.058] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:07:58.058] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:09:00.116] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.128] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.139] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.149] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.189] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.210] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.225] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.239] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.250] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.262] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.275] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.286] Server  ERROR    ⨯ ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:00.292] Server  LOG      ✓ Compiled in 164ms
+[00:09:02.025] Browser ERROR   ./src/app/analytics/page.tsx:8:1
+Module not found: Can't resolve './page.module.css'
+   6 | import DonutChart from './donutChart/DonutChart';
+   7 | import Cards from "./cards/Cards";
+>  8 | import styles from './page.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 |
+  10 | type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
+  11 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:09:05.937] Server  LOG      ✓ Compiled in 274ms
+[00:09:10.046] Server  LOG      ✓ Compiled in 60ms
+[00:09:13.830] Server  LOG      ✓ Compiled in 72ms
+[00:09:16.452] Server  LOG      ✓ Compiled in 76ms
+[00:09:25.446] Server  LOG      ✓ Compiled in 63ms
+[00:09:31.852] Server  LOG      ✓ Compiled in 71ms
+[00:09:45.342] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.348] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.354] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.363] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.369] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.376] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.385] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.390] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.400] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.409] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.415] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.423] Server  ERROR    ⨯ ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:09:45.427] Server  LOG      ✓ Compiled in 131ms
+[00:09:47.274] Browser ERROR   ./src/app/analytics/donutChart/DonutChart.tsx:5:1
+Module not found: Can't resolve './DonutChart.module.css'
+  3 | import { PieChart, Pie, Cell } from 'recharts';
+  4 | import { Text } from '@mantine/core';
+> 5 | import styles from './DonutChart.module.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface BankDonutData {
+  8 |   income: number;
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/donutChart/DonutChart.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:09:48.051] Server  LOG      ✓ Compiled in 192ms
+[00:09:57.328] Server  LOG      ✓ Compiled in 219ms
+[00:10:00.766] Server  LOG      ✓ Compiled in 101ms
+[00:10:14.086] Server  LOG      ✓ Compiled in 118ms
+[00:10:17.947] Server  LOG      ✓ Compiled in 102ms
+[00:10:27.220] Server  LOG      ✓ Compiled in 149ms
+[00:10:30.565] Server  LOG      ✓ Compiled in 75ms
+[00:10:35.011] Server  LOG      ✓ Compiled in 27ms
+[00:10:45.527] Server  LOG      ✓ Compiled in 271ms
+[00:10:59.013] Server  LOG      ✓ Compiled in 25ms
+[00:11:01.090] Server  LOG      ✓ Compiled in 17ms
+[00:11:01.974] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:01.974] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:03.198] Server  LOG      ✓ Compiled in 17ms
+[00:11:03.512] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:03.512] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:16.019] Server  LOG      ✓ Compiled in 43ms
+[00:11:27.316] Server  LOG      ✓ Compiled in 18ms
+[00:11:43.826] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:43.826] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:44.801] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:44.801] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:45.896] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:45.896] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:54.718] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:54.718] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:57.519] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:57.519] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:59.678] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:11:59.678] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:12:17.790] Server  LOG      ✓ Compiled in 664ms
+[00:13:00.927] Server  LOG      ✓ Compiled in 219ms
+[00:13:03.858] Server  LOG      ✓ Compiled in 36ms
+[00:13:08.085] Server  LOG      ✓ Compiled in 55ms
+[00:13:11.989] Server  LOG      ✓ Compiled in 63ms
+[00:13:18.784] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:14:32.581] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:14:32.581] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:14:38.830] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:14:38.830] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:14:39.574] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:14:39.574] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:14:46.502] Server  LOG      ✓ Compiled in 262ms
+[00:15:21.227] Server  LOG      ✓ Compiled in 40ms
+[00:15:24.434] Server  LOG      ✓ Compiled in 171ms
+[00:15:27.852] Server  LOG      ✓ Compiled in 52ms
+[00:15:32.496] Server  LOG      ✓ Compiled in 48ms
+[00:15:40.577] Server  LOG      ✓ Compiled in 22ms
+[00:15:44.938] Server  LOG      ✓ Compiled in 165ms
+[00:15:50.856] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:15:50.856] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:15:52.498] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:15:52.498] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:16:08.374] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:16:08.374] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:16:33.593] Server  LOG      ✓ Compiled in 886ms
+[00:16:58.875] Server  LOG      ✓ Compiled in 137ms
+[00:17:05.893] Server  LOG      ✓ Compiled in 35ms
+[00:17:06.004] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css
+Transforming CSS failed
+Selector "[style*="marginLeft: '-210px'"]" is not pure. Pure selectors must contain at least one local class or id.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:17:06.004] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css
+Transforming CSS failed
+Selector "[style*="width: '40px'"][style*="height: '40px'"]" is not pure. Pure selectors must contain at least one local class or id.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:17:08.571] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css
+Transforming CSS failed
+Selector "[style*="marginLeft: '-210px'"]" is not pure. Pure selectors must contain at least one local class or id.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:17:08.571] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css
+Transforming CSS failed
+Selector "[style*="width: '40px'"][style*="height: '40px'"]" is not pure. Pure selectors must contain at least one local class or id.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:17:08.571] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css
+Transforming CSS failed
+Selector "[style*="marginLeft: '-210px'"]" is not pure. Pure selectors must contain at least one local class or id.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:17:08.571] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css
+Transforming CSS failed
+Selector "[style*="width: '40px'"][style*="height: '40px'"]" is not pure. Pure selectors must contain at least one local class or id.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:17:08.709] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css
+Transforming CSS failed
+Selector "[style*="marginLeft: '-210px'"]" is not pure. Pure selectors must contain at least one local class or id.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:17:08.709] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css
+Transforming CSS failed
+Selector "[style*="width: '40px'"][style*="height: '40px'"]" is not pure. Pure selectors must contain at least one local class or id.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:17:18.263] Server  LOG      ✓ Compiled in 29ms
+[00:18:50.881] Server  LOG      ✓ Compiled in 118ms
+[00:19:18.665] Server  LOG      ✓ Compiled in 223ms
+[00:19:24.526] Server  LOG      ✓ Compiled in 45ms
+[00:19:29.334] Server  LOG      ✓ Compiled in 170ms
+[00:19:33.354] Server  LOG      ✓ Compiled in 47ms
+[00:19:47.065] Server  LOG      ✓ Compiled in 147ms
+[00:20:48.769] Server  LOG      ✓ Compiled in 47ms
+[00:20:52.023] Server  LOG      ✓ Compiled in 31ms
+[00:20:57.015] Server  LOG      ✓ Compiled in 33ms
+[00:21:15.603] Server  LOG      ✓ Compiled in 26ms
+[00:21:20.982] Server  LOG      ✓ Compiled in 53ms
+[00:21:27.514] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:21:27.514] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:21:30.112] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:21:30.112] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:21:30.893] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:21:30.893] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:22:01.199] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:22:01.199] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:22:36.286] Server  LOG      ✓ Compiled in 33ms
+[00:22:45.498] Server  LOG      ✓ Compiled in 40ms
+[00:23:29.737] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:23:31.065] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:23:31.455] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:23:31.455] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:23:47.142] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:23:47.800] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:23:48.104] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:23:48.104] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:23:57.293] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:23:58.256] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:23:58.517] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:23:58.941] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:23:58.941] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:24:07.235] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:24:08.343] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:24:08.703] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:24:08.703] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:24:24.314] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:24:25.629] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:24:25.629] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:24:25.629] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:24:40.549] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:24:41.131] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:24:41.324] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:24:41.655] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:24:41.655] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:24:45.480] Server  LOG      ✓ Compiled in 214ms
+[00:25:25.801] Server  LOG      ✓ Compiled in 28ms
+[00:25:28.643] Server  LOG      ✓ Compiled in 22ms
+[00:25:32.938] Server  LOG      ✓ Compiled in 20ms
+[00:25:40.838] Server  LOG      ✓ Compiled in 20ms
+[00:25:56.497] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:26:30.110] Server  LOG      ✓ Compiled in 78ms
+[00:27:16.974] Server  LOG      ✓ Compiled in 189ms
+[00:27:23.168] Server  LOG      ✓ Compiled in 76ms
+[00:27:26.192] Server  LOG      ✓ Compiled in 51ms
+[00:27:31.840] Server  LOG      ✓ Compiled in 98ms
+[00:27:44.540] Server  LOG      ✓ Compiled in 138ms
+[00:28:05.598] Server  LOG      ✓ Compiled in 109ms
+[00:28:09.422] Browser WARN    ImmutableStateInvariantMiddleware took 35ms, which is more than the warning threshold of 32ms. 
+If your state or actions are very large, you may want to disable the middleware as it might cause too much of a slowdown in development mode. See https://redux-toolkit.js.org/api/getDefaultMiddleware for instructions.
+It is disabled in production builds, so you don't need to worry about that.
+[00:28:10.065] Server  LOG      ✓ Compiled in 78ms
+[00:28:11.805] Server  LOG      ✓ Compiled in 92ms
+[00:28:15.365] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:28:17.576] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:17.922] Server  LOG      ✓ Compiled in 46ms
+[00:28:18.368] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:28:18.368] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:28:18.941] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <div ref={null} style={{...}} className="page-modul..." data-variant={undefined} data-size="xl" size={undefined} ...>
+      <@mantine/core/SimpleGrid cols={{base:1,lg:3}} spacing="md">
+        <SimpleGridMediaVariables>
+        <@mantine/core/Box ref={null} className="m_2415a157..." style={{}}>
+          <div ref={null} style={{}} className="m_2415a157..." data-variant={undefined} data-size={undefined} ...>
+            <div className="page-modul...">
+              <Cards onCardChange={function handleCardChange}>
+                <div className="Cards-modu...">
+                  <@mantine/core/Paper shadow="lg" radius="lg" className="Cards-modu...">
+                    <@mantine/core/Box ref={null} mod={[...]} className="Cards-modu..." style={{...}} variant={undefined}>
+                      <div ref={null} style={{...}} className="Cards-modu..." data-variant={undefined} ...>
+                        <@mantine/core/Group>
+                        <@mantine/core/Divider>
+                        <@mantine/core/Stack gap="md" p="md">
+                          <@mantine/core/Box ref={null} className="m_6d731127..." style={{...}} variant={undefined} ...>
+                            <div ref={null} style={{...}} className="m_6d731127..." data-variant={undefined} ...>
+                              <div>
+                              <@mantine/core/Group gap="xs" grow={true} className="Cards-modu...">
+                                <@mantine/core/Box className="Cards-modu..." style={{...}} ref={null} variant={undefined} ...>
+                                  <div
+                                    ref={null}
+                                    style={{--group-child-width:"calc(50% -...",--group-gap:"var(--mant...",--group-align:"center", ...}}
++                                   className="Cards-module__uj5W9W__actionsGroup m_4081bf90 mantine-Group-root"
+-                                   className="m_4081bf90 mantine-Group-root"
+                                    data-variant={undefined}
+                                    data-size={undefined}
+                                    size={undefined}
+                                    data-grow={true}
+                                  >
+                                    <@mantine/core/Button variant="outline" size="sm" className="Cards-modu...">
+                                      <@mantine/core/UnstyledButton ref={null} className="mantine-ac..." style={{...}} ...>
+                                        <@mantine/core/Box className="mantine-fo..." style={{...}} component="button" ...>
+                                          <button
+                                            ref={null}
+                                            style={{--button-height:"var(--butt...",--button-padding-x:"var(--butt...", ...}}
++                                           className="mantine-focus-auto mantine-active Cards-module__uj5W9W__actionB..."
+-                                           className="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-roo..."
+                                            data-variant="outline"
+                                            data-size="sm"
+                                            size={undefined}
+                                            type="button"
+                                          >
+                                    <@mantine/core/Button variant="outline" size="sm" className="Cards-modu..." ...>
+                                      <@mantine/core/UnstyledButton ref={null} className="mantine-ac..." style={{...}} ...>
+                                        <@mantine/core/Box className="mantine-fo..." style={{...}} component="button" ...>
+                                          <button
+                                            ref={null}
+                                            style={{--button-height:"var(--butt...",--button-padding-x:"var(--butt...", ...}}
++                                           className="mantine-focus-auto mantine-active Cards-module__uj5W9W__actionB..."
+-                                           className="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-roo..."
+                                            data-variant="outline"
+                                            data-size="sm"
+                                            size={undefined}
+                                            type="button"
+                                            onClick={function onClick}
+                                          >
+                              ...
+            ...
+
+[00:28:23.291] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:28:23.291] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:28:24.554] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:28:24.554] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:28:36.190] Server  LOG      ✓ Compiled in 153ms
+[00:28:41.353] Server  LOG      ✓ Compiled in 50ms
+[00:28:45.966] Server  LOG      ✓ Compiled in 52ms
+[00:28:57.749] Server  LOG      ✓ Compiled in 54ms
+[00:29:01.834] Server  LOG      ✓ Compiled in 29ms
+[00:29:05.548] Server  LOG      ✓ Compiled in 39ms
+[00:29:07.373] Server  LOG      ✓ Compiled in 45ms
+[00:29:28.464] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:29:28.464] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:29:28.988] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:29:28.988] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:29:37.015] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:17.165] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:17.165] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:17.854] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:17.854] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:20.652] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:20.652] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:21.217] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:21.217] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:23.385] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:23.385] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:24.083] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:30:24.083] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:31:56.612] Server  LOG      ✓ Compiled in 60ms
+[00:31:59.326] Server  LOG      ✓ Compiled in 22ms
+[00:32:03.892] Server  LOG      ✓ Compiled in 41ms
+[00:32:05.623] Server  LOG      ✓ Compiled in 63ms
+[00:32:14.701] Server  LOG      ✓ Compiled in 126ms
+[00:32:17.122] Server  LOG      ✓ Compiled in 34ms
+[00:32:20.471] Server  LOG      ✓ Compiled in 19ms
+[00:32:23.302] Server  LOG      ✓ Compiled in 23ms
+[00:32:26.204] Server  LOG      ✓ Compiled in 29ms
+[00:32:41.494] Server  LOG      ✓ Compiled in 59ms
+[00:32:42.537] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:32:42.537] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:32:43.511] Server  LOG      ✓ Compiled in 32ms
+[00:32:46.519] Server  LOG      ✓ Compiled in 124ms
+[00:32:48.530] Server  LOG      ✓ Compiled in 25ms
+[00:48:59.668] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:48:59.668] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:49:00.354] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:49:00.354] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:49:03.959] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:49:03.959] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:49:04.818] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:49:04.818] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:50:16.507] Server  LOG      ✓ Compiled in 140ms
+[00:50:19.209] Server  LOG      ✓ Compiled in 28ms
+[00:50:24.364] Server  LOG      ✓ Compiled in 25ms
+[00:50:27.481] Server  LOG      ✓ Compiled in 24ms
+[00:50:31.105] Server  LOG      ✓ Compiled in 50ms
+[00:50:35.471] Server  LOG      ✓ Compiled in 20ms
+[00:50:42.158] Server  LOG      ✓ Compiled in 31ms
+[00:50:45.485] Server  LOG      ✓ Compiled in 40ms
+[00:50:48.597] Server  LOG      ✓ Compiled in 17ms
+[00:50:51.016] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:50:51.016] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:03.718] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:05.370] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:51:05.370] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:05.370] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:06.903] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:06.903] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:07.697] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:07.697] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:16.376] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:17.576] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:17.576] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:51:52.417] Server  LOG      ✓ Compiled in 38ms
+[00:51:55.758] Server  LOG      ✓ Compiled in 21ms
+[00:52:11.805] Server  LOG      ✓ Compiled in 54ms
+[00:52:12.894] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:52:12.894] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:52:13.983] Server  LOG      ✓ Compiled in 36ms
+[00:52:17.954] Server  LOG      ✓ Compiled in 27ms
+[00:52:21.304] Server  LOG      ✓ Compiled in 32ms
+[00:52:23.093] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:52:23.093] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:52:36.676] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:52:36.676] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:52:42.110] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:52:44.176] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:52:44.176] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:52:56.973] Server  LOG      ✓ Compiled in 32ms
+[00:52:57.992] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:52:57.992] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:53:31.033] Server  LOG      ✓ Compiled in 50ms
+[00:53:33.988] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:53:33.988] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:53:34.886] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:53:34.886] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:53:36.290] Server  LOG      ✓ Compiled in 112ms
+[00:53:40.793] Server  LOG      ✓ Compiled in 34ms
+[00:53:48.919] Server  LOG      ✓ Compiled in 34ms
+[00:53:52.329] Server  LOG      ✓ Compiled in 45ms
+[00:53:55.031] Server  LOG      ✓ Compiled in 28ms
+[00:54:07.783] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:54:08.465] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:54:08.805] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:54:08.805] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:54:54.997] Server  LOG      ✓ Compiled in 44ms
+[00:54:59.723] Server  LOG      ✓ Compiled in 54ms
+[00:55:02.940] Server  LOG      ✓ Compiled in 33ms
+[00:55:09.847] Server  LOG      ✓ Compiled in 111ms
+[00:55:10.699] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css:268:22
+Parsing CSS source code failed
+  266 |   }
+  267 |
+> 268 |   .lineChart :global(> div) {
+      |                      ^
+  269 |     width: 100% !important;
+  270 |     height: 100% !important;
+  271 |     display: block !important;
+
+Invalid empty selector
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:55:16.742] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css:268:22
+Parsing CSS source code failed
+  266 |   }
+  267 |
+> 268 |   .lineChart :global(> div) {
+      |                      ^
+  269 |     width: 100% !important;
+  270 |     height: 100% !important;
+  271 |     display: block !important;
+
+Invalid empty selector
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:55:25.925] Server  ERROR    ⨯ ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css:268:22
+Parsing CSS source code failed
+  266 |   }
+  267 |
+> 268 |   .lineChart :global(> div) {
+      |                      ^
+  269 |     width: 100% !important;
+  270 |     height: 100% !important;
+  271 |     display: block !important;
+
+Invalid empty selector
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+
+[00:55:26.921] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css:268:22
+Parsing CSS source code failed
+  266 |   }
+  267 |
+> 268 |   .lineChart :global(> div) {
+      |                      ^
+  269 |     width: 100% !important;
+  270 |     height: 100% !important;
+  271 |     display: block !important;
+
+Invalid empty selector
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:55:27.402] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css:268:22
+Parsing CSS source code failed
+  266 |   }
+  267 |
+> 268 |   .lineChart :global(> div) {
+      |                      ^
+  269 |     width: 100% !important;
+  270 |     height: 100% !important;
+  271 |     display: block !important;
+
+Invalid empty selector
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:55:28.112] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css:268:22
+Parsing CSS source code failed
+  266 |   }
+  267 |
+> 268 |   .lineChart :global(> div) {
+      |                      ^
+  269 |     width: 100% !important;
+  270 |     height: 100% !important;
+  271 |     display: block !important;
+
+Invalid empty selector
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:55:29.069] Server  LOG      ○ Compiling /_error ...
+[00:55:32.184] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css:268:22
+Parsing CSS source code failed
+  266 |   }
+  267 |
+> 268 |   .lineChart :global(> div) {
+      |                      ^
+  269 |     width: 100% !important;
+  270 |     height: 100% !important;
+  271 |     display: block !important;
+
+Invalid empty selector
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:55:33.249] Browser ERROR   ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css:268:22
+Parsing CSS source code failed
+  266 |   }
+  267 |
+> 268 |   .lineChart :global(> div) {
+      |                      ^
+  269 |     width: 100% !important;
+  270 |     height: 100% !important;
+  271 |     display: block !important;
+
+Invalid empty selector
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+[00:55:34.286] Browser ERROR   uncaughtError: Error: ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css:268:22
+Parsing CSS source code failed
+  266 |   }
+  267 |
+> 268 |   .lineChart :global(> div) {
+      |                      ^
+  269 |     width: 100% !important;
+  270 |     height: 100% !important;
+  271 |     display: block !important;
+
+Invalid empty selector
+
+Import traces:
+  Client Component Browser:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component Browser]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Client Component Browser]
+    ./src/app/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.module.css [Client Component SSR]
+    ./src/app/analytics/balanceAnalytics/BalanceAnalytics.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Client Component SSR]
+    ./src/app/analytics/page.tsx [Server Component]
+
+
+[00:55:38.696] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:55:39.561] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:55:39.784] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:55:39.937] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:55:39.937] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:57:32.537] Server  LOG      ✓ Compiled in 43ms
+[00:57:34.267] Server  LOG      ✓ Compiled in 38ms
+[00:57:37.775] Server  LOG      ✓ Compiled in 41ms
+[00:57:37.849] Server  LOG      ✓ Compiled in 59ms
+[00:57:46.889] Server  LOG      ✓ Compiled in 50ms
+[00:57:58.148] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:57:59.381] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:57:59.381] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:58:02.451] Server  LOG      ✓ Compiled in 21ms
+[00:58:10.558] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:58:10.558] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:58:13.502] Server  LOG      ✓ Compiled in 36ms
+[00:58:36.566] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:58:37.848] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:58:37.848] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:59:26.677] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:59:26.677] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:59:30.456] Server  LOG      ✓ Compiled in 102ms
+[00:59:31.303] Server  LOG      ✓ Compiled in 27ms
+[00:59:32.949] Server  LOG      ✓ Compiled in 25ms
+[00:59:34.661] Server  LOG      ✓ Compiled in 47ms
+[00:59:37.081] Server  LOG      ✓ Compiled in 47ms
+[00:59:39.407] Server  LOG      ✓ Compiled in 51ms
+[00:59:42.472] Server  LOG      ✓ Compiled in 52ms
+[00:59:51.470] Server  LOG      ✓ Compiled in 29ms
+[00:59:53.595] Server  LOG      ✓ Compiled in 86ms
+[01:00:00.385] Server  LOG      ✓ Compiled in 76ms
+[01:00:03.674] Server  LOG      ✓ Compiled in 68ms
+[01:00:10.376] Server  LOG      ✓ Compiled in 39ms
+[01:00:25.846] Server  WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:00:28.310] Browser WARN    Image with src "/_next/static/media/Logo.9dd3624b.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[01:00:28.826] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:00:28.826] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:00:30.739] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:00:30.739] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:00:31.848] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:00:31.848] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:00:33.686] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:00:33.686] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:00:42.718] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[01:00:42.718] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.

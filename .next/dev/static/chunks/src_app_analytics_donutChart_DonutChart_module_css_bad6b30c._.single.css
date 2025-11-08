@@ -1,0 +1,120 @@
+/* [project]/src/app/analytics/donutChart/DonutChart.module.css [app-client] (css) */
+.DonutChart-module__bop0Xa__chartContainer {
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+}
+
+.DonutChart-module__bop0Xa__pieChart {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.DonutChart-module__bop0Xa__centerText {
+  pointer-events: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+}
+
+.DonutChart-module__bop0Xa__amountText {
+  text-align: center;
+  color: #111827;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -.02em;
+}
+
+.DonutChart-module__bop0Xa__labelText {
+  text-align: center;
+  color: #9ca3af;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -.005em;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .DonutChart-module__bop0Xa__chartContainer, .DonutChart-module__bop0Xa__pieChart {
+    width: 160px !important;
+    min-width: 160px !important;
+    height: 160px !important;
+    min-height: 160px !important;
+  }
+
+  .DonutChart-module__bop0Xa__pieChart .recharts-wrapper {
+    width: 160px !important;
+    min-width: 160px !important;
+    height: 160px !important;
+    min-height: 160px !important;
+  }
+
+  .DonutChart-module__bop0Xa__pieChart .recharts-surface {
+    width: 160px !important;
+    height: 160px !important;
+  }
+
+  .DonutChart-module__bop0Xa__amountText {
+    font-size: .875rem !important;
+  }
+
+  .DonutChart-module__bop0Xa__labelText {
+    font-size: .7rem !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .DonutChart-module__bop0Xa__chartContainer, .DonutChart-module__bop0Xa__pieChart {
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  .DonutChart-module__bop0Xa__pieChart .recharts-wrapper {
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  .DonutChart-module__bop0Xa__pieChart .recharts-surface {
+    width: 180px !important;
+    height: 180px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .DonutChart-module__bop0Xa__chartContainer, .DonutChart-module__bop0Xa__pieChart {
+    width: 140px !important;
+    min-width: 140px !important;
+    height: 140px !important;
+    min-height: 140px !important;
+  }
+
+  .DonutChart-module__bop0Xa__pieChart .recharts-wrapper {
+    width: 140px !important;
+    min-width: 140px !important;
+    height: 140px !important;
+    min-height: 140px !important;
+  }
+
+  .DonutChart-module__bop0Xa__pieChart .recharts-surface {
+    width: 140px !important;
+    height: 140px !important;
+  }
+
+  .DonutChart-module__bop0Xa__amountText {
+    font-size: .75rem !important;
+  }
+
+  .DonutChart-module__bop0Xa__labelText {
+    font-size: .65rem !important;
+  }
+}
+
+/*# sourceMappingURL=src_app_analytics_donutChart_DonutChart_module_css_bad6b30c._.single.css.map*/
