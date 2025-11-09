@@ -25,7 +25,6 @@ const HIDDEN_OWNER = '•••• ••••••';
 const HIDDEN_EXPIRY = '••/••';
 const FIRST_CARD_INDEX = 0;
 
-// Маппинг категорий на иконки
 const getCategoryIcon = (category: string) => {
   const lowerCategory = category.toLowerCase();
   if (lowerCategory.includes('продукт') || lowerCategory.includes('магазин') || lowerCategory.includes('супермаркет')) {
@@ -137,7 +136,7 @@ export default function Cards({ accountsData, onCardChange, selectedBankId }: Ca
         
         return {
           id: uniqueId,
-          accountId: account.id, 
+          accountId: account.accountId || account.id?.toString() || '', 
           bankId: bank.bankId,
           bankName: account.bankName || getBankName(bank.bankId),
           accountNumber: account.accountNumber || account.accountId || '',

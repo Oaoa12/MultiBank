@@ -300,11 +300,8 @@ export default function Dashboard() {
     });
   }, [loadedTransactions]);
 
-  // Вычисляем доходы и расходы за последний месяц
   const incomeExpense = useMemo(() => {
-    // Сначала пытаемся использовать данные из API статистики (последний месяц)
     if (statisticsData?.monthlyStats && Array.isArray(statisticsData.monthlyStats) && statisticsData.monthlyStats.length > 0) {
-      // Сортируем по дате и берем последний месяц
       const sortedStats = [...statisticsData.monthlyStats].sort((a, b) => {
         const parseMonth = (monthStr: string): Date => {
           const monthNames: Record<string, number> = {
@@ -403,7 +400,7 @@ export default function Dashboard() {
 
       let endpointExists = true;
       let checkCount = 0;
-      const maxChecks = 15; // 30 секунд / 2 секунды
+      const maxChecks = 15;
       
       const checkStatus = setInterval(async () => {
         if (!selectedBank || !result.requestId || !endpointExists) {
@@ -436,18 +433,15 @@ export default function Dashboard() {
             }, 1000);
           }
         } catch (error: any) {
-          // Если эндпоинт не существует (404), прекращаем проверку
           if (error?.status === 404) {
             endpointExists = false;
             clearInterval(checkStatus);
-            // Вместо проверки статуса, просто обновляем данные через некоторое время
             setTimeout(() => {
               refetchAccounts(true);
             }, 3000);
             return;
           }
           
-          // Логируем другие ошибки только в development
           if (process.env.NODE_ENV === 'development') {
             console.log('Bank consent status check error:', error?.status, error?.data);
           }
