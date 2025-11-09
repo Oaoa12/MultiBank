@@ -1,123 +1,23 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { Paper, Text, Stack, Group, Button, Title, Divider, Badge, Avatar, ThemeIcon } from '@mantine/core';
-import { IconCreditCard, IconEye, IconEyeOff, IconShoppingCart, IconCar, IconPlane, IconBuilding, IconPizza } from '@tabler/icons-react';
+import { useState, useRef, useEffect, useMemo } from 'react';
+import { Paper, Text, Stack, Group, Button, Title, Divider, Badge, Avatar, Loader, Center } from '@mantine/core';
+import { IconCreditCard, IconEye, IconEyeOff, IconShoppingCart, IconCar, IconPlane, IconBuilding, IconPizza, IconWallet, IconCoins } from '@tabler/icons-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper';
 import { Navigation, Pagination, Keyboard, A11y } from 'swiper/modules';
 import { useRouter } from 'next/navigation';
+import { BankOverviewResponse, useGetTransactionsStatisticsQuery, useGetCategoriesQuery } from '@/lib/store/api/AuthApi';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import styles from './Cards.module.css';
 
-interface CardData {
-  id: number;
-  bank: string;
-  type: string;
-  number: string;
-  owner: string;
-  expiry: string;
-  status: string;
-  color: string;
-  operations: number;
-  spent: string;
-  cashback: string;
-}
-
-interface CategoryData {
-  id: number;
-  name: string;
-  icon: React.ComponentType<{ size?: number; color?: string }>;
-  color: string;
-  amount: string;
-}
-
-const cardsData: CardData[] = [
-  {
-    id: 1,
-    bank: 'ВТБ',
-    type: 'Дебетовая карта',
-    number: '4635 1869 6438 6548',
-    owner: 'ILIA RAXAT',
-    expiry: '12/28',
-    status: 'Активна',
-    color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    operations: 24,
-    spent: '₽ 45,230',
-    cashback: '₽ 1,356'
-  },
-  {
-    id: 2,
-    bank: 'Сбер',
-    type: 'Кредитная карта',
-    number: '4753 9680 5745 4738',
-    owner: 'ILIA RAXAT',
-    expiry: '08/29',
-    status: 'Активна',
-    color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-    operations: 18,
-    spent: '₽ 32,150',
-    cashback: '₽ 965'
-  },
-  {
-    id: 3,
-    bank: 'Т-Банк',
-    type: 'Дебетовая карта',
-    number: '7648 5368 8563 5864',
-    owner: 'ILIA RAXAT',
-    expiry: '03/30',
-    status: 'Активна',
-    color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-    operations: 31,
-    spent: '₽ 67,890',
-    cashback: '₽ 2,036'
-  }
-];
-
-const popularCategories: CategoryData[] = [
-  {
-    id: 1,
-    name: 'Супермаркеты',
-    icon: IconShoppingCart,
-    color: '#2563eb',
-    amount: '₽ 45 230'
-  },
-  {
-    id: 2,
-    name: 'Транспорт',
-    icon: IconCar,
-    color: '#10b981',
-    amount: '₽ 12 500'
-  },
-  {
-    id: 3,
-    name: 'Путешествия',
-    icon: IconPlane,
-    color: '#f59e0b',
-    amount: '₽ 89 000'
-  },
-  {
-    id: 4,
-    name: 'Кафе и рестораны',
-    icon: IconPizza,
-    color: '#ef4444',
-    amount: '₽ 28 750'
-  },
-  {
-    id: 5,
-    name: 'Жильё',
-    icon: IconBuilding,
-    color: '#8b5cf6',
-    amount: '₽ 35 000'
-  }
-];
-
 interface CardsProps {
-  onCardChange?: (bank: string) => void;
+  accountsData?: BankOverviewResponse;
+  onCardChange?: (bankId: string) => void;
+  selectedBankId?: string | null;
 }
-
 
 const SWIPER_HEIGHT = '240px';
 const HIDDEN_CARD_NUMBER = '•••• •••• •••• ••••';
@@ -125,10 +25,157 @@ const HIDDEN_OWNER = '•••• ••••••';
 const HIDDEN_EXPIRY = '••/••';
 const FIRST_CARD_INDEX = 0;
 
-export default function Cards({ onCardChange }: CardsProps) {
+// Маппинг категорий на иконки
+const getCategoryIcon = (category: string) => {
+  const lowerCategory = category.toLowerCase();
+  if (lowerCategory.includes('продукт') || lowerCategory.includes('магазин') || lowerCategory.includes('супермаркет')) {
+    return IconShoppingCart;
+  }
+  if (lowerCategory.includes('транспорт') || lowerCategory.includes('🚌')) {
+    return IconCar;
+  }
+  if (lowerCategory.includes('путешеств') || lowerCategory.includes('самолет')) {
+    return IconPlane;
+  }
+  if (lowerCategory.includes('кафе') || lowerCategory.includes('ресторан') || lowerCategory.includes('развлечен')) {
+    return IconPizza;
+  }
+  if (lowerCategory.includes('жиль') || lowerCategory.includes('жкх') || lowerCategory.includes('аренд') || lowerCategory.includes('🏠')) {
+    return IconBuilding;
+  }
+  if (lowerCategory.includes('кредит')) {
+    return IconCoins;
+  }
+  if (lowerCategory.includes('зарплат')) {
+    return IconWallet;
+  }
+  return IconShoppingCart; 
+};
+
+const getCategoryColor = (category: string, index: number) => {
+  const lowerCategory = category.toLowerCase();
+  if (lowerCategory.includes('продукт') || lowerCategory.includes('магазин') || lowerCategory.includes('супермаркет')) {
+    return '#2563eb';
+  }
+  if (lowerCategory.includes('транспорт') || lowerCategory.includes('🚌')) {
+    return '#10b981';
+  }
+  if (lowerCategory.includes('путешеств') || lowerCategory.includes('самолет')) {
+    return '#f59e0b';
+  }
+  if (lowerCategory.includes('кафе') || lowerCategory.includes('ресторан') || lowerCategory.includes('развлечен')) {
+    return '#ef4444';
+  }
+  if (lowerCategory.includes('жиль') || lowerCategory.includes('жкх') || lowerCategory.includes('аренд') || lowerCategory.includes('🏠')) {
+    return '#8b5cf6';
+  }
+  if (lowerCategory.includes('кредит')) {
+    return '#f97316';
+  }
+  if (lowerCategory.includes('зарплат')) {
+    return '#06b6d4';
+  }
+  
+  const defaultColors = ['#2563eb', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+  return defaultColors[index % defaultColors.length];
+};
+
+const getBankName = (bankId: string): string => {
+  const bankNames: Record<string, string> = {
+    'vbank': 'ВТБ',
+    'sbank': 'Сбер',
+    'abank': 'А-Банк',
+    'tbank': 'Т-Банк',
+  };
+  return bankNames[bankId] || bankId.toUpperCase();
+};
+
+const getBankCardColor = (bankId: string): string => {
+  const colors: Record<string, string> = {
+    'vbank': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    'sbank': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    'abank': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    'tbank': 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+  };
+  return colors[bankId] || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+};
+
+export default function Cards({ accountsData, onCardChange, selectedBankId }: CardsProps) {
   const router = useRouter();
   const [isCardVisible, setIsCardVisible] = useState(true);
   const swiperRef = useRef<SwiperType | null>(null);
+  
+  const { data: statisticsData } = useGetTransactionsStatisticsQuery();
+  const { data: categoriesData } = useGetCategoriesQuery();
+
+  const cardsData = useMemo(() => {
+    if (!accountsData?.banks) {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Cards: Нет данных о банках');
+      }
+      return [];
+    }
+    
+    const allCards = accountsData.banks.flatMap(bank => {
+      if (!bank.accounts || bank.accounts.length === 0) {
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`Cards: Банк ${bank.bankId} не имеет счетов`);
+        }
+        return [];
+      }
+      
+      return bank.accounts.map((account, accountIndex) => {
+        const balanceValue = account.balance 
+          ? parseFloat(String(account.balance))
+          : (account.balances && account.balances.length > 0)
+            ? parseFloat(String(account.balances[0].amount))
+            : 0;
+        
+        const uniqueId = account.id 
+          ? `card-${bank.bankId}-${account.id}` 
+          : `card-${bank.bankId}-${account.accountId || accountIndex}`;
+        
+        return {
+          id: uniqueId,
+          accountId: account.id, 
+          bankId: bank.bankId,
+          bankName: account.bankName || getBankName(bank.bankId),
+          accountNumber: account.accountNumber || account.accountId || '',
+          balance: isNaN(balanceValue) ? 0 : balanceValue,
+          currency: account.currency || 'RUB',
+          accountName: account.accountName || account.nickname || account.accountId || 'Счет',
+          accountType: account.accountType || account.accountSubType || 'Дебетовый счет',
+        };
+      });
+    });
+    
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`Cards: Сформировано ${allCards.length} карт из ${accountsData.totalAccounts || 'неизвестного'} счетов`);
+      console.log('Cards: Данные счетов:', accountsData.banks.map(b => ({ 
+        bankId: b.bankId, 
+        accountsCount: b.accounts?.length || 0 
+      })));
+    }
+    
+    return allCards;
+  }, [accountsData]);
+
+  const popularCategories = useMemo(() => {
+    if (!statisticsData?.categoryStats || statisticsData.categoryStats.length === 0) {
+      return [];
+    }
+    
+    return statisticsData.categoryStats
+      .sort((a, b) => b.amount - a.amount)
+      .slice(0, 5)
+      .map((cat, index) => ({
+        id: index + 1,
+        name: cat.category,
+        icon: getCategoryIcon(cat.category),
+        color: getCategoryColor(cat.category, index),
+        amount: `₽ ${Math.round(cat.amount).toLocaleString()}`,
+      }));
+  }, [statisticsData]);
 
   const toggleCardVisibility = () => setIsCardVisible(prev => !prev);
 
@@ -136,21 +183,33 @@ export default function Cards({ onCardChange }: CardsProps) {
     const newIndex = swiper.realIndex;
     const selectedCard = cardsData[newIndex];
     if (onCardChange && selectedCard) {
-      onCardChange(selectedCard.bank);
+      onCardChange(selectedCard.bankId);
     }
   };
 
   useEffect(() => {
     const firstCard = cardsData[FIRST_CARD_INDEX];
-    if (onCardChange && firstCard) {
-      onCardChange(firstCard.bank);
+    if (onCardChange && firstCard && !selectedBankId) {
+      onCardChange(firstCard.bankId);
     }
-  }, []);
+  }, [cardsData, onCardChange, selectedBankId]);
 
-  const getCardNumber = (card: CardData) => isCardVisible ? card.number : HIDDEN_CARD_NUMBER;
-  const getCardOwner = (card: CardData) => isCardVisible ? card.owner : HIDDEN_OWNER;
-  const getCardExpiry = (card: CardData) => isCardVisible ? card.expiry : HIDDEN_EXPIRY;
+  const formatCardNumber = (number: string) => {
+    if (!isCardVisible) return HIDDEN_CARD_NUMBER;
+    const last4 = number.slice(-4);
+    return `•••• •••• •••• ${last4}`;
+  };
 
+  const formatBalance = (balance: number, currency: string) => {
+    return new Intl.NumberFormat('ru-RU', {
+      style: 'currency',
+      currency: currency || 'RUB',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(balance);
+  };
+
+  
   return (
     <div className={styles.cardsWrapper}>
       <Paper shadow="lg" radius="lg" className={styles.cardContainer}>
@@ -174,7 +233,7 @@ export default function Cards({ onCardChange }: CardsProps) {
                 borderRadius: '50%',
               }}
             >
-              {cardsData.length}
+              {cardsData.length || accountsData?.totalAccounts || 0}
             </Badge>
           </Group>
           <Group gap="xs">
@@ -193,8 +252,13 @@ export default function Cards({ onCardChange }: CardsProps) {
         <Divider mx="md" />
 
         <Stack gap="md" p="md">
-          <div className={styles.carouselContainer}>
-            <Swiper
+          {cardsData.length === 0 ? (
+            <Center p="xl">
+              <Text c="dimmed" size="sm">Нет доступных счетов</Text>
+            </Center>
+          ) : (
+            <div className={styles.carouselContainer}>
+              <Swiper
               modules={[Navigation, Pagination, Keyboard, A11y]}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
               onSlideChange={handleSlideChange}
@@ -207,20 +271,20 @@ export default function Cards({ onCardChange }: CardsProps) {
               touchStartPreventDefault={false}
               style={{ height: SWIPER_HEIGHT }}
             >
-              {cardsData.map((card) => (
-                <SwiperSlide key={card.id}>
-                  <div className={styles.bankCard} style={{ background: card.color }}>
+              {cardsData.map((card, index) => (
+                <SwiperSlide key={`${card.id}-${index}`}>
+                  <div className={styles.bankCard} style={{ background: getBankCardColor(card.bankId) }}>
                     <div className={styles.cardPattern} />
                     <div className={styles.cardGeometricPattern} />
                     
                     <div className={styles.cardTop}>
                       <Group justify="space-between" align="flex-start">
                         <div>
-                          <Text className={styles.cardBank}>{card.bank}</Text>
+                          <Text className={styles.cardBank}>{card.bankName}</Text>
                           <Group gap="xs" mt="xs">
-                            <Text className={styles.cardType}>{card.type}</Text>
+                            <Text className={styles.cardType}>{card.accountType}</Text>
                             <Badge size="xs" color="green" variant="light">
-                              {card.status}
+                              Активна
                             </Badge>
                           </Group>
                         </div>
@@ -230,7 +294,7 @@ export default function Cards({ onCardChange }: CardsProps) {
 
                     <div className={styles.cardMiddle}>
                       <Text className={styles.cardNumber}>
-                        {getCardNumber(card)}
+                        {formatCardNumber(card.accountNumber)}
                       </Text>
                     </div>
 
@@ -239,15 +303,15 @@ export default function Cards({ onCardChange }: CardsProps) {
                     <div className={styles.cardBottom}>
                       <Group justify="space-between" align="flex-end">
                         <div>
-                          <Text className={styles.cardLabel}>Владелец</Text>
+                          <Text className={styles.cardLabel}>Баланс</Text>
                           <Text className={styles.cardValue}>
-                            {getCardOwner(card)}
+                            {formatBalance(card.balance, card.currency)}
                           </Text>
                         </div>
                         <div>
-                          <Text className={styles.cardLabel}>Срок действия</Text>
+                          <Text className={styles.cardLabel}>Счет</Text>
                           <Text className={styles.cardValue}>
-                            {getCardExpiry(card)}
+                            {card.accountName}
                           </Text>
                         </div>
                       </Group>
@@ -255,15 +319,17 @@ export default function Cards({ onCardChange }: CardsProps) {
                   </div>
                 </SwiperSlide>
               ))}
-            </Swiper>
-            <div className="swiper-pagination"></div>
-          </div>
+              </Swiper>
+              <div className="swiper-pagination"></div>
+            </div>
+          )}
 
           <Group gap="xs" grow className={styles.actionsGroup}>
             <Button 
               variant="outline" 
               size="sm"
               className={styles.actionButton}
+              onClick={() => router.push('/dashboard')}
             >
               История операций
             </Button>
@@ -289,48 +355,54 @@ export default function Cards({ onCardChange }: CardsProps) {
             >
               Популярные категории
             </Text>
-            <Stack gap="xs" mt="md">
-              {popularCategories.map((category) => {
-                const IconComponent = category.icon;
-                return (
-                  <Group key={category.id} justify="space-between" align="center">
-                    <Group gap="sm">
-                      <Avatar 
-                        size={40} 
-                        radius="xl" 
-                        style={{ 
-                          backgroundColor: `${category.color}15`,
-                          border: `1px solid ${category.color}30`,
-                        }}
-                      >
-                        <IconComponent size={20} color={category.color} />
-                      </Avatar>
+            {popularCategories.length === 0 ? (
+              <Center p="md">
+                <Text size="sm" c="dimmed">Нет данных о категориях</Text>
+              </Center>
+            ) : (
+              <Stack gap="xs" mt="md">
+                {popularCategories.map((category) => {
+                  const IconComponent = category.icon;
+                  return (
+                    <Group key={category.id} justify="space-between" align="center">
+                      <Group gap="sm">
+                        <Avatar 
+                          size={40} 
+                          radius="xl" 
+                          style={{ 
+                            backgroundColor: `${category.color}15`,
+                            border: `1px solid ${category.color}30`,
+                          }}
+                        >
+                          <IconComponent size={20} color={category.color} />
+                        </Avatar>
+                        <Text 
+                          size="sm" 
+                          fw={500}
+                          style={{ 
+                            fontFamily: 'var(--font-inter), sans-serif',
+                            letterSpacing: '-0.005em',
+                          }}
+                        >
+                          {category.name}
+                        </Text>
+                      </Group>
                       <Text 
                         size="sm" 
-                        fw={500}
+                        fw={600}
                         style={{ 
-                          fontFamily: 'var(--font-inter), sans-serif',
-                          letterSpacing: '-0.005em',
+                          fontFamily: 'var(--font-mono), monospace',
+                          letterSpacing: '-0.01em',
+                          fontFeatureSettings: "'tnum', 'lnum'",
                         }}
                       >
-                        {category.name}
+                        {category.amount}
                       </Text>
                     </Group>
-                    <Text 
-                      size="sm" 
-                      fw={600}
-                      style={{ 
-                        fontFamily: 'var(--font-mono), monospace',
-                        letterSpacing: '-0.01em',
-                        fontFeatureSettings: "'tnum', 'lnum'",
-                      }}
-                    >
-                      {category.amount}
-                    </Text>
-                  </Group>
-                );
-              })}
-            </Stack>
+                  );
+                })}
+              </Stack>
+            )}
           </Stack>
         </Stack>
       </Paper>

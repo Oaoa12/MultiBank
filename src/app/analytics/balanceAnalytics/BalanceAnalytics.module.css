@@ -100,6 +100,8 @@
 .lineChartContainer {
   width: 100%;
   height: 100px;
+  min-width: 200px;
+  min-height: 100px;
   position: relative;
 }
 
@@ -308,7 +310,6 @@
   }
 }
 
-/* ПЛАНШЕТНАЯ АДАПТАЦИЯ */
 @media (min-width: 769px) and (max-width: 1024px) {
   .transactionsSection {
     margin-left: -100px !important;
@@ -320,7 +321,6 @@
   }
 }
 
-/* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ */
 @media (max-width: 480px) {
   .balanceAmount {
     font-size: 1.25rem !important;

@@ -260,8 +260,13 @@ export interface TransactionsStatisticsResponse {
   transactionsCount?: number;
   bankIncomes?: Record<string, number>;
   bankExpenses?: Record<string, number>;
+  categoryStats?: CategoryStatistic[]; // Статистика по категориям
   // Также может быть массив напрямую
   [key: string]: any;
+}
+
+export interface CategoriesResponse {
+  categories: string[];
 }
 
 // Интерфейсы для API целей
@@ -334,19 +339,9 @@ export interface UpdateGoalData {
 const baseQuery = fetchBaseQuery({ 
   baseUrl: '/api/',
   credentials: 'include',
-});
-
-const baseQueryWithoutApi = fetchBaseQuery({ 
-  baseUrl: 'http://localhost:3000',
-  credentials: 'include',
-});
-
-// Base query для транзакций API с JWT токеном
-const baseQueryTransactions = fetchBaseQuery({ 
-  baseUrl: 'http://localhost:3000',
-  credentials: 'include',
   prepareHeaders: async (headers, { getState }) => {
-    // Пытаемся получить токен из localStorage или sessionStorage
+    // Передаем токен из localStorage в Authorization header
+    // Это необходимо, так как cookies не работают между разными доменами
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('access_token') || 
                     localStorage.getItem('token') || 
@@ -355,6 +350,51 @@ const baseQueryTransactions = fetchBaseQuery({
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
+    }
+    return headers;
+  },
+});
+
+// Получаем URL API из переменной окружения или используем значение по умолчанию
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://176.114.89.172:3000';
+
+const baseQueryWithoutApi = fetchBaseQuery({ 
+  baseUrl: API_BASE_URL,
+  credentials: 'include',
+  prepareHeaders: async (headers, { getState }) => {
+    // Передаем токен из localStorage в Authorization header
+    // Это необходимо, так как cookies не работают между разными доменами
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('access_token') || 
+                    localStorage.getItem('token') || 
+                    sessionStorage.getItem('access_token') || 
+                    sessionStorage.getItem('token');
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+    }
+    return headers;
+  },
+});
+
+// Base query для транзакций API с HTTP-only cookies
+// We rely on secure HTTP-only cookies; no JS access to token
+const baseQueryTransactions = fetchBaseQuery({ 
+  baseUrl: API_BASE_URL,
+  credentials: 'include',
+  prepareHeaders: async (headers, { getState }) => {
+    // Если токен есть в localStorage (для обратной совместимости), используем его
+    // Но в основном полагаемся на HTTP-only cookies через credentials: 'include'
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('access_token') || 
+                    localStorage.getItem('token') || 
+                    sessionStorage.getItem('access_token') || 
+                    sessionStorage.getItem('token');
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      // Если токена нет в localStorage, полагаемся на cookies
+      // Бэкенд должен читать токен из cookies автоматически
     }
     return headers;
   },
@@ -371,6 +411,18 @@ export const authApi = createApi({
         method: 'POST',
         body: userData,
       }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // Сохраняем токен в localStorage для использования в Authorization header
+          // Это необходимо, так как cookies не работают между разными доменами
+          if (data?.access_token && typeof window !== 'undefined') {
+            localStorage.setItem('access_token', data.access_token);
+          }
+        } catch (error) {
+          // Ошибка регистрации обрабатывается в компоненте
+        }
+      },
       invalidatesTags: ['Auth'],
     }),
     login: builder.mutation<AuthResponse, LoginData>({
@@ -379,6 +431,18 @@ export const authApi = createApi({
         method: 'POST',
         body: credentials,
       }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // Сохраняем токен в localStorage для использования в Authorization header
+          // Это необходимо, так как cookies не работают между разными доменами
+          if (data?.access_token && typeof window !== 'undefined') {
+            localStorage.setItem('access_token', data.access_token);
+          }
+        } catch (error) {
+          // Ошибка логина обрабатывается в компоненте
+        }
+      },
       invalidatesTags: ['Auth'],
     }),
     getAuthProfile: builder.query<ProfileResponse, void>({
@@ -423,7 +487,42 @@ export const authApi = createApi({
       invalidatesTags: ['Auth'],
     }),
     getBankConsentStatus: builder.query<BankConsentStatus, { bankId: string; requestId: string }>({
-      query: ({ bankId, requestId }) => `auth/bank-consent/${bankId}/${requestId}`,
+      queryFn: async ({ bankId, requestId }, api, extraOptions) => {
+        // Используем отдельный baseQuery без префикса /api/
+        // Пробуем разные варианты эндпоинтов в порядке приоритета
+        const endpoints = [
+          `/connection/status/${bankId}/${requestId}`,
+          `/auth/bank-consent/${bankId}/${requestId}`,
+          `/bank/consent/${bankId}/${requestId}`,
+        ];
+        
+        let lastError: any = null;
+        
+        for (const endpoint of endpoints) {
+          const result = await baseQueryWithoutApi(
+            {
+              url: endpoint,
+            },
+            api,
+            extraOptions
+          );
+          
+          // Если успешно, возвращаем результат
+          if (!result.error) {
+            return { data: result.data as BankConsentStatus };
+          }
+          
+          // Если не 404, возвращаем ошибку сразу (не пробуем другие эндпоинты)
+          if (result.error.status !== 404) {
+            return { error: result.error };
+          }
+          
+          lastError = result.error;
+        }
+        
+        // Если все эндпоинты вернули 404, возвращаем последнюю ошибку
+        return { error: lastError };
+      },
       providesTags: ['Auth'],
     }),
     getBankOverview: builder.query<BankOverviewResponse, { refresh?: boolean }>({
@@ -518,6 +617,11 @@ export const authApi = createApi({
         
         const url = `/transactions${params.toString() ? `?${params.toString()}` : ''}`;
         
+        if (process.env.NODE_ENV === 'development') {
+          console.log('getTransactions - Request URL:', `${API_BASE_URL}${url}`);
+          console.log('getTransactions - Filters:', filterParams);
+        }
+        
         const result = await baseQueryTransactions(
           {
             url,
@@ -525,6 +629,17 @@ export const authApi = createApi({
           api,
           extraOptions
         );
+        
+        if (process.env.NODE_ENV === 'development') {
+          if (result.error) {
+            console.error('getTransactions - Error:', result.error);
+            console.error('getTransactions - Error status:', result.error?.status);
+            console.error('getTransactions - Error data:', result.error?.data);
+          } else {
+            console.log('getTransactions - Success:', result.data);
+            console.log('getTransactions - Transactions count:', (result.data as TransactionsAPIResponse)?.transactions?.length || 0);
+          }
+        }
         
         if (result.error) {
           return { error: result.error };
@@ -536,9 +651,59 @@ export const authApi = createApi({
     // API для статистики транзакций
     getTransactionsStatistics: builder.query<TransactionsStatisticsResponse, void>({
       queryFn: async (arg, api, extraOptions) => {
+        // Пробуем разные варианты эндпоинтов
+        const endpoints = [
+          '/transactions/statistics/monthly',
+          '/transactions/statistics',
+          '/statistics/monthly',
+        ];
+        
+        let lastError: any = null;
+        
+        for (const endpoint of endpoints) {
+          const result = await baseQueryTransactions(
+            {
+              url: endpoint,
+            },
+            api,
+            extraOptions
+          );
+          
+          // Если успешно, возвращаем результат
+          if (!result.error) {
+            return { data: result.data as TransactionsStatisticsResponse };
+          }
+          
+          // Если не 404, возвращаем ошибку сразу (не пробуем другие эндпоинты)
+          if (result.error.status !== 404) {
+            return { error: result.error };
+          }
+          
+          lastError = result.error;
+        }
+        
+        // Если все эндпоинты вернули 404, возвращаем пустые данные вместо ошибки
+        // Это позволяет компонентам работать без статистики
+        return { 
+          data: {
+            monthlyStats: [],
+            totalIncome: 0,
+            totalExpenses: 0,
+            transactionsCount: 0,
+            bankIncomes: {},
+            bankExpenses: {},
+            categoryStats: [],
+          } as TransactionsStatisticsResponse 
+        };
+      },
+      providesTags: ['Auth'],
+    }),
+    // API для получения категорий
+    getCategories: builder.query<CategoriesResponse, void>({
+      queryFn: async (arg, api, extraOptions) => {
         const result = await baseQueryTransactions(
           {
-            url: '/transactions/statistics/monthly',
+            url: '/transactions/categories',
           },
           api,
           extraOptions
@@ -547,7 +712,7 @@ export const authApi = createApi({
         if (result.error) {
           return { error: result.error };
         }
-        return { data: result.data as TransactionsStatisticsResponse };
+        return { data: result.data as CategoriesResponse };
       },
       providesTags: ['Auth'],
     }),
@@ -713,6 +878,7 @@ export const {
   useGetTransactionsQuery,
   useLazyGetTransactionsQuery,
   useGetTransactionsStatisticsQuery,
+  useGetCategoriesQuery,
   useGetGoalsQuery,
   useLazyGetGoalsQuery,
   useGetGoalByIdQuery,

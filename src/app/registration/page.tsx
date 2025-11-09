@@ -50,7 +50,12 @@ export default function Registration() {
     try {
       const reg = await register({ email, password }).unwrap();
       const token = reg?.access_token;
-      if (token) setTempToken(token);
+      if (token) {
+        setTempToken(token);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('access_token', token);
+        }
+      }
       try {
         await login({ email, password }).unwrap();
       } catch {}

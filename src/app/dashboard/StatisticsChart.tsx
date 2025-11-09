@@ -73,13 +73,25 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export default function StatisticsChart({ transactions }: StatisticsChartProps) {
   // Загружаем статистику из API
-  const { data: statisticsData, isLoading, error } = useGetTransactionsStatisticsQuery();
+  // skip: true означает, что запрос не будет выполняться автоматически
+  // Мы можем включить его позже, когда эндпоинт будет доступен
+  const { data: statisticsData, isLoading, error } = useGetTransactionsStatisticsQuery(undefined, {
+    skip: false, // Можно установить в true, если эндпоинт не существует
+  });
+
+  // Проверяем, является ли ошибка 404 (нет данных) или реальной ошибкой
+  const is404Error = error && 'status' in error && error.status === 404;
+  const isRealError = error && !is404Error;
 
   // Преобразуем данные из API для графика
   const chartData = useMemo(() => {
-    // Логируем для отладки
-    console.log('StatisticsChart - API response:', statisticsData);
-    console.log('StatisticsChart - Error:', error);
+    // Логируем для отладки только в development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('StatisticsChart - API response:', statisticsData);
+      if (isRealError) {
+        console.log('StatisticsChart - Error:', error);
+      }
+    }
     
     if (!statisticsData) {
       return [];
@@ -159,8 +171,31 @@ export default function StatisticsChart({ transactions }: StatisticsChartProps) 
     );
   }
 
-  if (error) {
-    console.error('StatisticsChart - API Error:', error);
+  // Если ошибка 404, считаем это как "нет данных", а не ошибку
+  if (is404Error) {
+    return (
+      <div
+        style={{
+          height: '280px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          gap: '8px',
+          color: PAGE_STYLES.textSecondary,
+        }}
+      >
+        <div style={{ fontSize: '14px', fontWeight: 500 }}>Нет данных для отображения</div>
+        <div style={{ fontSize: '12px' }}>Транзакции появятся после синхронизации</div>
+      </div>
+    );
+  }
+
+  // Показываем ошибку только если это не 404
+  if (isRealError) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('StatisticsChart - API Error:', error);
+    }
     return (
       <div
         style={{

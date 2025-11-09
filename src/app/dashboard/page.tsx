@@ -96,40 +96,46 @@ export default function Dashboard() {
   const { data: statisticsData } = useGetTransactionsStatisticsQuery();
 
 
-  // Загружаем начальную страницу транзакций
-  useEffect(() => {
-    const loadInitialTransactions = async () => {
-      setTransactionsLoading(true);
-      setTransactionsPage(1);
+  const loadInitialTransactions = useCallback(async () => {
+    setTransactionsLoading(true);
+    setTransactionsPage(1);
+    
+    try {
+      const result = await getTransactions({
+        page: 1,
+        limit: 30,
+      });
       
-      try {
-        const result = await getTransactions({
-          page: 1,
-          limit: 30, // Начальная загрузка - 30 транзакций
-        });
-        
-        if (result.data?.transactions) {
-          setLoadedTransactions(result.data.transactions);
-          // Проверяем, есть ли еще транзакции
-          setHasMoreTransactions(result.data.transactions.length === 30);
+      if (result.data?.transactions) {
+        setLoadedTransactions(result.data.transactions);
+        setHasMoreTransactions(result.data.transactions.length === 30);
+        if (process.env.NODE_ENV === 'development') {
           console.log('Loaded initial transactions:', result.data.transactions.length);
-        } else {
-          setLoadedTransactions([]);
-          setHasMoreTransactions(false);
+          console.log('Transactions data:', result.data.transactions.slice(0, 3));
         }
-      } catch (error) {
-        console.error('Error loading initial transactions', error);
+      } else {
+        if (process.env.NODE_ENV === 'development') {
+          console.log('No transactions in response:', result.data);
+        }
         setLoadedTransactions([]);
         setHasMoreTransactions(false);
-      } finally {
-        setTransactionsLoading(false);
       }
-    };
-
-    loadInitialTransactions();
+    } catch (error: any) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error loading initial transactions:', error);
+        console.error('Error details:', error?.status, error?.data);
+      }
+      setLoadedTransactions([]);
+      setHasMoreTransactions(false);
+    } finally {
+      setTransactionsLoading(false);
+    }
   }, [getTransactions]);
 
-  // Функция для загрузки следующей страницы транзакций
+  useEffect(() => {
+    loadInitialTransactions();
+  }, [loadInitialTransactions]);
+
   const loadMoreTransactions = useCallback(async () => {
     if (loadingMoreTransactions || !hasMoreTransactions) return;
 
@@ -146,7 +152,6 @@ export default function Dashboard() {
         const newTransactions = result.data.transactions;
         setLoadedTransactions(prev => [...prev, ...newTransactions]);
         setTransactionsPage(nextPage);
-        // Если получили меньше чем limit, значит это последняя страница
         setHasMoreTransactions(newTransactions.length === 30);
       } else {
         setHasMoreTransactions(false);
@@ -159,18 +164,15 @@ export default function Dashboard() {
     }
   }, [getTransactions, transactionsPage, hasMoreTransactions, loadingMoreTransactions]);
 
-  // Infinite scroll - автоматическая загрузка при прокрутке до конца
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     const target = e.currentTarget;
     const scrollBottom = target.scrollHeight - target.scrollTop - target.clientHeight;
     
-    // Загружаем следующую страницу, если прокрутили до 100px от конца
     if (scrollBottom < 100 && hasMoreTransactions && !loadingMoreTransactions) {
       loadMoreTransactions();
     }
   }, [hasMoreTransactions, loadingMoreTransactions, loadMoreTransactions]);
 
-  // Вычисляем общий баланс
   const totalBalance = useMemo(() => {
     if (!accountsData?.banks) return 0;
     let total = 0;
@@ -186,23 +188,24 @@ export default function Dashboard() {
     return total;
   }, [accountsData]);
 
-  // Обрабатываем транзакции из API
   const allTransactions = useMemo(() => {
     if (!loadedTransactions || loadedTransactions.length === 0) {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Dashboard - No loaded transactions, length:', loadedTransactions?.length || 0);
+      }
       return [];
     }
 
-    // Преобразуем транзакции в формат для отображения
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Dashboard - Processing transactions:', loadedTransactions.length);
+    }
+
     const transformed = loadedTransactions.map((tx: any) => {
-      // Определяем формат транзакции (новый TransactionFromAPI или старый формат с bookingDateTime)
       const isNewFormat = tx.id !== undefined && tx.type !== undefined;
       
-      // Для нового формата (TransactionFromAPI)
       if (isNewFormat) {
         const uniqueKey = `tx_${tx.id}`;
         const isCredit = tx.type === 'INCOME';
-        // Используем bookingDateTime или valueDateTime как реальную дату транзакции
-        // Если их нет, используем createdAt как fallback
         const transactionDate = tx.bookingDateTime || tx.valueDateTime || tx.createdAt || tx.updatedAt;
         
         return {
@@ -217,16 +220,14 @@ export default function Dashboard() {
           bookingDateTime: tx.bookingDateTime || transactionDate,
           valueDateTime: tx.valueDateTime || transactionDate,
           transactionInformation: tx.description || '',
-          date: transactionDate, // Используем реальную дату транзакции
+          date: transactionDate,
           bankId: tx.account?.bankName || '',
           merchant: tx.merchant,
           category: tx.category,
         };
       }
       
-      // Для старого формата (с bookingDateTime/valueDateTime) - это реальный формат из API
       const uniqueKey = tx.transactionId || `tx_${tx.accountId}_${tx.bookingDateTime}`;
-      // Используем bookingDateTime или valueDateTime как реальную дату транзакции
       const transactionDate = tx.bookingDateTime || tx.valueDateTime;
       
       return {
@@ -241,14 +242,13 @@ export default function Dashboard() {
         bookingDateTime: transactionDate,
         valueDateTime: tx.valueDateTime || transactionDate,
         transactionInformation: tx.description || tx.transactionInformation || '',
-        date: transactionDate, // Используем реальную дату транзакции
+        date: transactionDate,
         bankId: tx.bankId || '',
         merchant: tx.merchantName || tx.merchant,
         category: tx.category,
       };
     });
 
-    // Сортируем по дате (новые сначала) - без ограничений
     return transformed.sort((a, b) => {
       const dateA = new Date(a.date || a.bookingDateTime || a.valueDateTime || a.createdAt || 0).getTime();
       const dateB = new Date(b.date || b.bookingDateTime || b.valueDateTime || b.createdAt || 0).getTime();
@@ -291,37 +291,30 @@ export default function Dashboard() {
       }
     }
 
-    // Если статистики нет, вычисляем из транзакций за текущий месяц
     let income = 0;
     let expense = 0;
 
-    // Получаем дату начала и конца текущего месяца
     const now = new Date();
     const firstDayOfCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
     const lastDayOfCurrentMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
 
     allTransactions.forEach((transaction: any) => {
-      // Получаем дату транзакции
       const transactionDate = transaction.date || transaction.bookingDateTime || transaction.valueDateTime;
       if (!transactionDate) return;
 
       const txDate = new Date(transactionDate);
       
-      // Проверяем, что дата валидна
       if (isNaN(txDate.getTime())) return;
       
-      // Проверяем, что транзакция в текущем месяце
       if (txDate < firstDayOfCurrentMonth || txDate > lastDayOfCurrentMonth) {
         return;
       }
 
-      // В новом формате amount - это число напрямую
       const amount = typeof transaction.amount === 'number' 
         ? transaction.amount 
         : parseFloat(String(transaction.amount || '0'));
 
       if (!isNaN(amount) && amount !== 0) {
-        // В новом формате type: 'INCOME' или 'EXPENSE'
         if (transaction.type === 'INCOME' || transaction.creditDebitIndicator === 'Credit') {
           income += Math.abs(amount);
         } else if (transaction.type === 'EXPENSE' || transaction.creditDebitIndicator === 'Debit') {
@@ -333,7 +326,6 @@ export default function Dashboard() {
     return { income, expense };
   }, [allTransactions, statisticsData]);
 
-  // Фильтруем список банков
   const banksList = useMemo(() => {
     if (!banksData?.banks) return [];
     const filtered = banksData.banks.filter((bankId) =>
@@ -365,9 +357,21 @@ export default function Dashboard() {
         color: 'blue',
       });
 
-      // Проверяем статус каждые 2 секунды
+      let endpointExists = true;
+      let checkCount = 0;
+      const maxChecks = 15; // 30 секунд / 2 секунды
+      
       const checkStatus = setInterval(async () => {
-        if (!selectedBank || !result.requestId) return;
+        if (!selectedBank || !result.requestId || !endpointExists) {
+          clearInterval(checkStatus);
+          return;
+        }
+
+        checkCount++;
+        if (checkCount > maxChecks) {
+          clearInterval(checkStatus);
+          return;
+        }
 
         try {
           const statusResult = await getBankConsentStatus({
@@ -386,19 +390,40 @@ export default function Dashboard() {
               refetchAccounts();
             }, 1000);
           }
-        } catch (error) {
-          // Игнорируем ошибки проверки статуса
+        } catch (error: any) {
+          // Если эндпоинт не существует (404), прекращаем проверку
+          if (error?.status === 404) {
+            endpointExists = false;
+            clearInterval(checkStatus);
+            // Вместо проверки статуса, просто обновляем данные через некоторое время
+            setTimeout(() => {
+              refetchAccounts();
+            }, 3000);
+            return;
+          }
+          
+          // Логируем другие ошибки только в development
+          if (process.env.NODE_ENV === 'development') {
+            console.log('Bank consent status check error:', error?.status, error?.data);
+          }
         }
       }, 2000);
-
-      // Останавливаем проверку через 30 секунд
-      setTimeout(() => {
-        clearInterval(checkStatus);
-      }, 30000);
     } catch (error: any) {
+      let errorMessage = 'Не удалось отправить запрос';
+      
+      if (error?.status === 404) {
+        errorMessage = 'Эндпоинт не найден. Убедитесь, что бэкенд запущен и доступен.';
+      } else if (error?.status === 401 || error?.status === 403) {
+        errorMessage = 'Ошибка аутентификации. Пожалуйста, войдите заново.';
+      } else if (error?.data?.message) {
+        errorMessage = error.data.message;
+      } else if (error?.message) {
+        errorMessage = error.message;
+      }
+      
       notifications.show({
-        title: 'Ошибка',
-        message: error?.data?.message || 'Не удалось отправить запрос',
+        title: 'Ошибка подключения банка',
+        message: errorMessage,
         color: 'red',
       });
     }
@@ -416,9 +441,21 @@ export default function Dashboard() {
         refetchAccounts();
       }, 2000);
     } catch (error: any) {
+      let errorMessage = 'Не удалось запустить синхронизацию';
+      
+      if (error?.status === 404) {
+        errorMessage = 'Эндпоинт не найден. Убедитесь, что бэкенд запущен и доступен.';
+      } else if (error?.status === 401 || error?.status === 403) {
+        errorMessage = 'Ошибка аутентификации. Пожалуйста, войдите заново.';
+      } else if (error?.data?.message) {
+        errorMessage = error.data.message;
+      } else if (error?.message) {
+        errorMessage = error.message;
+      }
+      
       notifications.show({
-        title: 'Ошибка',
-        message: error?.data?.message || 'Не удалось запустить синхронизацию',
+        title: 'Ошибка синхронизации',
+        message: errorMessage,
         color: 'red',
       });
     }
@@ -431,26 +468,22 @@ export default function Dashboard() {
           Дашборд
         </Title>
 
-        {/* Основной блок с flex */}
         <div style={{
           display: 'flex',
           gap: 'var(--mantine-spacing-lg)',
           alignItems: 'stretch',
         }}>
-          {/* Первый блок: баланс, сбережения и диаграмма */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
             gap: 'var(--mantine-spacing-lg)',
           }}>
-            {/* Внутренний div с балансом и сбережениями */}
             <div style={{
               display: 'flex',
               gap: 'var(--mantine-spacing-lg)',
               alignItems: 'stretch',
             }}>
-              {/* Баланс */}
               <div style={{ flex: 1 }}>
                 <Card
                   padding="xl"
@@ -497,7 +530,6 @@ export default function Dashboard() {
                 </Card>
               </div>
 
-              {/* Сбережения */}
               <div style={{ flex: 1 }}>
                 <Card
                   padding="xl"
@@ -533,7 +565,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Диаграмма под блоком с балансом и сбережениями */}
             <div>
               <Card
                 padding="xl"
@@ -551,21 +582,18 @@ export default function Dashboard() {
                     </Title>
                   </Group>
 
-                  {/* AreaChart статистика */}
                   <StatisticsChart transactions={allTransactions} />
                 </Stack>
               </Card>
             </div>
           </div>
 
-          {/* Второй блок: транзакции */}
           <div style={{
             flex: '0 0 550px',
             display: 'flex',
             flexDirection: 'column',
             gap: 'var(--mantine-spacing-lg)',
           }}>
-            {/* Блок транзакций */}
             <Card
               padding="xl"
               radius="xl"
@@ -593,6 +621,44 @@ export default function Dashboard() {
                   <Center py="md" style={{ flex: 1, minHeight: 0 }}>
                     <Loader size="sm" />
                   </Center>
+                ) : loadedTransactions.length === 0 && !transactionsLoading ? (
+                  <Center py="md" style={{ flex: 1, minHeight: 0 }}>
+                    <Stack gap="md" align="center">
+                      <IconHistory size={48} color={PAGE_STYLES.textSecondary} />
+                      <Text size="sm" c={PAGE_STYLES.textSecondary} ta="center">
+                        Нет транзакций
+                      </Text>
+                      <Text size="xs" c={PAGE_STYLES.textSecondary} ta="center" maw={300}>
+                        Транзакции появятся после синхронизации с банками. 
+                        Нажмите "Синхронизировать" в разделе банков.
+                      </Text>
+                      <Button 
+                        size="sm" 
+                        variant="light"
+                        onClick={async () => {
+                          try {
+                            await syncBanks().unwrap();
+                            notifications.show({
+                              title: 'Синхронизация запущена',
+                              message: 'Транзакции будут загружены в течение нескольких минут',
+                              color: 'blue',
+                            });
+                            setTimeout(() => {
+                              loadInitialTransactions();
+                            }, 5000);
+                          } catch (error: any) {
+                            notifications.show({
+                              title: 'Ошибка синхронизации',
+                              message: error?.data?.message || 'Не удалось запустить синхронизацию',
+                              color: 'red',
+                            });
+                          }
+                        }}
+                      >
+                        Синхронизировать банки
+                      </Button>
+                    </Stack>
+                  </Center>
                 ) : allTransactions.length > 0 ? (
                   <div
                     style={{
@@ -608,7 +674,6 @@ export default function Dashboard() {
                   >
                     <Stack gap={0}>
                     {allTransactions.map((transaction: any, index) => {
-                      // Обрабатываем дату из нового формата
                       const transactionDate = transaction.date || transaction.bookingDateTime || transaction.valueDateTime || transaction.createdAt || transaction.updatedAt || transaction.transactionDate;
                       const date = transactionDate ? new Date(transactionDate) : new Date();
                       const day = date.getDate();
@@ -618,7 +683,6 @@ export default function Dashboard() {
                       const minutes = date.getMinutes().toString().padStart(2, '0');
                       const timeStr = `${hours}:${minutes}`;
 
-                      // Обрабатываем сумму из нового формата (amount - это число)
                       let amount = 0;
                       if (typeof transaction.amount === 'number') {
                         amount = transaction.amount;
@@ -628,14 +692,12 @@ export default function Dashboard() {
                         amount = parseFloat(String(transaction.amount || transaction.value || '0'));
                       }
 
-                      // Определяем знак на основе type или creditDebitIndicator
                       const isCredit = transaction.type === 'INCOME' || transaction.creditDebitIndicator === 'Credit';
                       const currency = transaction.currency || transaction.amount?.currency || 'RUB';
                       const amountStr = isCredit
                         ? `+${formatBalance(Math.abs(amount).toString(), currency)}`
                         : `-${formatBalance(Math.abs(amount).toString(), currency)}`;
 
-                      // Название транзакции из нового формата
                       const name = transaction.transactionInformation || transaction.description || transaction.name || transaction.merchant || 'Транзакция';
                       const status = transaction.status || 'Booked';
                       const transactionCode = transaction.bankTransactionCode?.code || transaction.category || '';
@@ -785,7 +847,6 @@ export default function Dashboard() {
                     })}
                     </Stack>
                     
-                    {/* Кнопка загрузки еще транзакций */}
                     {hasMoreTransactions && (
                       <div style={{ padding: '16px', display: 'flex', justifyContent: 'center' }}>
                         <Button
@@ -800,7 +861,6 @@ export default function Dashboard() {
                       </div>
                     )}
                     
-                    {/* Индикатор загрузки при подгрузке */}
                     {loadingMoreTransactions && (
                       <Center py="md">
                         <Loader size="sm" />
@@ -823,7 +883,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Мои счета */}
         <Card
           padding="xl"
           radius="xl"
@@ -852,11 +911,53 @@ export default function Dashboard() {
             {accountsError && (
               <Alert
                 icon={<IconAlertCircle size={16} />}
-                title="Ошибка загрузки"
+                title="Ошибка загрузки счетов"
                 color="red"
-                variant="light"
+                mb="md"
               >
-                Не удалось загрузить данные счетов. Попробуйте обновить страницу.
+                {(() => {
+                    const errorMessage = accountsError && 'data' in accountsError 
+                    ? String(accountsError.data) 
+                    : accountsError && 'message' in accountsError
+                    ? String(accountsError.message)
+                    : 'Не удалось загрузить счета';
+                  
+                  const needsReconnect = errorMessage.includes('недействительно') ||
+                                        errorMessage.includes('не связано с client_id') ||
+                                        errorMessage.includes('CONSENT_REQUIRED');
+                  
+                  if (needsReconnect) {
+                    return (
+                      <div>
+                        <Text size="sm" mb="xs">{errorMessage}</Text>
+                        <Text size="sm" c="dimmed" mb="xs">
+                          Необходимо пересоздать согласие с правильным client_id.
+                        </Text>
+                        <Button
+                          size="xs"
+                          variant="light"
+                          onClick={() => {
+                            const bankMatch = errorMessage.match(/для банка (\w+)/i) || 
+                                            errorMessage.match(/bank[:\s]+(\w+)/i);
+                            if (bankMatch && bankMatch[1]) {
+                              handleBankConnect(bankMatch[1]);
+                            } else {
+                              notifications.show({
+                                title: 'Информация',
+                                message: 'Выберите банк из списка и нажмите "Подключить" для пересоздания согласия',
+                                color: 'blue',
+                              });
+                            }
+                          }}
+                        >
+                          Пересоздать согласие
+                        </Button>
+                      </div>
+                    );
+                  }
+                  
+                  return <Text size="sm">{errorMessage}</Text>;
+                })()}
               </Alert>
             )}
 
@@ -871,7 +972,6 @@ export default function Dashboard() {
               gap: '24px',
             }}>
                 {accountsData.banks.map((bank) => {
-                  // Получаем реальное название банка из первого счета
                   const bankName = (bank.accounts && bank.accounts.length > 0 && bank.accounts[0].bankName) 
                     ? bank.accounts[0].bankName 
                     : bank.bankId;
@@ -891,7 +991,6 @@ export default function Dashboard() {
                     return sum + (isNaN(balance) ? 0 : balance);
                   }, 0);
                   
-                  // Получаем статистику по банку из API
                   const bankIncome = statisticsData?.bankIncomes?.[bank.bankId] || 0;
                   const bankExpense = statisticsData?.bankExpenses?.[bank.bankId] || 0;
 
@@ -920,7 +1019,6 @@ export default function Dashboard() {
                       }}
                       onClick={() => setSelectedBankDetails(bank.bankId)}
                     >
-                      {/* Заголовок банка с цветным фоном */}
                       <div
                         style={{
                           background: `linear-gradient(135deg, ${bankColor.primary} 0%, ${bankColor.secondary} 100%)`,
@@ -990,9 +1088,7 @@ export default function Dashboard() {
                         </Group>
                       </div>
 
-                      {/* Основной контент */}
                       <Stack gap={0} style={{ padding: '24px' }}>
-                        {/* Общий баланс */}
                         <div style={{ marginBottom: '20px' }}>
                           <Text 
                             size="xs" 
@@ -1023,7 +1119,6 @@ export default function Dashboard() {
                           </Text>
                         </div>
                         
-                        {/* Статистика по банку */}
                         {(bankIncome > 0 || bankExpense > 0) && (
                           <div 
                             style={{ 
@@ -1091,7 +1186,6 @@ export default function Dashboard() {
                           </div>
                         )}
 
-                        {/* Список счетов */}
                         {(bank.accounts || []).length > 0 ? (
                           <Stack gap={8}>
                             <Text 
@@ -1286,7 +1380,6 @@ export default function Dashboard() {
           </Stack>
         </Card>
 
-        {/* Подключить банк */}
         <Card
           padding="xl"
           radius="xl"
@@ -1365,7 +1458,6 @@ export default function Dashboard() {
         </Card>
       </Stack>
 
-      {/* Модальное окно для подключения банка */}
       {consentModalOpen && selectedBank && (
         <div
           style={{
@@ -1397,13 +1489,14 @@ export default function Dashboard() {
                 Подключить {selectedBank}
               </Title>
               <Text size="sm" c={PAGE_STYLES.textSecondary}>
-                Введите client_id (опционально). Если не указать, будет использован сохраненный.
+                Введите client_id для подключения банка. Если согласие недействительно, укажите правильный client_id (например, team052-3).
               </Text>
               <TextInput
                 label="Client ID"
-                placeholder="team052-1"
+                placeholder="team052-3"
                 value={clientId}
                 onChange={(e) => setClientId(e.target.value)}
+                description="Обязательно укажите, если пересоздаете согласие"
               />
               <Group justify="flex-end" gap="sm">
                 <Button variant="subtle" onClick={() => setConsentModalOpen(false)}>
@@ -1418,12 +1511,10 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Модальное окно с деталями банка */}
       {selectedBankDetails && (() => {
         const bank = accountsData?.banks?.find(b => b.bankId === selectedBankDetails);
         if (!bank) return null;
         
-        // Получаем реальное название банка из первого счета
         const bankName = (bank.accounts && bank.accounts.length > 0 && bank.accounts[0].bankName) 
           ? bank.accounts[0].bankName 
           : bank.bankId;
@@ -1441,11 +1532,10 @@ export default function Dashboard() {
           return sum + (isNaN(balance) ? 0 : balance);
         }, 0);
         
-        // Фильтруем транзакции по этому банку
         const bankTransactions = allTransactions.filter(tx => 
           tx.bankId === bank.bankId || 
           (tx.account && tx.account.bankName === bank.bankId)
-        ).slice(0, 10); // Последние 10 транзакций
+        ).slice(0, 10);
         
         return (
           <Modal
@@ -1483,7 +1573,6 @@ export default function Dashboard() {
             centered
           >
             <Stack gap="lg">
-              {/* Общая статистика */}
               <Card
                 padding="lg"
                 radius="md"
@@ -1543,7 +1632,6 @@ export default function Dashboard() {
                 </Stack>
               </Card>
 
-              {/* Детальная информация о счетах */}
               <div>
                 <Text size="sm" fw={600} c={PAGE_STYLES.textPrimary} style={{ marginBottom: '12px' }}>
                   Счета
@@ -1621,7 +1709,6 @@ export default function Dashboard() {
                 </Stack>
               </div>
 
-              {/* Последние транзакции */}
               {bankTransactions.length > 0 && (
                 <div>
                   <Text size="sm" fw={600} c={PAGE_STYLES.textPrimary} style={{ marginBottom: '12px' }}>
@@ -1676,7 +1763,6 @@ export default function Dashboard() {
         );
       })()}
 
-      {/* Модальное окно с деталями транзакции */}
       <Modal
         opened={transactionModalOpen}
         onClose={() => setTransactionModalOpen(false)}

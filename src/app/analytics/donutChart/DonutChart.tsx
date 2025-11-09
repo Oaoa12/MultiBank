@@ -2,48 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell } from 'recharts';
-import { Text } from '@mantine/core';
+import { Text, Loader, Center } from '@mantine/core';
+import { TransactionsStatisticsResponse } from '@/lib/store/api/AuthApi';
 import styles from './DonutChart.module.css';
 
-interface BankDonutData {
-  income: number;
-  expenses: number;
-}
-
-type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
-
 interface DonutChartProps {
-  selectedBank: string;
+  selectedBankId: string | null;
+  statisticsData?: TransactionsStatisticsResponse;
 }
-
-interface ChartDataPoint {
-  name: string;
-  value: number;
-  color: string;
-  [key: string]: string | number;
-}
-
-const bankDonutData: Record<BankName, BankDonutData> = {
-  'ВТБ': {
-    income: 1250000,
-    expenses: 320000,
-  },
-  'Т-Банк': {
-    income: 850000,
-    expenses: 280000,
-  },
-  'Сбер': {
-    income: 2100000,
-    expenses: 450000,
-  },
-};
-
-const DEFAULT_BANK: BankName = 'ВТБ';
 
 const EXPENSES_COLOR = '#d1d5db';
 const INCOME_COLOR = '#2563eb';
 
-export default function DonutChart({ selectedBank }: DonutChartProps) {
+export default function DonutChart({ selectedBankId, statisticsData }: DonutChartProps) {
   const [chartSize, setChartSize] = useState(200);
   const [chartCenter, setChartCenter] = useState(100);
   const [innerRadius, setInnerRadius] = useState(65);
@@ -79,13 +50,29 @@ export default function DonutChart({ selectedBank }: DonutChartProps) {
     return () => window.removeEventListener('resize', updateChartSize);
   }, []);
 
-  const bankData = bankDonutData[selectedBank as BankName] || bankDonutData[DEFAULT_BANK];
-  const { income, expenses } = bankData;
+  const getBankData = () => {
+    if (!statisticsData) {
+      return { income: 0, expenses: 0 };
+    }
 
-  const chartData: ChartDataPoint[] = [
+    if (selectedBankId) {
+      const income = statisticsData.bankIncomes?.[selectedBankId] || 0;
+      const expenses = statisticsData.bankExpenses?.[selectedBankId] || 0;
+      return { income, expenses };
+    }
+
+    const income = statisticsData.totalIncome || 0;
+    const expenses = statisticsData.totalExpenses || 0;
+    return { income, expenses };
+  };
+
+  const { income, expenses } = getBankData();
+
+  const chartData = [
     { name: 'Траты', value: expenses, color: EXPENSES_COLOR },
     { name: 'Поступления', value: income, color: INCOME_COLOR },
   ];
+
 
   return (
     <div 
@@ -115,10 +102,10 @@ export default function DonutChart({ selectedBank }: DonutChartProps) {
 
       <div className={styles.centerText}>
         <Text size="md" fw={700} className={styles.amountText}>
-          {expenses.toLocaleString()} ₽
+          {Math.round(expenses).toLocaleString()} ₽
         </Text>
         <Text size="xs" className={styles.labelText}>
-          Траты за месяц
+          Траты {selectedBankId ? 'по банку' : 'за все время'}
         </Text>
       </div>
     </div>

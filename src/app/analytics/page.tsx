@@ -1,40 +1,47 @@
 'use client';
 
-import { Container, SimpleGrid } from '@mantine/core';
+import { Container, SimpleGrid, Loader, Center, Alert } from '@mantine/core';
 import { useState } from 'react';
+import { useGetBankOverviewQuery, useGetTransactionsStatisticsQuery } from '@/lib/store/api/AuthApi';
 import BalanceAnalytics from "./balanceAnalytics/BalanceAnalytics";
 import DonutChart from './donutChart/DonutChart';
 import Cards from "./cards/Cards";
 import styles from './page.module.css';
 
-type BankName = 'ВТБ' | 'Т-Банк' | 'Сбер';
-
-const DEFAULT_BANK: BankName = 'ВТБ';
-
-const isValidBankName = (bank: string): bank is BankName => {
-  return bank === 'ВТБ' || bank === 'Т-Банк' || bank === 'Сбер';
-};
-
 export default function AnalyticsPage() {
-  const [selectedBank, setSelectedBank] = useState<BankName>(DEFAULT_BANK);
+  const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
+  
+  const { data: accountsData, isLoading: accountsLoading, error: accountsError } = useGetBankOverviewQuery({});
+  const { data: statisticsData, isLoading: statisticsLoading, error: statisticsError } = useGetTransactionsStatisticsQuery();
 
-  const handleCardChange = (bank: string) => {
-    if (isValidBankName(bank)) {
-      setSelectedBank(bank);
-    }
+  const selectedBank = selectedBankId || (accountsData?.banks && accountsData.banks.length > 0 ? accountsData.banks[0].bankId : null);
+
+  const handleCardChange = (bankId: string) => {
+    setSelectedBankId(bankId);
   };
 
   return (
     <Container className={styles.container} size="xl" py="xl">
       <SimpleGrid cols={{ base: 1, lg: 3 }} spacing="md">
         <div className={styles.cardsSection}>
-          <Cards onCardChange={handleCardChange} />
+          <Cards 
+            accountsData={accountsData} 
+            onCardChange={handleCardChange}
+            selectedBankId={selectedBank}
+          />
         </div>
         <div className={styles.chartSection}>
           <div className={styles.donutChartWrapper}>
-            <DonutChart selectedBank={selectedBank} />
+            <DonutChart 
+              selectedBankId={selectedBank}
+              statisticsData={statisticsData}
+            />
           </div>
-          <BalanceAnalytics selectedBank={selectedBank} />
+          <BalanceAnalytics 
+            selectedBankId={selectedBank}
+            accountsData={accountsData}
+            statisticsData={statisticsData}
+          />
         </div>
       </SimpleGrid>
     </Container>
