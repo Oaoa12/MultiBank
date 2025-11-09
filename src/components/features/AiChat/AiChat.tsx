@@ -242,7 +242,7 @@ export function AiChat() {
         notifications.show({
           color: 'yellow',
           title: 'Требуется авторизация',
-          message: 'Пожалуйста, войдите в систему для использования AI помощника',
+          message: 'Пожалуйста, войдите в систему для использования Ивана Банкова',
         });
       }
       return;
@@ -448,8 +448,8 @@ export function AiChat() {
                   <Group gap="xs">
                     <IconRobot size={24} color="#1e3a8a" />
                     <div>
-                      <Text fw={600} size="lg">Финансовый помощник</Text>
-                      <Text size="xs" c="dimmed">AI консультант</Text>
+                      <Text fw={600} size="lg">Иван Банков</Text>
+                      <Text size="xs" c="dimmed">Ai agent</Text>
                     </div>
                   </Group>
                   <Group gap="xs">
@@ -496,7 +496,7 @@ export function AiChat() {
                             <Text c="dimmed" mt="md">
                               {isAuthenticated 
                                 ? 'Задайте вопрос о финансах, и я помогу вам!'
-                                : 'Войдите в систему, чтобы использовать AI помощника'}
+                                : 'Войдите в систему, чтобы использовать Ивана Банкова'}
                             </Text>
                           </Box>
                         ) : (
@@ -536,7 +536,7 @@ export function AiChat() {
                                         <IconRobot size={16} />
                                       )}
                                       <Text size="xs" fw={500}>
-                                        {message.role === 'user' ? 'Вы' : 'AI Помощник'}
+                                        {message.role === 'user' ? 'Вы' : 'Иван Банков'}
                                       </Text>
                                     </Group>
                                     {message.role === 'assistant' && !message.isRead && (
