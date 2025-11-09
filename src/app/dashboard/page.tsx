@@ -44,6 +44,7 @@ import {
   TransactionFromAPI,
   useGetTransactionsStatisticsQuery,
   useDeleteBankMutation,
+  useLazyGetAccountTransactionsQuery,
 } from '@/lib/store/api/AuthApi';
 import StatisticsChart from './StatisticsChart';
 
@@ -100,10 +101,13 @@ export default function Dashboard() {
   const [getTransactions] = useLazyGetTransactionsQuery();
   const { data: statisticsData } = useGetTransactionsStatisticsQuery();
   const [deleteBank] = useDeleteBankMutation();
+  const [getAccountTransactions] = useLazyGetAccountTransactionsQuery();
   
   // Debounce для рефетчей, чтобы избежать множественных одновременных обновлений
   const refetchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastRefetchTimeRef = useRef<number>(0);
+  // Отслеживаем, для каких аккаунтов уже были загружены транзакции
+  const processedAccountsRef = useRef<Set<string>>(new Set());
   
   const refetchAccounts = useCallback(() => {
     const now = Date.now();
@@ -132,6 +136,41 @@ export default function Dashboard() {
       }
     };
   }, []);
+
+  // Автоматически загружаем транзакции для всех подключенных банков при загрузке страницы
+  useEffect(() => {
+    if (!accountsData?.banks || accountsLoading) return;
+
+    // Для каждого банка и каждого аккаунта вызываем getAccountTransactions
+    accountsData.banks.forEach((bank) => {
+      if (!bank.accounts || bank.accounts.length === 0) return;
+
+      bank.accounts.forEach((account) => {
+        if (!account.accountId || !bank.bankId) return;
+
+        // Создаем уникальный ключ для аккаунта
+        const accountKey = `${bank.bankId}-${account.accountId}`;
+
+        // Проверяем, не обрабатывали ли мы уже этот аккаунт
+        if (processedAccountsRef.current.has(accountKey)) return;
+
+        // Помечаем аккаунт как обработанный
+        processedAccountsRef.current.add(accountKey);
+
+        // Вызываем getAccountTransactions для этого аккаунта (первый раз после подключения банка)
+        getAccountTransactions({
+          bankId: bank.bankId,
+          accountId: account.accountId,
+        }).catch((error) => {
+          if (process.env.NODE_ENV === 'development') {
+            console.error(`Error loading transactions for ${bank.bankId}/${account.accountId}:`, error);
+          }
+          // Удаляем из обработанных, чтобы можно было повторить попытку
+          processedAccountsRef.current.delete(accountKey);
+        });
+      });
+    });
+  }, [accountsData, accountsLoading, getAccountTransactions]);
 
   const loadInitialTransactions = useCallback(async () => {
     setTransactionsLoading(true);

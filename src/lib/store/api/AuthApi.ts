@@ -603,6 +603,7 @@ export const authApi = createApi({
     getAccountTransactions: builder.query<TransactionsResponse, { bankId: string; accountId: string }>({
       queryFn: async ({ bankId, accountId }, api, extraOptions) => {
         // Используем отдельный baseQuery без префикса /api/
+        // Эндпоинт для получения транзакций конкретного банка/аккаунта (первый раз после подключения)
         const result = await baseQueryWithoutApi(
           {
             url: `/transactions/${bankId}/accId/${accountId}`,
@@ -617,7 +618,7 @@ export const authApi = createApi({
       },
       providesTags: ['Auth'],
     }),
-    // Новый эндпоинт для получения транзакций по туториалу
+    // Эндпоинт для получения всех существующих транзакций в системе с фильтрами и пагинацией
     getTransactions: builder.query<TransactionsAPIResponse, TransactionsFilters | void>({
       queryFn: async (filters, api, extraOptions) => {
         const params = new URLSearchParams();
