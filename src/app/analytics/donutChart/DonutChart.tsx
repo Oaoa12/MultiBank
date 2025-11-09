@@ -68,11 +68,15 @@ export default function DonutChart({ selectedBankId, statisticsData }: DonutChar
 
   const { income, expenses } = getBankData();
 
+  // Скрываем компонент, если нет данных
+  if (!statisticsData || (income === 0 && expenses === 0)) {
+    return null;
+  }
+
   const chartData = [
     { name: 'Траты', value: expenses, color: EXPENSES_COLOR },
     { name: 'Поступления', value: income, color: INCOME_COLOR },
   ];
-
 
   return (
     <div 

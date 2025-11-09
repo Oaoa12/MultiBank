@@ -581,6 +581,25 @@ export const authApi = createApi({
       },
       providesTags: ['Auth'],
     }),
+    deleteBank: builder.mutation<{ message: string }, number>({
+      queryFn: async (accountId, api, extraOptions) => {
+        // Используем отдельный baseQuery без префикса /api/
+        // Передаем id аккаунта, а не bankId
+        const result = await baseQueryWithoutApi(
+          {
+            url: `/bank/${accountId}/permanent`,
+            method: 'DELETE',
+          },
+          api,
+          extraOptions
+        );
+        if (result.error) {
+          return { error: result.error };
+        }
+        return { data: result.data as { message: string } };
+      },
+      invalidatesTags: ['Auth'],
+    }),
     getAccountTransactions: builder.query<TransactionsResponse, { bankId: string; accountId: string }>({
       queryFn: async ({ bankId, accountId }, api, extraOptions) => {
         // Используем отдельный baseQuery без префикса /api/
@@ -873,6 +892,7 @@ export const {
   useSyncBanksMutation,
   useGetBankAccountsQuery,
   useLazyGetBankAccountsQuery,
+  useDeleteBankMutation,
   useGetAccountTransactionsQuery,
   useLazyGetAccountTransactionsQuery,
   useGetTransactionsQuery,

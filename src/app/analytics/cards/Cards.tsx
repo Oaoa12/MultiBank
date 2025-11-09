@@ -165,7 +165,8 @@ export default function Cards({ accountsData, onCardChange, selectedBankId }: Ca
       return [];
     }
     
-    return statisticsData.categoryStats
+    // Создаем копию массива перед сортировкой, так как RTK Query делает данные immutable
+    return [...statisticsData.categoryStats]
       .sort((a, b) => b.amount - a.amount)
       .slice(0, 5)
       .map((cat, index) => ({
@@ -343,23 +344,20 @@ export default function Cards({ accountsData, onCardChange, selectedBankId }: Ca
             </Button>
           </Group>
 
-          <Stack gap="xs" mt="md">
-            <Text 
-              size="lg" 
-              fw={600} 
-              c="#000"
-              style={{ 
-                fontFamily: 'var(--font-inter), sans-serif',
-                letterSpacing: '-0.01em'
-              }}
-            >
-              Популярные категории
-            </Text>
-            {popularCategories.length === 0 ? (
-              <Center p="md">
-                <Text size="sm" c="dimmed">Нет данных о категориях</Text>
-              </Center>
-            ) : (
+          {/* Показываем секцию популярных категорий только если есть данные */}
+          {popularCategories.length > 0 && (
+            <Stack gap="xs" mt="md">
+              <Text 
+                size="lg" 
+                fw={600} 
+                c="#000"
+                style={{ 
+                  fontFamily: 'var(--font-inter), sans-serif',
+                  letterSpacing: '-0.01em'
+                }}
+              >
+                Популярные категории
+              </Text>
               <Stack gap="xs" mt="md">
                 {popularCategories.map((category) => {
                   const IconComponent = category.icon;
@@ -402,8 +400,8 @@ export default function Cards({ accountsData, onCardChange, selectedBankId }: Ca
                   );
                 })}
               </Stack>
-            )}
-          </Stack>
+            </Stack>
+          )}
         </Stack>
       </Paper>
     </div>

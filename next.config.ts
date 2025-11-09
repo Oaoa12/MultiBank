@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
         source: "/transactions/:path*",
         destination: `${apiUrl}/transactions/:path*`,
       },
+      {
+        source: "/minio/:path*",
+        destination: `${apiUrl}/minio/:path*`,
+      },
     ];
   },
 };

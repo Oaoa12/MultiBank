@@ -63,7 +63,9 @@ export default function BalanceAnalytics({ selectedBankId, accountsData, statist
   }, [accountsData, selectedBankId]);
 
   const chartData = useMemo(() => {
-    if (!statisticsData?.monthlyStats) return [];
+    if (!statisticsData?.monthlyStats || statisticsData.monthlyStats.length === 0) {
+      return [];
+    }
 
     const monthlyStats = [...statisticsData.monthlyStats]
       .sort((a, b) => {
@@ -75,6 +77,7 @@ export default function BalanceAnalytics({ selectedBankId, accountsData, statist
           
           const parts = monthStr.toLowerCase().split(' ');
           const monthName = parts[0].replace('г.', '').trim();
+          // Используем текущий год как fallback (безопасно для гидратации, так как год обычно присутствует в данных)
           const year = parseInt(parts[1]) || new Date().getFullYear();
           const monthIndex = monthNames[monthName] ?? 0;
           
@@ -89,9 +92,7 @@ export default function BalanceAnalytics({ selectedBankId, accountsData, statist
         value: currentBalance, 
       }));
 
-    return monthlyStats.length > 0 ? monthlyStats : [
-      { month: 'Ноя', value: currentBalance }
-    ];
+    return monthlyStats;
   }, [statisticsData, currentBalance]);
 
   const recentTransactions = useMemo(() => {
@@ -137,21 +138,22 @@ export default function BalanceAnalytics({ selectedBankId, accountsData, statist
             {Math.round(currentBalance).toLocaleString()} ₽
           </Text>
 
-          <div
-            key={selectedBankId || 'all'}
-            className={`${isAnimated ? styles.chartVisible : styles.chartHidden} ${styles.chartWrapper}`}
-          >
-            <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor={CHART_COLOR} stopOpacity={0.2} />
-                  <stop offset="100%" stopColor="#60a5fa" stopOpacity={0.05} />
-                </linearGradient>
-              </defs>
-            </svg>
+          {/* Показываем график только если есть данные */}
+          {chartData.length > 0 && (
+            <div
+              key={selectedBankId || 'all'}
+              className={`${isAnimated ? styles.chartVisible : styles.chartHidden} ${styles.chartWrapper}`}
+            >
+              <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                    <stop offset="0%" stopColor={CHART_COLOR} stopOpacity={0.2} />
+                    <stop offset="100%" stopColor="#60a5fa" stopOpacity={0.05} />
+                  </linearGradient>
+                </defs>
+              </svg>
 
-            <div className={styles.lineChartContainer} style={{ width: '100%', height: '100px', minHeight: '100px', minWidth: '200px' }}>
-              {chartData.length > 0 ? (
+              <div className={styles.lineChartContainer} style={{ width: '100%', height: '100px', minHeight: '100px', minWidth: '200px' }}>
                 <LineChart
                   className={styles.lineChart}
                   h={100}
@@ -188,72 +190,62 @@ export default function BalanceAnalytics({ selectedBankId, accountsData, statist
                     padding: { left: 20, right: 20 }
                   }}
                 />
-              ) : (
-                <Center h={100}>
-                  <Text size="sm" c="dimmed">Нет данных для графика</Text>
-                </Center>
-              )}
+              </div>
             </div>
-          </div>
+          )}
         </Stack>
       </Paper>
-      <Stack gap="xs" className={styles.transactionsSection}>
-        <Text 
-          size="lg" 
-          fw={600} 
-          c="#000"
-          className={styles.transactionsTitle}
-        >
-          Последние транзакции
-        </Text>
-        {transactionsLoading ? (
-          <Center p="md">
-            <Loader size="sm" />
-          </Center>
-        ) : transactionsError ? (
-          <Center p="md">
-            <Text size="sm" c="red">
-              {process.env.NODE_ENV === 'development' 
-                ? `Ошибка загрузки: ${transactionsError && 'status' in transactionsError ? transactionsError.status : 'Unknown'}`
-                : 'Ошибка загрузки транзакций'}
-            </Text>
-          </Center>
-        ) : recentTransactions.length === 0 ? (
-          <Center p="md">
-            <Stack gap="xs" align="center">
-              <Text size="sm" c="dimmed">Нет транзакций</Text>
-              <Text size="xs" c="dimmed" ta="center">
-                Транзакции появятся после синхронизации с банками
+      {/* Показываем секцию транзакций только если есть данные */}
+      {recentTransactions.length > 0 && (
+        <Stack gap="xs" className={styles.transactionsSection}>
+          <Text 
+            size="lg" 
+            fw={600} 
+            c="#000"
+            className={styles.transactionsTitle}
+          >
+            Последние транзакции
+          </Text>
+          {transactionsLoading ? (
+            <Center p="md">
+              <Loader size="sm" />
+            </Center>
+          ) : transactionsError ? (
+            <Center p="md">
+              <Text size="sm" c="red">
+                {process.env.NODE_ENV === 'development' 
+                  ? `Ошибка загрузки: ${transactionsError && 'status' in transactionsError ? transactionsError.status : 'Unknown'}`
+                  : 'Ошибка загрузки транзакций'}
               </Text>
-            </Stack>
-          </Center>
-        ) : (
-          <Stack gap="xs" mt="md" className={styles.transactionsList}>
-            {recentTransactions.map((transaction) => (
-              <Group key={transaction.id} justify="space-between" align="center" className={styles.transactionItem}>
-                <Group gap="sm">
-                  <div className={styles.transactionIcon} />
+            </Center>
+          ) : (
+            <Stack gap="xs" mt="md" className={styles.transactionsList}>
+              {recentTransactions.map((transaction) => (
+                <Group key={transaction.id} justify="space-between" align="center" className={styles.transactionItem}>
+                  <Group gap="sm">
+                    <div className={styles.transactionIcon} />
+                    <Text 
+                      size="sm" 
+                      fw={500}
+                      className={styles.transactionName}
+                    >
+                      {transaction.name}
+                    </Text>
+                  </Group>
                   <Text 
                     size="sm" 
-                    fw={500}
-                    className={styles.transactionName}
+                    fw={600}
+                    c={transaction.type === 'income' ? '#10b981' : '#000'}
+                    className={styles.transactionAmount}
                   >
-                    {transaction.name}
+                    {transaction.type === 'income' ? '+' : '-'}₽ {transaction.amount.toLocaleString()}
                   </Text>
                 </Group>
-                <Text 
-                  size="sm" 
-                  fw={600}
-                  c={transaction.type === 'income' ? '#10b981' : '#000'}
-                  className={styles.transactionAmount}
-                >
-                  {transaction.type === 'income' ? '+' : '-'}₽ {transaction.amount.toLocaleString()}
-                </Text>
-              </Group>
-            ))}
-          </Stack>
-        )}
-      </Stack>
+              ))}
+            </Stack>
+          )}
+        </Stack>
+      )}
     </div>
   );
 }

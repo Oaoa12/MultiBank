@@ -216,28 +216,18 @@ export default function StatisticsChart({ transactions }: StatisticsChartProps) 
     );
   }
 
-  if (!statisticsData || chartData.length === 0) {
-    return (
-      <div
-        style={{
-          height: '280px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          gap: '8px',
-          color: PAGE_STYLES.textSecondary,
-        }}
-      >
-        <div style={{ fontSize: '14px', fontWeight: 500 }}>Нет данных для отображения</div>
-        <div style={{ fontSize: '12px' }}>Транзакции появятся после синхронизации</div>
-        {process.env.NODE_ENV === 'development' && (
-          <div style={{ fontSize: '10px', marginTop: '10px', color: '#999' }}>
-            Data: {JSON.stringify(statisticsData)}
-          </div>
-        )}
-      </div>
-    );
+  // Проверяем, есть ли реальные данные (не пустые массивы и нули)
+  const hasData = statisticsData && (
+    (statisticsData.monthlyStats && statisticsData.monthlyStats.length > 0) ||
+    (statisticsData.totalIncome && statisticsData.totalIncome > 0) ||
+    (statisticsData.totalExpenses && statisticsData.totalExpenses > 0) ||
+    (statisticsData.transactionsCount && statisticsData.transactionsCount > 0) ||
+    (statisticsData.categoryStats && statisticsData.categoryStats.length > 0)
+  );
+
+  if (!statisticsData || !hasData || chartData.length === 0) {
+    // Возвращаем null вместо пустого блока, чтобы полностью скрыть компонент
+    return null;
   }
 
   return (

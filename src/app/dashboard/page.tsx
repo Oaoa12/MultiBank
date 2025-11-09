@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import {
   Container,
   Grid,
@@ -31,8 +31,10 @@ import {
   IconInfoCircle,
   IconClock,
   IconCheck,
+  IconX,
 } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
+import { modals } from '@mantine/modals';
 import {
   useGetBanksQuery,
   useBankConsentMutation,
@@ -42,6 +44,7 @@ import {
   useLazyGetTransactionsQuery,
   TransactionFromAPI,
   useGetTransactionsStatisticsQuery,
+  useDeleteBankMutation,
 } from '@/lib/store/api/AuthApi';
 import StatisticsChart from './StatisticsChart';
 
@@ -90,11 +93,52 @@ export default function Dashboard() {
   const { data: banksData, isLoading: banksLoading } = useGetBanksQuery();
   const [bankConsent] = useBankConsentMutation();
   const [getBankConsentStatus] = useLazyGetBankConsentStatusQuery();
-  const { data: accountsData, isLoading: accountsLoading, error: accountsError, refetch: refetchAccounts } = useGetBankOverviewQuery({ refresh: true });
+  // Убираем refresh: true из дефолтного параметра, чтобы избежать частых рефетчей
+  const { data: accountsData, isLoading: accountsLoading, error: accountsError, refetch: refetchAccountsBase } = useGetBankOverviewQuery({});
   const [syncBanks] = useSyncBanksMutation();
   const [getTransactions] = useLazyGetTransactionsQuery();
   const { data: statisticsData } = useGetTransactionsStatisticsQuery();
-
+  const [deleteBank] = useDeleteBankMutation();
+  
+  // Debounce для рефетчей, чтобы избежать множественных одновременных обновлений
+  const refetchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastRefetchTimeRef = useRef<number>(0);
+  
+  const refetchAccounts = useCallback((withRefresh: boolean = false) => {
+    const now = Date.now();
+    // Если прошло меньше 2 секунд с последнего рефетча, отменяем предыдущий и планируем новый
+    if (now - lastRefetchTimeRef.current < 2000) {
+      if (refetchTimeoutRef.current) {
+        clearTimeout(refetchTimeoutRef.current);
+      }
+      refetchTimeoutRef.current = setTimeout(() => {
+        lastRefetchTimeRef.current = Date.now();
+        if (withRefresh) {
+          refetchAccountsBase({ refresh: true });
+        } else {
+          refetchAccountsBase();
+        }
+      }, 2000);
+      return;
+    }
+    
+    // Иначе делаем рефетч сразу
+    lastRefetchTimeRef.current = now;
+    if (withRefresh) {
+      refetchAccountsBase({ refresh: true });
+    } else {
+      refetchAccountsBase();
+    }
+  }, [refetchAccountsBase]);
+  
+  // Cleanup timeout при размонтировании компонента
+  useEffect(() => {
+    return () => {
+      if (refetchTimeoutRef.current) {
+        clearTimeout(refetchTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const loadInitialTransactions = useCallback(async () => {
     setTransactionsLoading(true);
@@ -386,8 +430,9 @@ export default function Dashboard() {
               message: 'Согласие получено. Данные обновляются...',
               color: 'green',
             });
+            // Используем refresh: true для принудительного обновления после подключения банка
             setTimeout(() => {
-              refetchAccounts();
+              refetchAccounts(true);
             }, 1000);
           }
         } catch (error: any) {
@@ -397,7 +442,7 @@ export default function Dashboard() {
             clearInterval(checkStatus);
             // Вместо проверки статуса, просто обновляем данные через некоторое время
             setTimeout(() => {
-              refetchAccounts();
+              refetchAccounts(true);
             }, 3000);
             return;
           }
@@ -438,7 +483,7 @@ export default function Dashboard() {
         color: 'blue',
       });
       setTimeout(() => {
-        refetchAccounts();
+        refetchAccounts(true);
       }, 2000);
     } catch (error: any) {
       let errorMessage = 'Не удалось запустить синхронизацию';
@@ -459,6 +504,70 @@ export default function Dashboard() {
         color: 'red',
       });
     }
+  };
+
+  const handleDeleteBankClick = (e: React.MouseEvent, bankId: string) => {
+    e.stopPropagation(); // Предотвращаем открытие модального окна с деталями банка
+    
+    const bank = accountsData?.banks?.find(b => b.bankId === bankId);
+    const firstAccount = bank?.accounts?.[0];
+    
+    if (!firstAccount || !firstAccount.id) {
+      notifications.show({
+        title: 'Ошибка',
+        message: 'Не удалось найти аккаунт для удаления',
+        color: 'red',
+      });
+      return;
+    }
+    
+    const bankName = firstAccount.bankName || bankId;
+    const accountId = firstAccount.id;
+    
+    modals.openConfirmModal({
+      title: 'Удаление банка',
+      centered: true,
+      children: (
+        <Text size="sm">
+          Вы уверены, что хотите удалить банк <strong>{bankName}</strong>? Это действие нельзя отменить. Все данные о счетах и транзакциях этого банка будут удалены.
+        </Text>
+      ),
+      labels: { confirm: 'Удалить', cancel: 'Отмена' },
+      confirmProps: { color: 'red', leftSection: <IconX size={18} /> },
+      onConfirm: async () => {
+        try {
+          // Передаем id аккаунта, а не bankId
+          await deleteBank(accountId).unwrap();
+          notifications.show({
+            title: 'Банк удален',
+            message: 'Банк успешно удален из системы',
+            color: 'green',
+          });
+          // Обновляем данные после удаления
+          setTimeout(() => {
+            refetchAccounts(true);
+          }, 500);
+        } catch (error: any) {
+          let errorMessage = 'Не удалось удалить банк';
+          
+          if (error?.status === 404) {
+            errorMessage = 'Банк не найден';
+          } else if (error?.status === 401 || error?.status === 403) {
+            errorMessage = 'Ошибка аутентификации. Пожалуйста, войдите заново.';
+          } else if (error?.data?.message) {
+            errorMessage = error.data.message;
+          } else if (error?.message) {
+            errorMessage = error.message;
+          }
+          
+          notifications.show({
+            title: 'Ошибка удаления',
+            message: errorMessage,
+            color: 'red',
+          });
+        }
+      },
+    });
   };
 
   return (
@@ -565,27 +674,43 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div>
-              <Card
-                padding="xl"
-                radius="xl"
-                style={{
-                  background: PAGE_STYLES.cardBackground,
-                  border: `1px solid ${PAGE_STYLES.borderColor}`,
-                  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
-                }}
-              >
-                <Stack gap="md">
-                  <Group justify="space-between" align="center">
-                    <Title order={3} size="h4" fw={600} c={PAGE_STYLES.textPrimary}>
-                      Статистика
-                    </Title>
-                  </Group>
+            {/* Показываем карточку статистики только если есть данные */}
+            {(() => {
+              const hasStatisticsData = statisticsData && (
+                (statisticsData.monthlyStats && statisticsData.monthlyStats.length > 0) ||
+                (statisticsData.totalIncome && statisticsData.totalIncome > 0) ||
+                (statisticsData.totalExpenses && statisticsData.totalExpenses > 0) ||
+                (statisticsData.transactionsCount && statisticsData.transactionsCount > 0)
+              );
+              
+              if (!hasStatisticsData) {
+                return null;
+              }
+              
+              return (
+                <div>
+                  <Card
+                    padding="xl"
+                    radius="xl"
+                    style={{
+                      background: PAGE_STYLES.cardBackground,
+                      border: `1px solid ${PAGE_STYLES.borderColor}`,
+                      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+                    }}
+                  >
+                    <Stack gap="md">
+                      <Group justify="space-between" align="center">
+                        <Title order={3} size="h4" fw={600} c={PAGE_STYLES.textPrimary}>
+                          Статистика
+                        </Title>
+                      </Group>
 
-                  <StatisticsChart transactions={allTransactions} />
-                </Stack>
-              </Card>
-            </div>
+                      <StatisticsChart transactions={allTransactions} />
+                    </Stack>
+                  </Card>
+                </div>
+              );
+            })()}
           </div>
 
           <div style={{
@@ -1027,7 +1152,7 @@ export default function Dashboard() {
                         }}
                       >
                         <Group justify="space-between" align="center">
-                          <Stack gap={4}>
+                          <Stack gap={4} style={{ flex: 1 }}>
                             <Text 
                               fw={700} 
                               size="lg" 
@@ -1059,32 +1184,62 @@ export default function Dashboard() {
                               })()}
                             </Text>
                           </Stack>
-                          <div
-                            style={{
-                              width: '56px',
-                              height: '56px',
-                              borderRadius: '14px',
-                              background: 'rgba(255, 255, 255, 0.2)',
-                              backdropFilter: 'blur(10px)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              border: '1px solid rgba(255, 255, 255, 0.3)',
-                            }}
-                          >
-                            <Text 
-                              fw={700} 
-                              size="xl" 
-                              style={{ 
+                          <Group gap="xs" align="center">
+                            <Button
+                              variant="subtle"
+                              color="red"
+                              size="xs"
+                              p={4}
+                              style={{
+                                minWidth: 'auto',
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '6px',
+                                background: 'rgba(255, 255, 255, 0.2)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid rgba(255, 255, 255, 0.3)',
                                 color: '#FFFFFF',
-                                fontSize: '24px',
-                                letterSpacing: '-0.03em',
-                                fontFamily: 'var(--font-inter), sans-serif',
+                                cursor: 'pointer',
+                              }}
+                              onClick={(e) => handleDeleteBankClick(e, bank.bankId)}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.background = 'rgba(239, 68, 68, 0.3)';
+                                e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.5)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
                               }}
                             >
-                              {bankName.charAt(0).toUpperCase()}
-                            </Text>
-                          </div>
+                              <IconX size={16} />
+                            </Button>
+                            <div
+                              style={{
+                                width: '56px',
+                                height: '56px',
+                                borderRadius: '14px',
+                                background: 'rgba(255, 255, 255, 0.2)',
+                                backdropFilter: 'blur(10px)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                border: '1px solid rgba(255, 255, 255, 0.3)',
+                              }}
+                            >
+                              <Text 
+                                fw={700} 
+                                size="xl" 
+                                style={{ 
+                                  color: '#FFFFFF',
+                                  fontSize: '24px',
+                                  letterSpacing: '-0.03em',
+                                  fontFamily: 'var(--font-inter), sans-serif',
+                                }}
+                              >
+                                {bankName.charAt(0).toUpperCase()}
+                              </Text>
+                            </div>
+                          </Group>
                         </Group>
                       </div>
 
