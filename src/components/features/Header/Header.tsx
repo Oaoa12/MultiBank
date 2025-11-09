@@ -1,6 +1,6 @@
 "use client"
 import { IconChevronDown } from '@tabler/icons-react';
-import { Burger, Center, Container, Group, Menu } from '@mantine/core';
+import { Burger, Center, Container, Group, Menu, Drawer, Stack, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Logo from '../../../../public/Logo.png'
 import classes from './Header.module.css';
@@ -22,7 +22,7 @@ const links = [
 export function Header() {
     const { data: me, isSuccess, isLoading, isError } = useGetCurrentUserQuery();
     const [logout] = useLogoutMutation();
-    const [opened, { toggle }] = useDisclosure(false);
+    const [opened, { toggle, close }] = useDisclosure(false);
 
     const isAuth = useMemo(() => !!me || !!isSuccess, [me, isSuccess]);
 
@@ -30,7 +30,7 @@ export function Header() {
         try {
             await logout().unwrap();
         } catch {}
-        setIsAuth(false);
+        close();
         window.location.href = '/';
     };
 
@@ -84,6 +84,48 @@ export function Header() {
         );
     });
 
+    const mobileItems = visibleLinks.map((link) => {
+        if (link.label === 'Профиль') {
+            return (
+                <Stack key={link.label} gap="xs">
+                    <Button
+                        variant="subtle"
+                        fullWidth
+                        justify="flex-start"
+                        component={Link}
+                        href="/profile"
+                        onClick={close}
+                    >
+                        Профиль
+                    </Button>
+                    <Button
+                        variant="subtle"
+                        color="red"
+                        fullWidth
+                        justify="flex-start"
+                        onClick={handleLogout}
+                    >
+                        Выйти
+                    </Button>
+                </Stack>
+            );
+        }
+
+        return (
+            <Button
+                key={link.label}
+                variant="subtle"
+                fullWidth
+                justify="flex-start"
+                component={Link}
+                href={link.link}
+                onClick={close}
+            >
+                {link.label}
+            </Button>
+        );
+    });
+
     return (
         <header className={classes.header}>
             <Container size="md">
@@ -103,6 +145,19 @@ export function Header() {
                     <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
                 </div>
             </Container>
+
+            <Drawer
+                opened={opened}
+                onClose={close}
+                title="Меню"
+                position="right"
+                hiddenFrom="sm"
+                padding="md"
+            >
+                <Stack gap="xs">
+                    {mobileItems}
+                </Stack>
+            </Drawer>
         </header>
     );
 }
