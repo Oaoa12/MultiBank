@@ -434,6 +434,7 @@ export default function ProfilePage() {
                 size="md"
                 leftSection={<IconHistory size={18} />} 
                 justify="start"
+                onClick={() => router.push('/dashboard')}
               >
                 История операций
               </Button>

@@ -16,11 +16,13 @@
   display: flex;
   gap: 20px;
   align-items: flex-start;
+  overflow: visible;
 }
 
 .donutChartWrapper {
   margin-top: 80px;
   flex-shrink: 0;
+  overflow: visible;
 }
 
 @media (max-width: 768px) {

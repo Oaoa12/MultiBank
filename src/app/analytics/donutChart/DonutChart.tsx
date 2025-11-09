@@ -99,7 +99,10 @@ export default function DonutChart({ selectedBankId, statisticsData }: DonutChar
           stroke="none"
         >
           {chartData.map((entry) => (
-            <Cell key={entry.name} fill={entry.color} />
+            <Cell 
+              key={entry.name} 
+              fill={entry.color}
+            />
           ))}
         </Pie>
       </PieChart>

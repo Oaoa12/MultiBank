@@ -4,6 +4,22 @@ import { Paper, Text, Stack, Divider, Group, Loader, Center } from '@mantine/cor
 import { LineChart } from '@mantine/charts';
 import { useState, useEffect, useMemo } from 'react';
 import { BankOverviewResponse, TransactionsStatisticsResponse, useGetTransactionsQuery } from '@/lib/store/api/AuthApi';
+import { 
+  IconBasket, 
+  IconBus, 
+  IconPlaneDeparture, 
+  IconCoffee, 
+  IconHome, 
+  IconCash, 
+  IconBriefcase,
+  IconReceipt,
+  IconDeviceMobile,
+  IconGasStation,
+  IconMedicalCross,
+  IconSchool,
+  IconGift,
+  IconArrowRight
+} from '@tabler/icons-react';
 import styles from './BalanceAnalytics.module.css';
 
 interface BalanceAnalyticsProps {
@@ -26,6 +42,61 @@ const TOOLTIP_STYLE: React.CSSProperties = {
 
 const CHART_COLOR = '#2563eb';
 const ANIMATION_DELAY = 50;
+
+// Функция для получения иконки транзакции по категории (отличные от иконок популярных категорий)
+const getTransactionIcon = (category: string | undefined, type: 'INCOME' | 'EXPENSE' | 'TRANSFER') => {
+  if (type === 'INCOME') {
+    return IconBriefcase; // Иконка для доходов
+  }
+  
+  if (!category) {
+    return IconReceipt; // Иконка по умолчанию
+  }
+  
+  const lowerCategory = category.toLowerCase();
+  
+  if (lowerCategory.includes('продукт') || lowerCategory.includes('магазин') || lowerCategory.includes('супермаркет')) {
+    return IconBasket; // Вместо IconShoppingCart
+  }
+  if (lowerCategory.includes('транспорт') || lowerCategory.includes('🚌') || lowerCategory.includes('автобус')) {
+    return IconBus; // Вместо IconCar
+  }
+  if (lowerCategory.includes('путешеств') || lowerCategory.includes('самолет') || lowerCategory.includes('авиа')) {
+    return IconPlaneDeparture; // Вместо IconPlane
+  }
+  if (lowerCategory.includes('кафе') || lowerCategory.includes('ресторан') || lowerCategory.includes('развлечен') || lowerCategory.includes('кофе')) {
+    return IconCoffee; // Вместо IconPizza
+  }
+  if (lowerCategory.includes('жиль') || lowerCategory.includes('жкх') || lowerCategory.includes('аренд') || lowerCategory.includes('🏠')) {
+    return IconHome; // Вместо IconBuilding
+  }
+  if (lowerCategory.includes('кредит') || lowerCategory.includes('займ')) {
+    return IconCash; // Вместо IconCoins
+  }
+  if (lowerCategory.includes('зарплат') || lowerCategory.includes('доход')) {
+    return IconBriefcase;
+  }
+  if (lowerCategory.includes('мобильн') || lowerCategory.includes('связь') || lowerCategory.includes('телефон')) {
+    return IconDeviceMobile;
+  }
+  if (lowerCategory.includes('бензин') || lowerCategory.includes('заправк') || lowerCategory.includes('топливо')) {
+    return IconGasStation;
+  }
+  if (lowerCategory.includes('медицин') || lowerCategory.includes('здоров') || lowerCategory.includes('аптек')) {
+    return IconMedicalCross;
+  }
+  if (lowerCategory.includes('образован') || lowerCategory.includes('школ') || lowerCategory.includes('университет')) {
+    return IconSchool;
+  }
+  if (lowerCategory.includes('подарок') || lowerCategory.includes('праздник')) {
+    return IconGift;
+  }
+  if (lowerCategory.includes('перевод') || lowerCategory.includes('transfer')) {
+    return IconArrowRight;
+  }
+  
+  return IconReceipt; // Иконка по умолчанию
+};
 
 export default function BalanceAnalytics({ selectedBankId, accountsData, statisticsData }: BalanceAnalyticsProps) {
   const [isAnimated, setIsAnimated] = useState(false);
@@ -114,6 +185,8 @@ export default function BalanceAnalytics({ selectedBankId, accountsData, statist
         name: tx.merchant || tx.description || tx.category || 'Транзакция',
         amount: tx.amount,
         type: tx.type === 'INCOME' ? 'income' as const : 'expense' as const,
+        category: tx.category,
+        transactionType: tx.type,
       }));
   }, [transactionsData, transactionsError]);
 
@@ -220,28 +293,50 @@ export default function BalanceAnalytics({ selectedBankId, accountsData, statist
             </Center>
           ) : (
             <Stack gap="xs" mt="md" className={styles.transactionsList}>
-              {recentTransactions.map((transaction) => (
-                <Group key={transaction.id} justify="space-between" align="center" className={styles.transactionItem}>
-                  <Group gap="sm">
-                    <div className={styles.transactionIcon} />
+              {recentTransactions.map((transaction) => {
+                const TransactionIcon = getTransactionIcon(transaction.category, transaction.transactionType);
+                return (
+                  <Group key={transaction.id} justify="space-between" align="center" className={styles.transactionItem}>
+                    <Group gap="sm">
+                      <div 
+                        className={styles.transactionIcon}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '8px',
+                          backgroundColor: transaction.type === 'income' ? '#10b98115' : '#f3f4f6',
+                        }}
+                      >
+                        <TransactionIcon 
+                          size={18} 
+                          color={transaction.type === 'income' ? '#10b981' : '#6b7280'}
+                          style={{
+                            transition: 'transform 0.2s ease',
+                          }}
+                        />
+                      </div>
+                      <Text 
+                        size="sm" 
+                        fw={500}
+                        className={styles.transactionName}
+                      >
+                        {transaction.name}
+                      </Text>
+                    </Group>
                     <Text 
                       size="sm" 
-                      fw={500}
-                      className={styles.transactionName}
+                      fw={600}
+                      c={transaction.type === 'income' ? '#10b981' : '#000'}
+                      className={styles.transactionAmount}
                     >
-                      {transaction.name}
+                      {transaction.type === 'income' ? '+' : '-'}₽ {transaction.amount.toLocaleString()}
                     </Text>
                   </Group>
-                  <Text 
-                    size="sm" 
-                    fw={600}
-                    c={transaction.type === 'income' ? '#10b981' : '#000'}
-                    className={styles.transactionAmount}
-                  >
-                    {transaction.type === 'income' ? '+' : '-'}₽ {transaction.amount.toLocaleString()}
-                  </Text>
-                </Group>
-              ))}
+                );
+              })}
             </Stack>
           )}
         </Stack>
