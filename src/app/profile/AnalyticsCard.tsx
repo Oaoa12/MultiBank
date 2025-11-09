@@ -103,7 +103,8 @@ export default function AnalyticsCard({
         const x = index * (CHART_CONFIG.BAR_WIDTH + CHART_CONFIG.GAP);
         const barHeight = (CHART_CONFIG.HEIGHT * height) / 100;
         const y = CHART_CONFIG.HEIGHT - barHeight;
-        const isLast = index === heights.length - 1;
+        
+        const opacity = 0.6 + (index / (heights.length - 1 || 1)) * 0.4; 
 
         return (
           <rect
@@ -112,7 +113,10 @@ export default function AnalyticsCard({
             y={y}
             width={CHART_CONFIG.BAR_WIDTH}
             height={barHeight}
-            fill={isLast ? color : CHART_CONFIG.GRAY_COLOR}
+            fill={color}
+            opacity={opacity}
+            rx={2}
+            ry={2}
           />
         );
       }),

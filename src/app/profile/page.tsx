@@ -36,13 +36,14 @@ import {
   IconAlertCircle,
 } from '@tabler/icons-react';
 import { useProfile } from '@/lib/hooks/useProfile';
-import { useLogoutMutation } from '@/lib/store/api/AuthApi';
+import { useLogoutMutation, useLazyGetTransactionsQuery, useGetTransactionsStatisticsQuery } from '@/lib/store/api/AuthApi';
 import { userApi } from '@/lib/store/api/UserApi';
 import { authApi } from '@/lib/store/api/AuthApi';
 import { useDispatch } from 'react-redux';
 import AnalyticsSection from './AnalyticsSection';
 import { useGetCurrentUserQuery } from '@/lib/store/api/UserApi';
 import Link from 'next/link';
+import { useMemo, useCallback } from 'react';
 
 const PAGE_STYLES = {
   background: 'linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%)',
@@ -52,34 +53,20 @@ const PAGE_STYLES = {
   successGreen: '#28a745',
 } as const;
 
-const TRANSACTION_STATUS_COLORS = {
-  Успешно: 'green',
-  'В обработке': 'orange',
-  Отменено: 'red',
-} as const;
-
-const TRANSACTIONS_DATA = [
-  { day: 15, month: 'янв', name: 'Пополнение счета', category: 'Переводы', status: 'Успешно', amount: '+₽ 5,000' },
-  { day: 12, month: 'янв', name: 'Магнит', category: 'Супермаркеты', status: 'Успешно', amount: '-₽ 1,250' },
-  { day: 10, month: 'янв', name: 'Перевод между счетами', category: 'Переводы', status: 'В обработке', amount: '₽ 3,000' },
-] as const;
-
 const GENDER_OPTIONS = [
   { value: 'MALE', label: 'Мужской' },
   { value: 'FEMALE', label: 'Женский' },
 ] as const;
 
-interface Transaction {
-  day: number;
-  month: string;
-  name: string;
-  category: string;
-  status: keyof typeof TRANSACTION_STATUS_COLORS | string;
-  amount: string;
-}
-
-const getStatusColor = (status: string): string => {
-  return TRANSACTION_STATUS_COLORS[status as keyof typeof TRANSACTION_STATUS_COLORS] || 'gray';
+const formatBalance = (balance: string | number | undefined | null, currency: string = 'RUB'): string => {
+  if (balance === undefined || balance === null || balance === '') {
+    return '0.00';
+  }
+  const num = typeof balance === 'string' ? parseFloat(balance) : balance;
+  if (isNaN(num)) {
+    return '0.00';
+  }
+  return num.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ' + currency;
 };
 
 export default function ProfilePage() {
@@ -117,6 +104,32 @@ export default function ProfilePage() {
 
   const [logout, { isLoading: logoutLoading }] = useLogoutMutation();
   const dispatch = useDispatch();
+  const [getTransactions] = useLazyGetTransactionsQuery();
+  const { data: statisticsData } = useGetTransactionsStatisticsQuery();
+  
+  const [transactions, setTransactions] = useState<any[]>([]);
+  const [transactionsLoading, setTransactionsLoading] = useState(false);
+
+  const loadTransactions = useCallback(async () => {
+    setTransactionsLoading(true);
+    try {
+      const result = await getTransactions({
+        page: 1,
+        limit: 5,
+      });
+      if (result.data?.transactions) {
+        setTransactions(result.data.transactions);
+      }
+    } catch (error) {
+      console.error('Error loading transactions:', error);
+    } finally {
+      setTransactionsLoading(false);
+    }
+  }, [getTransactions]);
+
+  useEffect(() => {
+    loadTransactions();
+  }, [loadTransactions]);
 
   useEffect(() => {
     document.body.style.overflowX = 'hidden';
@@ -454,7 +467,7 @@ export default function ProfilePage() {
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 7.5 }}>
           <div style={{ marginBottom: 'var(--mantine-spacing-xl)' }}>
-            <AnalyticsSection />
+            <AnalyticsSection statisticsData={statisticsData} />
           </div>
 
           <Card
@@ -470,69 +483,115 @@ export default function ProfilePage() {
               <Button 
                 variant="subtle" 
                 size="sm"
+                onClick={() => router.push('/dashboard')}
               >
                 Все операции
               </Button>
             </Group>
 
-            <Stack gap="sm">
-              {TRANSACTIONS_DATA.map((transaction, index) => (
-                <Group 
-                  key={index}
-                  justify="space-between" 
-                  p="md" 
-                  style={{ 
-                    backgroundColor: index % 2 === 0 ? 'var(--mantine-color-gray-0)' : 'transparent', 
-                    borderRadius: 'var(--mantine-radius-md)' 
-                  }}
-                  wrap="nowrap"
-                >
-                  <div style={{ minWidth: '50px', textAlign: 'center' }}>
-                    <Text fw={700} size="xl" style={{ lineHeight: 1.2, color: '#000' }}>
-                      {transaction.day}
-                    </Text>
-                    <Text size="xs" c="dimmed" style={{ lineHeight: 1, textTransform: 'lowercase' }}>
-                      {transaction.month}
-                    </Text>
-                  </div>
+            {transactionsLoading ? (
+              <Center py="xl">
+                <Loader size="sm" />
+              </Center>
+            ) : transactions.length === 0 ? (
+              <Center py="xl">
+                <Text size="sm" c="dimmed">Нет транзакций</Text>
+              </Center>
+            ) : (
+              <Stack gap="sm">
+                {transactions.map((transaction: any, index: number) => {
+                  const transactionDate = transaction.date || transaction.bookingDateTime || transaction.valueDateTime || transaction.createdAt;
+                  const date = transactionDate ? new Date(transactionDate) : new Date();
+                  const day = date.getDate();
+                  const monthNames = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+                  const month = monthNames[date.getMonth()] || '';
 
-                  <div style={{ flex: 1, marginLeft: '16px' }}>
-                    <Text size="sm" fw={500} style={{ color: '#000' }}>
-                      {transaction.name}
-                    </Text>
-                    <Text size="xs" c="dimmed" style={{ marginTop: '2px' }}>
-                      {transaction.category}
-                    </Text>
-                  </div>
+                  let amount = 0;
+                  if (typeof transaction.amount === 'number') {
+                    amount = transaction.amount;
+                  } else if (typeof transaction.amount === 'object' && transaction.amount?.amount) {
+                    amount = parseFloat(String(transaction.amount.amount || '0'));
+                  } else {
+                    amount = parseFloat(String(transaction.amount || '0'));
+                  }
 
-                  <Badge
-                    variant="light"
-                    color={getStatusColor(transaction.status)}
-                    size="sm"
-                    style={{ marginRight: '16px' }}
-                    leftSection={
-                      transaction.status === 'Успешно' ? (
-                        <div
-                          style={{
-                            width: '6px',
-                            height: '6px',
-                            borderRadius: '50%',
-                            backgroundColor: PAGE_STYLES.successGreen,
-                            marginRight: '4px',
-                          }}
-                        />
-                      ) : null
-                    }
-                  >
-                    {transaction.status}
-                  </Badge>
+                  const isCredit = transaction.type === 'INCOME' || transaction.creditDebitIndicator === 'Credit';
+                  const currency = transaction.currency || transaction.amount?.currency || 'RUB';
+                  const amountStr = isCredit
+                    ? `+${formatBalance(Math.abs(amount).toString(), currency)}`
+                    : `-${formatBalance(Math.abs(amount).toString(), currency)}`;
 
-                  <Text fw={700} style={{ color: '#000', minWidth: '100px', textAlign: 'right' }}>
-                    {transaction.amount}
-                  </Text>
-                </Group>
-              ))}
-            </Stack>
+                  const name = transaction.transactionInformation || transaction.description || transaction.name || transaction.merchant || 'Транзакция';
+                  const category = transaction.category || 'Другое';
+                  const status = transaction.status === 'Booked' ? 'Успешно' : transaction.status || 'Успешно';
+
+                  return (
+                    <Group 
+                      key={transaction.id || transaction.transactionId || index}
+                      justify="space-between" 
+                      align="center"
+                      p="md" 
+                      style={{ 
+                        backgroundColor: index % 2 === 0 ? 'var(--mantine-color-gray-0)' : 'transparent', 
+                        borderRadius: 'var(--mantine-radius-md)' 
+                      }}
+                      wrap="nowrap"
+                    >
+                      <div style={{ minWidth: '50px', textAlign: 'center' }}>
+                        <Text fw={700} size="xl" style={{ lineHeight: 1.2, color: '#000' }}>
+                          {day}
+                        </Text>
+                        <Text size="xs" c="dimmed" style={{ lineHeight: 1, textTransform: 'lowercase' }}>
+                          {month}
+                        </Text>
+                      </div>
+
+                      <div style={{ flex: 1, marginLeft: '16px' }}>
+                        <Text size="sm" fw={500} style={{ color: '#000' }}>
+                          {name}
+                        </Text>
+                        <Text size="xs" c="dimmed" style={{ marginTop: '2px' }}>
+                          {category}
+                        </Text>
+                      </div>
+
+                      <Badge
+                        variant="light"
+                        color={status === 'Успешно' ? 'green' : status === 'В обработке' ? 'orange' : 'red'}
+                        size="sm"
+                        style={{ 
+                          marginRight: '16px',
+                          minWidth: '110px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          height: '24px'
+                        }}
+                        leftSection={
+                          status === 'Успешно' ? (
+                            <div
+                              style={{
+                                width: '6px',
+                                height: '6px',
+                                borderRadius: '50%',
+                                backgroundColor: PAGE_STYLES.successGreen,
+                                marginRight: '4px',
+                              }}
+                            />
+                          ) : null
+                        }
+                      >
+                        {status}
+                      </Badge>
+
+                      <Text fw={700} style={{ color: isCredit ? PAGE_STYLES.successGreen : '#000', minWidth: '100px', textAlign: 'right' }}>
+                        {amountStr}
+                      </Text>
+                    </Group>
+                  );
+                })}
+              </Stack>
+            )}
           </Card>
 
           <Card 

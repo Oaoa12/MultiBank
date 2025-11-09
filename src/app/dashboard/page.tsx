@@ -34,7 +34,6 @@ import {
   IconX,
 } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
-import { modals } from '@mantine/modals';
 import {
   useGetBanksQuery,
   useBankConsentMutation,
@@ -89,6 +88,8 @@ export default function Dashboard() {
   const [selectedTransaction, setSelectedTransaction] = useState<any | null>(null);
   const [transactionModalOpen, setTransactionModalOpen] = useState(false);
   const [selectedBankDetails, setSelectedBankDetails] = useState<string | null>(null);
+  const [deleteBankModalOpen, setDeleteBankModalOpen] = useState(false);
+  const [bankToDelete, setBankToDelete] = useState<{ bankId: string; accountId: number; bankName: string } | null>(null);
 
   const { data: banksData, isLoading: banksLoading } = useGetBanksQuery();
   const [bankConsent] = useBankConsentMutation();
@@ -104,7 +105,7 @@ export default function Dashboard() {
   const refetchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastRefetchTimeRef = useRef<number>(0);
   
-  const refetchAccounts = useCallback((withRefresh: boolean = false) => {
+  const refetchAccounts = useCallback(() => {
     const now = Date.now();
     // Если прошло меньше 2 секунд с последнего рефетча, отменяем предыдущий и планируем новый
     if (now - lastRefetchTimeRef.current < 2000) {
@@ -113,22 +114,14 @@ export default function Dashboard() {
       }
       refetchTimeoutRef.current = setTimeout(() => {
         lastRefetchTimeRef.current = Date.now();
-        if (withRefresh) {
-          refetchAccountsBase({ refresh: true });
-        } else {
-          refetchAccountsBase();
-        }
+        refetchAccountsBase();
       }, 2000);
       return;
     }
     
     // Иначе делаем рефетч сразу
     lastRefetchTimeRef.current = now;
-    if (withRefresh) {
-      refetchAccountsBase({ refresh: true });
-    } else {
-      refetchAccountsBase();
-    }
+    refetchAccountsBase();
   }, [refetchAccountsBase]);
   
   // Cleanup timeout при размонтировании компонента
@@ -429,7 +422,7 @@ export default function Dashboard() {
             });
             // Используем refresh: true для принудительного обновления после подключения банка
             setTimeout(() => {
-              refetchAccounts(true);
+              refetchAccounts();
             }, 1000);
           }
         } catch (error: any) {
@@ -437,7 +430,7 @@ export default function Dashboard() {
             endpointExists = false;
             clearInterval(checkStatus);
             setTimeout(() => {
-              refetchAccounts(true);
+              refetchAccounts();
             }, 3000);
             return;
           }
@@ -477,7 +470,7 @@ export default function Dashboard() {
         color: 'blue',
       });
       setTimeout(() => {
-        refetchAccounts(true);
+        refetchAccounts();
       }, 2000);
     } catch (error: any) {
       let errorMessage = 'Не удалось запустить синхронизацию';
@@ -518,50 +511,44 @@ export default function Dashboard() {
     const bankName = firstAccount.bankName || bankId;
     const accountId = firstAccount.id;
     
-    modals.openConfirmModal({
-      title: 'Удаление банка',
-      centered: true,
-      children: (
-        <Text size="sm">
-          Вы уверены, что хотите удалить банк <strong>{bankName}</strong>? Это действие нельзя отменить. Все данные о счетах и транзакциях этого банка будут удалены.
-        </Text>
-      ),
-      labels: { confirm: 'Удалить', cancel: 'Отмена' },
-      confirmProps: { color: 'red', leftSection: <IconX size={18} /> },
-      onConfirm: async () => {
-        try {
-          // Передаем id аккаунта, а не bankId
-          await deleteBank(accountId).unwrap();
-          notifications.show({
-            title: 'Банк удален',
-            message: 'Банк успешно удален из системы',
-            color: 'green',
-          });
-          // Обновляем данные после удаления
-          setTimeout(() => {
-            refetchAccounts(true);
-          }, 500);
-        } catch (error: any) {
-          let errorMessage = 'Не удалось удалить банк';
-          
-          if (error?.status === 404) {
-            errorMessage = 'Банк не найден';
-          } else if (error?.status === 401 || error?.status === 403) {
-            errorMessage = 'Ошибка аутентификации. Пожалуйста, войдите заново.';
-          } else if (error?.data?.message) {
-            errorMessage = error.data.message;
-          } else if (error?.message) {
-            errorMessage = error.message;
-          }
-          
-          notifications.show({
-            title: 'Ошибка удаления',
-            message: errorMessage,
-            color: 'red',
-          });
-        }
-      },
-    });
+    setBankToDelete({ bankId, accountId, bankName });
+    setDeleteBankModalOpen(true);
+  };
+
+  const handleConfirmDeleteBank = async () => {
+    if (!bankToDelete) return;
+    
+    try {
+      await deleteBank(bankToDelete.accountId).unwrap();
+      notifications.show({
+        title: 'Банк удален',
+        message: 'Банк успешно удален из системы',
+        color: 'green',
+      });
+      setDeleteBankModalOpen(false);
+      setBankToDelete(null);
+      setTimeout(() => {
+        refetchAccounts();
+      }, 500);
+    } catch (error: any) {
+      let errorMessage = 'Не удалось удалить банк';
+      
+      if (error?.status === 404) {
+        errorMessage = 'Банк не найден';
+      } else if (error?.status === 401 || error?.status === 403) {
+        errorMessage = 'Ошибка аутентификации. Пожалуйста, войдите заново.';
+      } else if (error?.data?.message) {
+        errorMessage = error.data.message;
+      } else if (error?.message) {
+        errorMessage = error.message;
+      }
+      
+      notifications.show({
+        title: 'Ошибка удаления',
+        message: errorMessage,
+        color: 'red',
+      });
+    }
   };
 
   return (
@@ -1911,6 +1898,33 @@ export default function Dashboard() {
           </Modal>
         );
       })()}
+
+      <Modal
+        opened={deleteBankModalOpen}
+        onClose={() => {
+          setDeleteBankModalOpen(false);
+          setBankToDelete(null);
+        }}
+        title="Удаление банка"
+        centered
+      >
+        <Stack gap="md">
+          <Text size="sm">
+            Вы уверены, что хотите удалить банк <strong>{bankToDelete?.bankName}</strong>? Это действие нельзя отменить. Все данные о счетах и транзакциях этого банка будут удалены.
+          </Text>
+          <Group justify="flex-end" gap="sm">
+            <Button variant="subtle" onClick={() => {
+              setDeleteBankModalOpen(false);
+              setBankToDelete(null);
+            }}>
+              Отмена
+            </Button>
+            <Button color="red" leftSection={<IconX size={18} />} onClick={handleConfirmDeleteBank}>
+              Удалить
+            </Button>
+          </Group>
+        </Stack>
+      </Modal>
 
       <Modal
         opened={transactionModalOpen}
