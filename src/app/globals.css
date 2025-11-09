@@ -114,7 +114,7 @@ select,
 }
 
 .swiper-button-next {
-  right: 40px !important;
+  display: none !important;
 }
 
 .swiper-pagination {
@@ -142,5 +142,20 @@ select,
 
 .transactions-scroll::-webkit-scrollbar-thumb:hover {
   background: #A0A0A0;
+}
+
+/* Hide Next.js Dev Tools indicator */
+#devtools-indicator,
+.nextjs-toast,
+[data-nextjs-toast],
+[data-nextjs-toast="true"],
+div[id="devtools-indicator"],
+div[data-nextjs-toast] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: fixed !important;
+  z-index: -9999 !important;
 }
 

@@ -233,7 +233,7 @@
 }
 
 .swiper-button-next {
-  right: calc(50% - (var(--card-width) / 2) - 12px);
+  display: none !important;
 }
 
 .swiper-pagination {

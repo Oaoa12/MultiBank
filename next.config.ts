@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // @ts-ignore - devIndicators может быть boolean в некоторых версиях
+  devIndicators: false,
   async rewrites() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://176.114.89.172:3000';
     

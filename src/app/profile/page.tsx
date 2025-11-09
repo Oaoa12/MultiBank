@@ -23,6 +23,7 @@ import {
   Alert,
   Loader,
   Center,
+  Progress,
 } from '@mantine/core';
 import {
   IconUser,
@@ -349,6 +350,28 @@ export default function ProfilePage() {
                 <Badge color={user?.isActive ? "green" : "red"} variant="light">
                   {user?.isActive ? "Активный" : "Неактивный"}
                 </Badge>
+                {user?.level !== undefined && user?.progressToNextLevel !== undefined && user?.totalLevels !== undefined && (
+                  <Stack gap="xs" w="100%" mt="md">
+                    <Group justify="space-between" w="100%">
+                      <Text size="sm" fw={500}>
+                        Уровень {user.level} из {user.totalLevels}
+                      </Text>
+                      <Text size="sm" c="dimmed">
+                        {user.progressToNextLevel.toFixed(1)}% до следующего уровня
+                      </Text>
+                    </Group>
+                    <Progress 
+                      value={user.progressToNextLevel} 
+                      size="lg" 
+                      radius="xl"
+                      color="blue"
+                      animated
+                    />
+                    <Text size="xs" c="dimmed" ta="center">
+                      Осталось {(100 - user.progressToNextLevel).toFixed(1)}% до уровня {user.level + 1}
+                    </Text>
+                  </Stack>
+                )}
               </Stack>
                <Button 
                  style={{

@@ -28,11 +28,15 @@ import {
   useGetRecommendationsQuery,
   useMarkRecommendationAsReadMutation,
   useDeleteAllRecommendationsMutation,
+  useGetRelevantAdMutation,
   type Recommendation
 } from '@/lib/store/api/AiApi';
 import { notifications } from '@mantine/notifications';
 import classes from './AiChat.module.css';
 import { useGetCurrentUserQuery } from '@/lib/store/api/UserApi';
+import { formatMarkdown } from '@/lib/utils/formatMarkdown';
+import { useGetUserAdsQuery } from '@/lib/store/api/AdsApi';
+import type { Ad } from '@/lib/store/api/AdsApi';
 
 interface ChatMessage {
   id: string;
@@ -44,6 +48,7 @@ interface ChatMessage {
 }
 
 const STORAGE_KEY = 'ai-chat-history';
+const ADS_STORAGE_KEY = 'user-ads';
 
 export function AiChat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,11 +59,14 @@ export function AiChat() {
   const [getFinancialAdvice] = useGetFinancialAdviceMutation();
   const [markAsRead] = useMarkRecommendationAsReadMutation();
   const [deleteAllRecommendations] = useDeleteAllRecommendationsMutation();
+  const [getRelevantAd] = useGetRelevantAdMutation();
+  const requestedAdsRef = useRef<Set<number>>(new Set());
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollViewportRef = useRef<HTMLDivElement>(null);
   const readMessagesRef = useRef<Set<number>>(new Set());
   const [isClearing, setIsClearing] = useState(false);
+  const [lastAd, setLastAd] = useState<{ id: number; ads: string; url: string } | null>(null);
   
   // Check if user is authenticated
   const { isSuccess: isAuthenticated } = useGetCurrentUserQuery();
@@ -69,9 +77,54 @@ export function AiChat() {
     { skip: !isAuthenticated }
   );
 
+  // Load user ads
+  const { data: userAdsData, refetch: refetchUserAds } = useGetUserAdsQuery(
+    undefined,
+    { skip: !isAuthenticated }
+  );
+
+  // Обрабатываем рекламы пользователя и показываем последнюю
+  useEffect(() => {
+    if (userAdsData) {
+      // Обрабатываем оба варианта: массив напрямую или объект с полем ads
+      let adsArray: Ad[] = [];
+      if (Array.isArray(userAdsData)) {
+        adsArray = userAdsData;
+      } else if (userAdsData.ads && Array.isArray(userAdsData.ads)) {
+        adsArray = userAdsData.ads;
+      }
+
+      // Выбираем рекламу по lastViewedAt (самая новая или null)
+      if (adsArray.length > 0) {
+        const selectedAd = adsArray
+          .filter(ad => ad) // Фильтруем пустые значения
+          .sort((a, b) => {
+            // Сначала рекламы без lastViewedAt (null или undefined)
+            if (!a.lastViewedAt && !b.lastViewedAt) return 0;
+            if (!a.lastViewedAt) return -1; // a идет первым
+            if (!b.lastViewedAt) return 1; // b идет первым
+            
+            // Затем сортируем по lastViewedAt (самая новая первая)
+            const dateA = new Date(a.lastViewedAt).getTime();
+            const dateB = new Date(b.lastViewedAt).getTime();
+            return dateB - dateA; // Обратный порядок - самая новая первая
+          })[0]; // Берем первую (самую новую или без lastViewedAt)
+        
+        if (selectedAd) {
+          setLastAd({
+            id: selectedAd.id,
+            ads: selectedAd.ads,
+            url: selectedAd.url || '#',
+          });
+        }
+      }
+    }
+  }, [userAdsData]);
+
   // Convert recommendations to chat messages
   const convertRecommendationsToMessages = useCallback((recs: Recommendation[]): ChatMessage[] => {
-    return recs
+    // Создаем копию массива перед сортировкой, чтобы не мутировать read-only массив
+    return [...recs]
       .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
       .map((rec) => ({
         id: `rec-${rec.id}`,
@@ -127,6 +180,10 @@ export function AiChat() {
           (!m.recommendationId || !existingByRecId.has(m.recommendationId))
         );
         
+        // НЕ запрашиваем relevant-by-advice при загрузке рекомендаций из API
+        // Запрос relevant-by-advice делается только один раз при отправке нового сообщения в чате
+        // через /api/ai/financial-advice
+        
         // Update existing recommendations with latest data (e.g., isRead status)
         const updated = prev.map(m => {
           if (m.recommendationId) {
@@ -140,7 +197,14 @@ export function AiChat() {
         
         // Combine and sort by timestamp
         const combined = [...updated, ...newRecMessages];
-        return combined.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
+        const sorted = combined.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
+        
+        // Если появились новые рекомендации, сбрасываем isLoading
+        if (newRecMessages.length > 0) {
+          setIsLoading(false);
+        }
+        
+        return sorted;
       });
     }
   }, [isAuthenticated, recommendations, convertRecommendationsToMessages]);
@@ -229,12 +293,12 @@ export function AiChat() {
     };
   }, [messages, isAuthenticated, isOpen, markAsRead, refetchRecommendations]);
 
-  // Auto-scroll to bottom when new messages arrive
+  // Auto-scroll to bottom when new messages arrive or when ad appears
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages]);
+  }, [messages, lastAd]);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading || !isAuthenticated) {
@@ -260,24 +324,131 @@ export function AiChat() {
     setInput('');
     setIsLoading(true);
 
+    // Сохраняем ID пользовательского сообщения для отслеживания
+    const userMessageId = userMessage.id;
+    let hasReceivedResponse = false;
+
     try {
       const response = await getFinancialAdvice({ prompt }).unwrap();
+      hasReceivedResponse = true;
+      
+      // Извлекаем данные из нового формата ответа
+      const advice = response.message || response.advice || '';
+      const recommendationId = response.recommendation?.id || response.recommendationId;
+      
+      console.log('AiChat: response structure', { 
+        hasRecommendation: !!response.recommendation, 
+        recommendationId,
+        hasMessage: !!response.message,
+        hasAdvice: !!response.advice 
+      });
+      
+      // Проверяем, что ответ не пустой
+      if (!advice || advice.trim() === '' || advice.trim() === 'Извините, не удалось получить ответ.') {
+        console.log('AiChat: empty or error advice in response, waiting for recommendations');
+        // Не показываем ошибку, ждем ответ через recommendations
+        setIsLoading(false);
+        // Refetch recommendations чтобы получить ответ
+        refetchRecommendations();
+        return;
+      }
       
       const assistantMessage: ChatMessage = {
         id: `assistant-${Date.now()}`,
         role: 'assistant',
-        content: response.advice || 'Извините, не удалось получить ответ.',
+        content: advice,
         timestamp: new Date(),
-        recommendationId: response.recommendationId,
+        recommendationId: recommendationId,
         isRead: false, // New messages are unread by default
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
+      setIsLoading(false);
+      
+      // СРАЗУ отправляем запрос на /ads/relevant-by-advice с recommendationId (только если ответ не пустой)
+      console.log('AiChat: recommendationId', recommendationId);
+      console.log('AiChat: requestedAdsRef.current', Array.from(requestedAdsRef.current));
+      console.log('AiChat: has recommendationId?', !!recommendationId);
+      console.log('AiChat: already requested?', recommendationId ? requestedAdsRef.current.has(recommendationId) : false);
+      
+      if (recommendationId && !requestedAdsRef.current.has(recommendationId)) {
+        requestedAdsRef.current.add(recommendationId);
+        console.log('AiChat: requesting ad for recommendation', recommendationId);
+        // Запрашиваем рекламу асинхронно, не блокируя UI
+        // Это единственное место, где запрашивается relevant-by-advice
+        getRelevantAd({ recommendationId: recommendationId })
+          .unwrap()
+          .then((ad) => {
+            console.log('AiChat: received ad', ad);
+            // Сохраняем рекламу из ответа сразу, даже если пользователь уже прочитал сообщение
+            if (ad && ad.ads) {
+              // Сохраняем рекламу для показа в чате
+              setLastAd({
+                id: ad.id,
+                ads: ad.ads,
+                url: ad.url || '#',
+              });
+              
+              // Сохраняем рекламу в localStorage для AdsModal
+              try {
+                // Получаем существующие рекламы из localStorage
+                const savedAds = localStorage.getItem(ADS_STORAGE_KEY);
+                let adsArray: Ad[] = savedAds ? JSON.parse(savedAds) : [];
+                
+                // Проверяем, нет ли уже этой рекламы в массиве
+                const existingIndex = adsArray.findIndex(a => a.id === ad.id);
+                if (existingIndex >= 0) {
+                  // Обновляем существующую рекламу
+                  adsArray[existingIndex] = ad;
+                } else {
+                  // Добавляем новую рекламу в конец массива
+                  adsArray.push(ad);
+                }
+                
+                // Сохраняем обновленный массив в localStorage
+                localStorage.setItem(ADS_STORAGE_KEY, JSON.stringify(adsArray));
+                console.log('AiChat: saved ad to localStorage', { ad, adsArray });
+                
+                // Отправляем событие для обновления AdsModal
+                window.dispatchEvent(new CustomEvent('new-ad-received', { detail: ad }));
+                // Также отправляем событие об обновлении localStorage
+                window.dispatchEvent(new CustomEvent('localStorage-updated'));
+              } catch (error) {
+                console.error('Failed to save ad to localStorage:', error);
+              }
+            }
+            // После запроса relevant-by-advice обновляем список реклам пользователя через /ads/user
+            refetchUserAds();
+          })
+          .catch((error) => {
+            console.error('Failed to get relevant ad:', error);
+            // Удаляем из множества, чтобы можно было повторить попытку
+            if (recommendationId) {
+              requestedAdsRef.current.delete(recommendationId);
+            }
+          });
+      } else {
+        console.log('AiChat: NOT requesting ad - recommendationId:', recommendationId, 'already requested:', recommendationId ? requestedAdsRef.current.has(recommendationId) : false);
+      }
       
       // Refetch recommendations to get updated list
       refetchRecommendations();
     } catch (error: any) {
       console.error('Error getting financial advice:', error);
+      
+      // Не показываем ошибку сразу, если это может быть таймаут
+      // Ответ может прийти позже через recommendations
+      // Проверяем, есть ли уже ответ через recommendations
+      const hasRecommendation = recommendations?.some(rec => 
+        rec.content && rec.content.trim() !== ''
+      );
+      
+      // Если есть рекомендация с контентом, не показываем ошибку
+      if (hasRecommendation) {
+        console.log('AdsModal: recommendation already exists, not showing error');
+        setIsLoading(false);
+        return;
+      }
       
       let errorMessage = 'Не удалось получить финансовый совет';
       let showInChat = false;
@@ -295,17 +466,26 @@ export function AiChat() {
       } else if (error?.status === 500) {
         errorMessage = 'Ошибка сервера. Попробуйте позже.';
         showInChat = true;
+      } else {
+        // Для других ошибок (таймаут и т.д.) не показываем ошибку сразу
+        // Ответ может прийти позже через recommendations
+        console.log('AdsModal: request may be processing, waiting for recommendations');
+        setIsLoading(false);
+        // Продолжаем ждать ответ через recommendations
+        return;
       }
 
-      // Показываем уведомление
-      notifications.show({
-        color: error?.status === 404 && error?.data?.message ? 'yellow' : 'red',
-        title: error?.status === 404 && error?.data?.message ? 'Информация' : 'Ошибка',
-        message: errorMessage,
-      });
+      // Показываем уведомление только для критических ошибок
+      if (error?.status === 401 || (error?.status === 404 && !error?.data?.message)) {
+        notifications.show({
+          color: error?.status === 404 && error?.data?.message ? 'yellow' : 'red',
+          title: error?.status === 404 && error?.data?.message ? 'Информация' : 'Ошибка',
+          message: errorMessage,
+        });
+      }
       
-      // Показываем сообщение в чате, если это бизнес-логика или ошибка сервера
-      if (showInChat || (error?.status !== 401 && error?.status !== 404)) {
+      // Показываем сообщение в чате только для бизнес-логики
+      if (showInChat) {
         const errorMsg: ChatMessage = {
           id: `error-${Date.now()}`,
           role: 'assistant',
@@ -316,7 +496,8 @@ export function AiChat() {
         setMessages((prev) => [...prev, errorMsg]);
       }
     } finally {
-      setIsLoading(false);
+      // Не сбрасываем isLoading сразу, если ответ может прийти позже
+      // setIsLoading(false);
     }
   };
 
@@ -324,6 +505,10 @@ export function AiChat() {
     if (isClearing) return;
     if (!isAuthenticated) {
       setMessages([]);
+      // Очищаем множество запрошенных реклам
+      requestedAdsRef.current.clear();
+      // Очищаем последнюю рекламу
+      setLastAd(null);
       localStorage.removeItem(STORAGE_KEY);
       notifications.show({
         color: 'blue',
@@ -335,8 +520,12 @@ export function AiChat() {
 
     try {
       setIsClearing(true);
-      // Optimistic UI: clear assistant messages immediately
-      setMessages((prev) => prev.filter(msg => msg.role === 'user'));
+      // Optimistic UI: clear all messages immediately (including user messages)
+      setMessages([]);
+      // Очищаем множество запрошенных реклам
+      requestedAdsRef.current.clear();
+      // Очищаем последнюю рекламу
+      setLastAd(null);
       await deleteAllRecommendations().unwrap();
       localStorage.removeItem(STORAGE_KEY);
       notifications.show({
@@ -545,9 +734,9 @@ export function AiChat() {
                                       </Badge>
                                     )}
                                   </Group>
-                                  <Text size="sm" style={{ whiteSpace: 'pre-wrap' }}>
-                                    {message.content}
-                                  </Text>
+                                  <div style={{ fontSize: '0.875rem' }}>
+                                    {formatMarkdown(message.content)}
+                                  </div>
                                 </Paper>
                               </Group>
                             </motion.div>
@@ -562,6 +751,35 @@ export function AiChat() {
                               </Group>
                             </Paper>
                           </Group>
+                        )}
+                        {/* Показываем последнюю рекламу */}
+                        {lastAd && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <Paper
+                              p="md"
+                              radius="md"
+                              bg="gray.2"
+                              style={{ position: 'relative' }}
+                            >
+                              <Group justify="space-between" align="flex-start" gap="sm">
+                                <Text size="sm" style={{ flex: 1 }}>
+                                  {lastAd.ads}
+                                </Text>
+                                <ActionIcon
+                                  variant="subtle"
+                                  size="sm"
+                                  onClick={() => setLastAd(null)}
+                                  style={{ flexShrink: 0 }}
+                                >
+                                  <IconX size={16} />
+                                </ActionIcon>
+                              </Group>
+                            </Paper>
+                          </motion.div>
                         )}
                         <div ref={messagesEndRef} />
                       </Stack>

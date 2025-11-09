@@ -11,6 +11,9 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   profile?: Profile;
+  level?: number;
+  progressToNextLevel?: number;
+  totalLevels?: number;
 }
 
 export interface Profile {

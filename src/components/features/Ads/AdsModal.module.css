@@ -1,0 +1,37 @@
+.floatingAd {
+  position: fixed;
+  bottom: 100px; /* Сдвигаем выше, чтобы не перекрывать AiChat bubble */
+  right: 24px;
+  z-index: 999;
+  max-width: 380px;
+  width: 100%;
+  pointer-events: auto;
+}
+
+.adCard {
+  max-height: 500px;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--mantine-color-gray-3);
+}
+
+.closeButton {
+  color: var(--mantine-color-gray-6);
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: var(--mantine-color-gray-9);
+  background-color: var(--mantine-color-gray-1);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .floatingAd {
+    bottom: 90px; /* Сдвигаем выше на мобильных, чтобы не перекрывать AiChat */
+    right: 16px;
+    left: 16px;
+    max-width: none;
+  }
+}
+
