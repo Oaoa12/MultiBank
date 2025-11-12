@@ -1,18 +1,38 @@
 'use client';
 
 import { Container, SimpleGrid, Loader, Center, Alert } from '@mantine/core';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useGetBankOverviewQuery, useGetTransactionsStatisticsQuery } from '@/lib/store/api/AuthApi';
+import { useGetCurrentUserQuery } from '@/lib/store/api/UserApi';
 import BalanceAnalytics from "./balanceAnalytics/BalanceAnalytics";
 import DonutChart from './donutChart/DonutChart';
 import Cards from "./cards/Cards";
 import styles from './page.module.css';
 
 export default function AnalyticsPage() {
+  const router = useRouter();
+  const { isSuccess, isLoading: authLoading } = useGetCurrentUserQuery();
   const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
   
+  useEffect(() => {
+    if (!authLoading && !isSuccess) {
+      router.replace('/login');
+    }
+  }, [authLoading, isSuccess, router]);
+
   const { data: accountsData, isLoading: accountsLoading, error: accountsError } = useGetBankOverviewQuery({});
   const { data: statisticsData, isLoading: statisticsLoading, error: statisticsError } = useGetTransactionsStatisticsQuery();
+
+  if (authLoading || !isSuccess) {
+    return (
+      <Container className={styles.container} size="xl" py="xl">
+        <Center h={400}>
+          <Loader size="lg" />
+        </Center>
+      </Container>
+    );
+  }
 
   const selectedBank = selectedBankId || (accountsData?.banks && accountsData.banks.length > 0 ? accountsData.banks[0].bankId : null);
 

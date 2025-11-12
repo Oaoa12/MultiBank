@@ -210,14 +210,17 @@
   justify-content: center;
   height: 100%;
   touch-action: pan-y;
-  width: auto !important;
+  width: auto;
   overflow: visible;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
-  color: rgba(0, 0, 0, 0.75);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.95);
+  color: rgba(0, 0, 0, 0.75);
   border-radius: 8px;
   padding: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -226,23 +229,45 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0;
+  z-index: 15;
 }
 
-.swiper-button-prev {
-  left: calc(50% - (var(--card-width) / 2) - 12px);
+.carouselContainer :global(.swiper-button-prev) {
+  left: calc(50% - var(--card-width) / 2 - 70px);
+  right: auto;
 }
 
-.swiper-button-next {
-  display: none !important;
+.carouselContainer :global(.swiper-button-next) {
+  right: calc(50% - var(--card-width) / 2 - 70px);
+  left: auto;
+}
+
+@media (max-width: 768px) {
+  .carouselContainer :global(.swiper-button-prev) {
+    left: calc(50% - var(--card-width) / 2 - 50px);
+  }
+  .carouselContainer :global(.swiper-button-next) {
+    right: calc(50% - var(--card-width) / 2 - 50px);
+  }
+}
+
+@media (max-width: 480px) {
+  .carouselContainer :global(.swiper-button-prev) {
+    left: calc(50% - var(--card-width) / 2 - 40px);
+  }
+  .carouselContainer :global(.swiper-button-next) {
+    right: calc(50% - var(--card-width) / 2 - 40px);
+  }
 }
 
 .swiper-pagination {
-  position: absolute !important;
-  bottom: -60px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  margin-top: 0 !important;
-  width: auto !important;
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0;
+  width: auto;
 }
 
 .swiper-pagination-bullet {
@@ -285,51 +310,27 @@
   }
 
   .cardContainer {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     min-height: 560px;
     padding: 12px;
     padding-top: 20px;
-    overflow: visible !important;
-  }
-
-  .swiper-button-prev {
-    left: 8px;
-  }
-
-  .swiper-button-next {
-    right: 8px;
+    overflow: visible;
   }
 
   .carouselContainer {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: visible !important;
-    margin-bottom: 30px !important;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+    margin-bottom: 30px;
     padding-top: 10px;
     margin-top: 10px;
   }
 
-  .carouselContainer .swiper {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: visible !important;
-  }
-
-  .carouselContainer .swiper-wrapper {
-    overflow: visible !important;
-  }
-
-  .carouselContainer .swiper-slide {
-    width: var(--card-width) !important;
-    max-width: calc(100vw - 60px) !important;
-    overflow: visible !important;
-  }
-
   .bankCard {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 100%;
+    max-width: 100%;
     padding: 20px;
     min-height: 180px;
   }
@@ -356,116 +357,20 @@
   }
 
   .actionsGroup {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-top: 16px !important;
-    flex-direction: column !important;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 16px;
+    flex-direction: column;
   }
 
   .actionButton {
-    width: 100% !important;
-    margin-top: 0 !important;
-  }
-
-  /* Популярные категории - уменьшаем размеры */
-  .cardContainer :global([class*="mantine-Avatar-root"]) {
-    width: 32px !important;
-    height: 32px !important;
-  }
-
-  .cardContainer :global([class*="mantine-Avatar-root"]) svg {
-    width: 16px !important;
-    height: 16px !important;
-  }
-
-  /* Текст категорий на мобильных */
-  .cardContainer :global([class*="mantine-Text-root"]) {
-    font-size: 0.875rem !important;
+    width: 100%;
   }
 }
 
-/* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ */
 @media (max-width: 480px) {
   :root {
     --card-width: min(300px, calc(100vw - 32px));
     --carousel-height: 200px;
-  }
-
-  .cardsWrapper {
-    padding: 8px;
-    padding-top: 20px;
-    width: 100%;
-    max-width: 100%;
-    overflow: visible;
-  }
-
-  .cardContainer {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 8px;
-    padding-top: 20px;
-    min-height: 520px;
-    overflow: visible !important;
-  }
-
-  .carouselContainer {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-bottom: 20px !important;
-    overflow: visible !important;
-    padding-top: 10px;
-    margin-top: 10px;
-  }
-
-  .carouselContainer .swiper {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: visible !important;
-  }
-
-  .carouselContainer .swiper-wrapper {
-    overflow: visible !important;
-  }
-
-  .carouselContainer .swiper-slide {
-    width: var(--card-width) !important;
-    max-width: calc(100vw - 40px) !important;
-    overflow: visible !important;
-  }
-
-  .bankCard {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 16px;
-    min-height: 160px;
-  }
-
-  .cardBank {
-    font-size: 1rem;
-  }
-
-  .cardNumber {
-    font-size: 1rem;
-    letter-spacing: 1px;
-  }
-
-  .cardType {
-    font-size: 0.7rem;
-  }
-
-  .cardValue {
-    font-size: 0.75rem;
-  }
-
-  .cardLabel {
-    font-size: 0.6rem;
-  }
-
-  .swiper-button-prev {
-    left: 4px;
-  }
-
-  .swiper-button-next {
-    right: 4px;
   }
 }

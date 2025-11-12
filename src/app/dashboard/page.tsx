@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Container,
   Grid,
@@ -46,6 +47,7 @@ import {
   useDeleteBankMutation,
   useLazyGetAccountTransactionsQuery,
 } from '@/lib/store/api/AuthApi';
+import { useGetCurrentUserQuery } from '@/lib/store/api/UserApi';
 import StatisticsChart from './StatisticsChart';
 
 const PAGE_STYLES = {
@@ -73,6 +75,24 @@ const formatBalance = (balance: string | number | undefined | null, currency: st
 };
 
 export default function Dashboard() {
+  const router = useRouter();
+  const { isSuccess, isLoading } = useGetCurrentUserQuery();
+
+  useEffect(() => {
+    if (!isLoading && !isSuccess) {
+      router.replace('/login');
+    }
+  }, [isLoading, isSuccess, router]);
+
+  if (isLoading || !isSuccess) {
+    return (
+      <Container size="xl" py="xl">
+        <Center h={400}>
+          <Loader size="lg" />
+        </Center>
+      </Container>
+    );
+  }
 
   const [consentModalOpen, setConsentModalOpen] = useState(false);
   const [selectedBank, setSelectedBank] = useState<string | null>(null);

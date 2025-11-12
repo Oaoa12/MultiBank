@@ -43,7 +43,6 @@ import { authApi } from '@/lib/store/api/AuthApi';
 import { useDispatch } from 'react-redux';
 import AnalyticsSection from './AnalyticsSection';
 import { useGetCurrentUserQuery } from '@/lib/store/api/UserApi';
-import Link from 'next/link';
 import { useMemo, useCallback } from 'react';
 
 const PAGE_STYLES = {
@@ -153,6 +152,12 @@ export default function ProfilePage() {
     }
   }, [profile, user]);
 
+  useEffect(() => {
+    if (!authLoading && !authOk) {
+      router.replace('/login');
+    }
+  }, [authLoading, authOk, router]);
+
   const toggleNotification = (type: keyof typeof notifications) => {
     setNotifications(prev => ({
       ...prev,
@@ -225,16 +230,11 @@ export default function ProfilePage() {
 
   if (!authOk && !authLoading) {
     return (
-      <Center h={"70dvh"}>
-        <Stack align="center" gap="md">
-          <Title order={2}>Пожалуйста, авторизуйтесь</Title>
-          <Text c="dimmed">Для доступа к профилю нужен вход в систему</Text>
-          <Group>
-            <Button component={Link as any} href="/login">Войти</Button>
-            <Button variant="light" component={Link as any} href="/registration">Регистрация</Button>
-          </Group>
-        </Stack>
-      </Center>
+      <Container size="xl" py="xl">
+        <Center h={400}>
+          <Loader size="lg" />
+        </Center>
+      </Container>
     );
   }
 

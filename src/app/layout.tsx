@@ -21,10 +21,14 @@ export default function RootLayout({
     <html lang="ru" className="font-inter">
       <body suppressHydrationWarning>
         <Providers>
-          <Header />
-          {children}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <Header />
+            <main style={{ flex: 1 }}>
+              {children}
+            </main>
+            <Footer />
+          </div>
           <AiChat />
-          <Footer />
           <AdsModal />
         </Providers>
       </body>

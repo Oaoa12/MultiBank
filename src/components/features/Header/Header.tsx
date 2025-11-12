@@ -133,8 +133,8 @@ export function Header() {
                     <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
                         <Image
                             src={Logo}
-                            width={100}
-                            height={30}
+                            width={50}
+                            height={50}
                             alt="Logo"
                             style={{ cursor: 'pointer' }}
                         />
